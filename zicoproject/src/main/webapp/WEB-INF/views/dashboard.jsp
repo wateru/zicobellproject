@@ -321,7 +321,7 @@
 
         	$.notify({
             	icon: 'ti-gift',
-            	message: "<b>Zico - Project</b>에 오신것을 환영 합니다.<br> - 당신의 매장을 확인해 주세요"
+            	message: "<b>Zico - Project</b>에 깃은 족같은거임.<br> - 당신의 매장을 확인해 주세요"
 
             },{
                 type: 'success',
