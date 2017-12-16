@@ -209,7 +209,7 @@
                 </div>
             </div>
         </nav>
-<script>
+<script> 
 	$(document).ready(function() {
     	//slide
     	var x = 30;
