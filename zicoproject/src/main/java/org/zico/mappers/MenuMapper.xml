@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="org.zico.mappers.MenuMapper">
+
+<insert id="create">
+		insert into menu (menuName, imgName, menuPrice)
+		values (#{menuName}, #{imgName}, #{menuPrice})
+	</insert>
+	
+	<delete id="delete">
+	delete from menu where menuNo=#{menoNo}		
+	</delete>
+	
+	<update id="update">
+	update menu 
+	set menuName=#{menuName}, 
+		imgName=#{imgName},
+		menuPrice=#{menuPrice}
+	where menuNo=#{menuNo}
+	
+	</update>
+</mapper>
