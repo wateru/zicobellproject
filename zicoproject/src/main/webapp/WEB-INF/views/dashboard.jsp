@@ -1,83 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-	<meta charset="utf-8" />
-	<link rel="apple-touch-icon" sizes="76x76" href="/resources/assets/img/apple-icon.png">
-	<link rel="icon" type="image/png" sizes="96x96" href="/resources/assets/img/favicon.png">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-	<title>Zico-Project DashBoard</title>
-	<!-- Bootstrap core CSS     -->
-    <link href="/resources/assets/css/bootstrap.min.css" rel="stylesheet" />
-
-    <!-- Animation library for notifications   -->
-    <link href="/resources/assets/css/animate.min.css" rel="stylesheet"/>
-
-    <!--  Paper Dashboard core CSS    -->
-    <link href="/resources/assets/css/paper-dashboard.css" rel="stylesheet"/>
+<%@ include file="header.jsp" %>
 
 
-    <!--  CSS for Demo Purpose, don't include it in your project     -->
-    <link href="/resources/assets/css/demo.css" rel="stylesheet" />
+<!-- 
+	<div style="background-color:white;" class="col-md-12">
+		<div id="slidebox">
+	        <ul id="slider">
+	            <li><a href="#">공지 사항 | 연예인 하려면 마약도 할줄 알아야 하나 ㄷㄷ 많이 걸리네</a></li>
+	            <li><a href="#">공지 사항 | 그랜져 역사에 한 획을 그은 차이자 그랜져 위상이 한단계 낮아진 기점의 차</a></li>
+	            <li><a href="#">공지 사항 | cnn의 한국 비트코인 열풍 취재 기승전결</a></li>
+	            <li><a href="#">공지 사항 | 스포) 스타워즈 라스트 제다이 리뷰하는 만화.jpg</a></li>	            
+	        </ul>
+    	</div>
+	</div> -->
+	
+	
+	
 
 
-    <!--  Fonts and icons     -->
-    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
-    <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
-    <link href="/resources/assets/css/themify-icons.css" rel="stylesheet">
-</head>
-<body>
-<div class="wrapper">
-
-    <div style="width:100%" class="main-panel">
-        <nav class="navbar navbar-default">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar bar1"></span>
-                        <span class="icon-bar bar2"></span>
-                        <span class="icon-bar bar3"></span>
-                    </button>
-                    <a class="navbar-brand" href="#">Dashboard</a>
-                </div>
-                <div class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li>
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="ti-panel"></i>
-								<p>Stats</p>
-                            </a>
-                        </li>
-                        <li class="dropdown">
-                              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <i class="ti-bell"></i>
-                                    <p class="notification">5</p>
-									<p>Notifications</p>
-									<b class="caret"></b>
-                              </a>
-                              <ul class="dropdown-menu">
-                                <li><a href="#">Notification 1</a></li>
-                                <li><a href="#">Notification 2</a></li>
-                                <li><a href="#">Notification 3</a></li>
-                                <li><a href="#">Notification 4</a></li>
-                                <li><a href="#">Another notification</a></li>
-                              </ul>
-                        </li>
-						<li>
-                            <a href="#">
-								<i class="ti-settings"></i>
-								<p>Settings</p>
-                            </a>
-                        </li>
-                    </ul>
-
-                </div>
-            </div>
-        </nav>
-
-
+<!-- Main Start-->
+<!-- Main Start-->
+<!-- Main Start-->
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
@@ -92,7 +36,7 @@
                                     </div>
                                     <div class="col-xs-7">
                                         <div class="numbers">
-                                            <p>Capacity</p>
+                                            <p>일일 매출금액</p>
                                             105GB
                                         </div>
                                     </div>
@@ -117,8 +61,8 @@
                                     </div>
                                     <div class="col-xs-7">
                                         <div class="numbers">
-                                            <p>Revenue</p>
-                                            $1,345
+                                            <p>일일 순수익</p>
+                                       	     ￦1,354,700
                                         </div>
                                     </div>
                                 </div>
@@ -142,7 +86,7 @@
                                     </div>
                                     <div class="col-xs-7">
                                         <div class="numbers">
-                                            <p>Errors</p>
+                                            <p>일일 방문팀</p>
                                             23
                                         </div>
                                     </div>
@@ -167,7 +111,7 @@
                                     </div>
                                     <div class="col-xs-7">
                                         <div class="numbers">
-                                            <p>Followers</p>
+                                            <p>일일 근무자 수</p>
                                             +45
                                         </div>
                                     </div>
@@ -256,79 +200,7 @@
                 </div>
             </div>
         </div>
-
-
-        <footer class="footer">
-            <div class="container-fluid">
-                <nav class="pull-left">
-                    <ul>
-
-                        <li>
-                            <a href="http://www.creative-tim.com">
-                                Creative Tim
-                            </a>
-                        </li>
-                        <li>
-                            <a href="http://blog.creative-tim.com">
-                               Blog
-                            </a>
-                        </li>
-                        <li>
-                            <a href="http://www.creative-tim.com/license">
-                                Licenses
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-                <div class="copyright pull-right">
-                    &copy; <script>document.write(new Date().getFullYear())</script>, made with <i class="fa fa-heart heart"></i> by <a href="http://www.creative-tim.com">Creative Tim</a>
-                </div>
-            </div>
-        </footer>
-
-    </div>
-</div>
-
-
-</body>
-
-    <!--   Core JS Files   -->
-    <script src="/resources/assets/js/jquery-1.10.2.js" type="text/javascript"></script>
-	<script src="/resources/assets/js/bootstrap.min.js" type="text/javascript"></script>
-
-	<!--  Checkbox, Radio & Switch Plugins -->
-	<script src="/resources/assets/js/bootstrap-checkbox-radio.js"></script>
-
-	<!--  Charts Plugin -->
-	<script src="/resources/assets/js/chartist.min.js"></script>
-
-    <!--  Notifications Plugin    -->
-    <script src="/resources/assets/js/bootstrap-notify.js"></script>
-
-    <!--  Google Maps Plugin    -->
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
-
-    <!-- Paper Dashboard Core javascript and methods for Demo purpose -->
-	<script src="/resources/assets/js/paper-dashboard.js"></script>
-
-	<!-- Paper Dashboard DEMO methods, don't include it in your project! -->
-	<script src="/resources/assets/js/demo.js"></script>
-
-	<script type="text/javascript">
-    	$(document).ready(function(){
-
-        	demo.initChartist();
-
-        	$.notify({
-            	icon: 'ti-gift',
-            	message: "<b>Zico - Project</b>에 깃은 족같은거임.<br> - 당신의 매장을 확인해 주세요"
-
-            },{
-                type: 'success',
-                timer: 4000
-            });
-
-    	});
-	</script>
-
-</html>
+<!-- Main End-->
+<!-- Main End-->
+<!-- Main End-->
+<%@ include file="footer.jsp" %>

@@ -10,6 +10,39 @@ public class test {
 	public void test() {
 		
 	};
+	@GetMapping("/icons")
+	public void icons() {
+		
+	};
+	@GetMapping("/maps")
+	public void maps() {
+		
+	};
+	@GetMapping("/notifications")
+	public void notifications() {
+		
+	};
+	@GetMapping("/table")
+	public void table() {
+		
+	};
+	@GetMapping("/template")
+	public void template() {
+		
+	};
+	@GetMapping("/typography")
+	public void typography() {
+		
+	};
+	@GetMapping("/upgrade")
+	public void upgrade() {
+		
+	};
+	@GetMapping("/user")
+	public void user() {
+		
+	};
+	
 	
 	
 }
