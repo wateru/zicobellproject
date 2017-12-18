@@ -2,6 +2,7 @@ package org.zico.service;
 
 import java.util.List;
 
+import org.zico.dto.Criteria;
 import org.zico.domain.Menu;
 
 public interface MenuService {
@@ -15,4 +16,6 @@ public interface MenuService {
 	public Menu detali(int menuNo); 
 	
 	public void update(Menu menu);
+	
+	public int getListCount(Criteria cri);
 }

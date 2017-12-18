@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 
 import org.apache.commons.io.IOUtils;
 import org.zico.domain.Menu;
+import org.zico.dto.Criteria;
 import org.zico.service.MenuService;
 import org.zico.util.MediaUtils;
 import org.zico.util.UploadFileUtils;
@@ -54,7 +55,7 @@ public class MenuController {
 		    
 	   }
 	
-	@RequestMapping(value="/menuUpdatePost",method=RequestMethod.POST)
+	@RequestMapping(value="/menu/menuUpdatePost",method=RequestMethod.POST)
 	   public String menuUpdatePost(String menuName,int menuPrice,String imgName,int menuNo) {
 		   Menu menu=new Menu();
 		   log.info("이미지이름 :"+imgName);
@@ -70,7 +71,7 @@ public class MenuController {
 	   }
 	
 	
-   @RequestMapping(value="/insert",method=RequestMethod.POST)
+   @RequestMapping(value="/menu/insert",method=RequestMethod.POST)
    public String insertPost(String menuName,int menuPrice,String imgName) {
 	   Menu menu=new Menu();
 	   log.info("이미지이름 :"+imgName);
@@ -80,7 +81,7 @@ public class MenuController {
 	   
 	   serivce.create(menu);
 	   
-	  return "redirect:/menulist";
+	  return "redirect:/menu/menulist";
 	   
    }
    
@@ -106,10 +107,18 @@ public class MenuController {
   
    
    @GetMapping("/menu/menulist")
-   public void menuList(Model model) {
+   public void menuList(Model model,Criteria cri) {
 	   
 	  log.info("원웅스");
 	   model.addAttribute("menu",serivce.getList());
+	   model.addAttribute("total",serivce.getListCount(cri));
+	   
+	   
+   }
+   @GetMapping("/menu/token")
+   public void token() {
+	   
+	  
 	   
 	   
    }
@@ -117,7 +126,7 @@ public class MenuController {
    
    
    @ResponseBody
-   @RequestMapping("/displayFile")
+   @RequestMapping("/menu/displayFile")
    public ResponseEntity<byte[]>  displayFile(String fileName)throws Exception{
 
       InputStream in = null; 

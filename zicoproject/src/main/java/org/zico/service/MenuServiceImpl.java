@@ -3,6 +3,7 @@ package org.zico.service;
 import java.util.List;
 
 import org.zico.domain.Menu;
+import org.zico.dto.Criteria;
 import org.zico.mappers.MenuMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,6 +42,12 @@ public class MenuServiceImpl implements MenuService{
 	public void update(Menu menu) {
 		// TODO Auto-generated method stub
 		mapper.update(menu);
+	}
+
+	@Override
+	public int getListCount(Criteria cri) {
+		// TODO Auto-generated method stub
+		return mapper.getTotal(cri);
 	}
 
 	
