@@ -30,7 +30,7 @@
     <style>
     	<!-- Slide for 공지사항 -->
     	#slidebox {
-			position: relative;
+			
 			width: 60%;
 			height: 30px;
 			overflow: hidden;
@@ -46,8 +46,11 @@
 		
 		#slidebox ul li {
 			position: absolute;
-			width: 100%;
-			height: 30px;
+			width: 40%;
+			height: 20px;
+			overflow:hidden; 
+			text-overflow:ellipsis;
+			white-space:nowrap;
 		}
 		
 		#slidebox ul li p {
@@ -159,10 +162,8 @@
                     <a class="navbar-brand" href="#">Z I C O Bell</a>
                 </div>
                 
-						
-                <div style="height:15px;"></div>
                 <div class="collapse navbar-collapse">
-                	<div style="width: 60%; height: 30px; margin-top:10px; display:inline; float:left;" id="slidebox">
+                	<div style="width: 40%; height: 30px; margin-top:10px; display:inline; float:left;" id="slidebox">
 					        <ul id="slider">
 					            <li><a href="#">공지 사항 | 연예인 하려면 마약도 할줄 알아야 하나 ㄷㄷ 많이 걸리네</a></li>
 					            <li><a href="#">공지 사항 | 그랜져 역사에 한 획을 그은 차이자 그랜져 위상이 한단계 낮아진 기점의 차</a></li>
@@ -212,15 +213,22 @@
 <script> 
 	$(document).ready(function() {
     	//slide
-    	var x = 30;
+    	var x = 50;
         var slider = document.getElementById("slider");
         var slideArray = slider.getElementsByTagName("li");
         var slideMax = slideArray.length - 1;
         var curSlideNo = 0;
-
+		
+        console.log(slideArray);
+        console.log(slideMax);
+        
+        
+        //한번만 실행
         for (i = 0; i <= slideMax; i++) {
-            if (i == curSlideNo) slideArray[i].style.top = 0;
-            else slideArray[i].style.top = -x + "px";
+            if (i == curSlideNo) {slideArray[i].style.top = 25 + "px";	// 첫번째 행의 top값을 15로 고정
+            console.log("실행 : " + i);
+        }else{ slideArray[i].style.top = -x + "px"; // 첫번째 행을 제외한 top값을 -x값으로 고정
+            console.log("비실행 : " + i);}
         }
 
         slider.addEventListener('click', function () {
@@ -229,9 +237,10 @@
 
         var aniStart = false;
         var next = 1;
-        var changeSlide = function(){
-            if (aniStart === true) return;
+        var changeSlide = function(){	// 애니메이션이 진행되고 있다면 
+            if (aniStart === true){ return; console.log("aniStart");}
             next = curSlideNo + 1;
+            console.log("changeSlide");
             if (next > slideMax) next = 0;
             aniStart = true;
             sliding();
@@ -244,7 +253,7 @@
             var newNextX = nextX + 1;
             if (newCurX >= x) {
                 slideArray[curSlideNo].style.top = -x + "px";
-                slideArray[next].style.top = 0;
+                slideArray[next].style.top = 25 + "px";
                 curSlideNo = curSlideNo + 1;
                 if (curSlideNo > slideMax) curSlideNo = 0;
                 aniStart = false;
@@ -256,7 +265,7 @@
                 sliding();
             }, 10);
         }
-        setInterval(changeSlide,5000);
+        setInterval(changeSlide,10000);
 	});
 	</script>
 <!-- Top End -->

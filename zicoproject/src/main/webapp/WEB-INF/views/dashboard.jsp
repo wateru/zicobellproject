@@ -3,21 +3,6 @@
 <%@ include file="header.jsp" %>
 
 
-<!-- 
-	<div style="background-color:white;" class="col-md-12">
-		<div id="slidebox">
-	        <ul id="slider">
-	            <li><a href="#">공지 사항 | 연예인 하려면 마약도 할줄 알아야 하나 ㄷㄷ 많이 걸리네</a></li>
-	            <li><a href="#">공지 사항 | 그랜져 역사에 한 획을 그은 차이자 그랜져 위상이 한단계 낮아진 기점의 차</a></li>
-	            <li><a href="#">공지 사항 | cnn의 한국 비트코인 열풍 취재 기승전결</a></li>
-	            <li><a href="#">공지 사항 | 스포) 스타워즈 라스트 제다이 리뷰하는 만화.jpg</a></li>	            
-	        </ul>
-    	</div>
-	</div> -->
-	
-	
-	
-
 
 <!-- Main Start-->
 <!-- Main Start-->
@@ -37,7 +22,7 @@
                                     <div class="col-xs-7">
                                         <div class="numbers">
                                             <p>일일 매출금액</p>
-                                            105GB
+                                            	￦2,477,700
                                         </div>
                                     </div>
                                 </div>
@@ -87,7 +72,7 @@
                                     <div class="col-xs-7">
                                         <div class="numbers">
                                             <p>일일 방문팀</p>
-                                            23
+                                            30
                                         </div>
                                     </div>
                                 </div>
@@ -112,7 +97,7 @@
                                     <div class="col-xs-7">
                                         <div class="numbers">
                                             <p>일일 근무자 수</p>
-                                            +45
+                                            9명
                                         </div>
                                     </div>
                                 </div>
