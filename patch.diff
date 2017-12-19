@@ -1,0 +1,207 @@
+From a222a666d9c1511c13bbb6218a0b631c693b7e3b Mon Sep 17 00:00:00 2001
+From: "DESKTOP-ABTL8UI\\Lenovo" <tollsin@Nate.com>
+Date: Tue, 19 Dec 2017 18:19:24 +0900
+Subject: [PATCH] Revert "dd"
+
+This reverts commit 8d1ef6470bbf6eeb1030c26b4aef9aab8810f93d.
+---
+ .../src/main/java/org/zico/web/MenuController.java    |   2 +-
+ .../src/main/webapp/WEB-INF/views/menu/menuinsert.jsp |   4 ++--
+ .../src/main/webapp/WEB-INF/views/menu/menulist.jsp   |  14 ++++++++------
+ .../src/main/webapp/WEB-INF/views/menu/menuupdate.jsp |   4 ++--
+ .../target/classes/org/zico/web/MenuController.class  | Bin 7942 -> 7966 bytes
+ zicoproject/target/classes/org/zico/web/test.class    | Bin 1375 -> 1293 bytes
+ .../META-INF/maven/org.java97/web/pom.properties      |   2 +-
+ 7 files changed, 14 insertions(+), 12 deletions(-)
+
+diff --git a/zicoproject/src/main/java/org/zico/web/MenuController.java b/zicoproject/src/main/java/org/zico/web/MenuController.java
+index 89e6111..c542cc8 100644
+--- a/zicoproject/src/main/java/org/zico/web/MenuController.java
++++ b/zicoproject/src/main/java/org/zico/web/MenuController.java
+@@ -40,7 +40,7 @@ public class MenuController {
+ 	@RequestMapping(value ="/menu/delete", method=RequestMethod.POST)
+    public String menuDelete(@RequestParam(name="menuNo")int menuNo){
+ 	   serivce.remove(menuNo);
+-	   return "redirect:/menu/menulist"; 
++	   return "redirect:/menulist"; 
+    }
+ 	@GetMapping("/menu/menuinsert")
+ 	 public void uploadAjax(){
+diff --git a/zicoproject/src/main/webapp/WEB-INF/views/menu/menuinsert.jsp b/zicoproject/src/main/webapp/WEB-INF/views/menu/menuinsert.jsp
+index c3863d0..9ddc34f 100644
+--- a/zicoproject/src/main/webapp/WEB-INF/views/menu/menuinsert.jsp
++++ b/zicoproject/src/main/webapp/WEB-INF/views/menu/menuinsert.jsp
+@@ -1,6 +1,6 @@
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
+     pageEncoding="UTF-8"%>
+-<%@ include file="../admin/header.jsp" %>
++<%@ include file="../header.jsp" %>
+ 
+         <div class="content">
+ 				<div class="container-fluid">
+@@ -170,4 +170,4 @@ $(".fileDrop").on("dragenter dragover", function(event){
+     });
+ });
+ </script>
+-<%@ include file="../admin/footer.jsp" %>
++<%@ include file="../footer.jsp" %>
+diff --git a/zicoproject/src/main/webapp/WEB-INF/views/menu/menulist.jsp b/zicoproject/src/main/webapp/WEB-INF/views/menu/menulist.jsp
+index cafd5e2..197e89e 100644
+--- a/zicoproject/src/main/webapp/WEB-INF/views/menu/menulist.jsp
++++ b/zicoproject/src/main/webapp/WEB-INF/views/menu/menulist.jsp
+@@ -1,7 +1,7 @@
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
+     pageEncoding="UTF-8"%>
+     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+-<%@ include file="../admin/header.jsp" %>
++<%@ include file="../header.jsp" %>
+ 
+         <div class="content">
+             <div class="container-fluid">
+@@ -12,10 +12,12 @@
+ 									<div class="image">
+ 										<img src="/resources/assets/img/background.jpg" alt="..." />
+ 									</div>
+-									<div style="margin:0 auto" class="content fileDrop">
+-	
+-										<img src="displayFile?fileName=${menu.imgName}/">
++									<div class="content fileDrop">
++
+ 
++										<img src="displayFile?fileName=${menu.imgName}/"
++											>
++										
+ 
+ 										<p class="description text-center">
+ 										<label>메뉴이름:</label>
+@@ -55,7 +57,7 @@
+ 						<button type="submit" class="btn btn-info btn-fill btn-wd">등록</button>
+ 					</form>
+ 					<div class="paging">
+-	                        	<ul class="pagination mypage"></ul>
++	                       <ul class="pagination mypage"></ul>
+ 					</div>
+ 				</div>
+ 			</div>
+@@ -113,4 +115,4 @@
+ </html>
+              
+ 
+-<%@ include file="../admin/footer.jsp" %>
++<%@ include file="../footer.jsp" %>
+diff --git a/zicoproject/src/main/webapp/WEB-INF/views/menu/menuupdate.jsp b/zicoproject/src/main/webapp/WEB-INF/views/menu/menuupdate.jsp
+index d907897..b2ea255 100644
+--- a/zicoproject/src/main/webapp/WEB-INF/views/menu/menuupdate.jsp
++++ b/zicoproject/src/main/webapp/WEB-INF/views/menu/menuupdate.jsp
+@@ -1,6 +1,6 @@
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
+     pageEncoding="UTF-8"%>
+-<%@ include file="../admin/header.jsp" %>
++<%@ include file="../header.jsp" %>
+ 
+         <div class="content">
+ 				<div class="container-fluid">
+@@ -159,4 +159,4 @@ $(".fileDrop").on("dragenter dragover", function(event){
+     });
+ });
+ </script>
+-<%@ include file="../admin/footer.jsp" %>
++<%@ include file="../footer.jsp" %>
+diff --git a/zicoproject/target/classes/org/zico/web/MenuController.class b/zicoproject/target/classes/org/zico/web/MenuController.class
+index fbc59d4e08acda4c63f1da19b502c039344064f8..a7974b8957d95e7b4e0d9239c6d1f008c599bb7b 100644
+GIT binary patch
+delta 2371
+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
+Sg|;#m7P{2L&%vk;0RIEU?omYm
+
+delta 2168
+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
+
+diff --git a/zicoproject/target/classes/org/zico/web/test.class b/zicoproject/target/classes/org/zico/web/test.class
+index 782e12e726babb74c6c442c64e9a520a39f00626..0ab65dc36f755126a3629a2d8f91984f7a19bdfa 100644
+GIT binary patch
+delta 123
+zcmcc5)yu_o>ff$?3=9m$3~C#>-ZM_NXEI}CpIpY|!^ksvB8%wc8%*Ym0$`RZvpJ&(
+zm{kO1Nq|}Vfh-v?i-*OWQ31?~1hQ0sEFVS<F#j`<uLEQWPqt&_V`pPvWKd;b004mx
+BAJG5+
+
+delta 169
+zcmeC>y3fUR>ff$?3=9m$3>q7`-ZL^YGFVJJs3{ecT3DJ|T;iKpP>`9IZq3NRp`VzN
+zo0+GtHTfr_86)Rp1129vzR4SzMJG>UGG`P5v+e^~VqlgIvpJ&_m{kd6$pKkDj7ng>
+uFpD{(8km&;WNCp}Yk@31AWL}i4;DUQAqFM}RiKO17#JA@qZt^B8PoyabuD`U
+
+diff --git a/zicoproject/target/m2e-wtp/web-resources/META-INF/maven/org.java97/web/pom.properties b/zicoproject/target/m2e-wtp/web-resources/META-INF/maven/org.java97/web/pom.properties
+index 7ec5174..840d023 100644
+--- a/zicoproject/target/m2e-wtp/web-resources/META-INF/maven/org.java97/web/pom.properties
++++ b/zicoproject/target/m2e-wtp/web-resources/META-INF/maven/org.java97/web/pom.properties
+@@ -1,5 +1,5 @@
+ #Generated by Maven Integration for Eclipse
+-#Mon Dec 18 17:36:44 KST 2017
++#Mon Dec 18 10:29:27 KST 2017
+ version=1.0.0-BUILD-SNAPSHOT
+ groupId=org.java97
+ m2e.projectName=zicoproject
+-- 
+2.14.0.windows.2
+
