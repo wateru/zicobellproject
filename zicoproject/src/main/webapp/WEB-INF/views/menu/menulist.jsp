@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ include file="../admin/header.jsp" %>
+<%@ include file="../header.jsp" %>
 
         <div class="content">
             <div class="container-fluid">
@@ -12,10 +12,12 @@
 									<div class="image">
 										<img src="/resources/assets/img/background.jpg" alt="..." />
 									</div>
-									<div style="margin:0 auto" class="content fileDrop">
-	
-										<img src="displayFile?fileName=${menu.imgName}/">
+									<div class="content fileDrop">
 
+
+										<img src="displayFile?fileName=${menu.imgName}/"
+											>
+										
 
 										<p class="description text-center">
 										<label>메뉴이름:</label>
@@ -55,7 +57,7 @@
 						<button type="submit" class="btn btn-info btn-fill btn-wd">등록</button>
 					</form>
 					<div class="paging">
-	                        	<ul class="pagination mypage"></ul>
+	                       <ul class="pagination mypage"></ul>
 					</div>
 				</div>
 			</div>
@@ -113,4 +115,4 @@
 </html>
              
 
-<%@ include file="../admin/footer.jsp" %>
+<%@ include file="../footer.jsp" %>

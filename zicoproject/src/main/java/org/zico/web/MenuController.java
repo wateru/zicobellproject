@@ -40,7 +40,7 @@ public class MenuController {
 	@RequestMapping(value ="/menu/delete", method=RequestMethod.POST)
    public String menuDelete(@RequestParam(name="menuNo")int menuNo){
 	   serivce.remove(menuNo);
-	   return "redirect:/menu/menulist"; 
+	   return "redirect:/menulist"; 
    }
 	@GetMapping("/menu/menuinsert")
 	 public void uploadAjax(){
