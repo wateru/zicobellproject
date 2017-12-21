@@ -37,6 +37,18 @@
       </beans:constructor-arg>
    </beans:bean>
 	
+	<beans:bean id="echoHandler" class="org.zico.web.EchoHandler"/>
+
+<websocket:handlers>
+
+    <websocket:mapping handler="echoHandler" path="/echo" />
+
+    <websocket:sockjs />
+
+</websocket:handlers>
+	
+	
+	
 	<!-- Interceptor 설정 -->
 	<!-- <beans:bean id="orderInterceptor" class="org.zico.interceptor.OrderInterceptor"></beans:bean> 
 	<interceptors>
