@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -163,14 +164,16 @@
                 </div>
                 
                 <div class="collapse navbar-collapse">
-                	<div style="width: 40%; height: 30px; margin-top:10px; display:inline; float:left;" id="slidebox">
+                <div style="overflow:hidden;">
+                	<div style="width: 40%; height: 30px; margin-top:10px; display:inline;" id="slidebox">
 					        <ul id="slider">
-					            <li><a href="#">공지 사항 | 연예인 하려면 마약도 할줄 알아야 하나 ㄷㄷ 많이 걸리네</a></li>
-					            <li><a href="#">공지 사항 | 그랜져 역사에 한 획을 그은 차이자 그랜져 위상이 한단계 낮아진 기점의 차</a></li>
-					            <li><a href="#">공지 사항 | cnn의 한국 비트코인 열풍 취재 기승전결</a></li>
-					            <li><a href="#">공지 사항 | 스포) 스타워즈 라스트 제다이 리뷰하는 만화.jpg</a></li>	            
+					        	<c:forEach items="${list}" var="list">
+					        		<li><a href="/notice/detail?nno=${list.nno}">공지사항 | ${list.ntitle}</a></li>
+					        	</c:forEach>
+					               
 					        </ul>
 				    </div>
+				</div>
                     <ul class="nav navbar-nav navbar-right">
                         <li>
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -213,7 +216,7 @@
 <script> 
 	$(document).ready(function() {
     	//slide
-    	var x = 40;
+    	var x = 50;
         var slider = document.getElementById("slider");
         var slideArray = slider.getElementsByTagName("li");
         var slideMax = slideArray.length - 1;

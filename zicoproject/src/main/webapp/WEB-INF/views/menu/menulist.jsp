@@ -12,11 +12,10 @@
 									<div class="image">
 										<img src="/resources/assets/img/background.jpg" alt="..." />
 									</div>
-									<div style="margin:0 auto" class="content fileDrop">
-	
-										<img src="displayFile?fileName=${menu.imgName}/">
-
-
+									<div style="height:100%; width:100%; margin:0 auto" class="content fileDrop">
+										
+										<img style="align:center; margin:0 auto; height:100%; width:100%;" src="displayFile?fileName=${menu.imgName}/">
+								
 										<p class="description text-center">
 										<label>메뉴이름:</label>
 										<c:out value="${menu.menuName}"></c:out>
