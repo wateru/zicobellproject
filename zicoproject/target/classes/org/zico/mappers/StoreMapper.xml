@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-<mapper namespace="ore.zico.mappers.StoreMapper">
+<mapper namespace="org.zico.mappers.StoreMapper">
 
 	<!-- 매장등록 -->
 	<insert id="create">
