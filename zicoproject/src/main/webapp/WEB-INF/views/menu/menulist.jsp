@@ -10,7 +10,23 @@
 							<div class="col-lg-4 col-md-5">
 								<div class="card card-user">
 									<div class="image">
+<<<<<<< HEAD
 										<img src="/resources/assets/img/1.PNG" alt="..." />
+=======
+										<img src="/resources/assets/img/background.jpg" alt="..." />
+									</div>
+									<div style="height:100%; width:100%; margin:0 auto" class="content fileDrop">
+										
+										<img style="align:center; margin:0 auto; height:100%; width:100%;" src="displayFile?fileName=${menu.imgName}/">
+								
+										<p class="description text-center">
+										<label>메뉴이름:</label>
+										<c:out value="${menu.menuName}"></c:out>
+										<br>
+										<label>메뉴가격:</label>
+										<c:out value="${menu.menuPrice}"></c:out>
+										</p>
+>>>>>>> d343f4581b1319df784bcab8b38a6ab9ccbbc239
 									</div>
 									
 									
