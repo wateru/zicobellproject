@@ -20,6 +20,7 @@
 								</div>
 							
 							
+							
 							<div class="col-lg-4 col-md-5">
 								<div class="card card-user">
 									<div class="image">
@@ -27,7 +28,9 @@
 									</div>
 									<div class="content fileDrop">
 
-										<p class="description text-center"></p>
+										<div class="icon-container">
+                        				<span class="ti-image"></span><span class="icon-name"> 사진을 드레그 해주세요</span>
+                        			</div>
 									</div>
 									<hr>
 									<div class="text-center">
@@ -46,14 +49,15 @@
 									</div>
 								</div>
 							</div>
+							
 					</div>
 
-
-					<button type="submit" class="btn btn-info btn-fill btn-wd zico">등록</button>
-					
+					<button type="submit" class="btn btn-info btn-fill btn-wd zico">등록</button>	
 					</form>
-
-
+					<form action="/menu/menulist" method="get"> 
+					<button type="submit" class="btn btn-info btn-fill btn-wd ">목록</button>
+					</form>
+				
 				</div>
 			</div>
 		</div>

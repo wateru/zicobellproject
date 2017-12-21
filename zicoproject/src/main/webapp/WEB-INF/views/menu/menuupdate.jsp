@@ -26,15 +26,19 @@
 							<div class="col-lg-4 col-md-5">
 								<div class="card card-user">
 									<div class="image">
-										<img src="/resources/assets/img/background.jpg" alt="..." />
+										<img src="/resources/assets/img/1.PNG" alt="..." />
 									</div>
 									<div class="content fileDrop">
+										<div class="icon-container">
+                        				<span class="ti-image"></span><span class="icon-name"> 사진을 드레그 해주세요</span>
+                        			</div>
+										
 										<span> <input type="image"
 											src=displayFile?fileName=${menu.imgName}
 											value="${menu.imgName}" name="imgName"> <small
 											data-src=${menu.imgName}>취소하기</small>
 										</span>
-										<p class="description text-center"></p>
+										
 									</div>
 									<hr>
 									<div class="text-center">							
