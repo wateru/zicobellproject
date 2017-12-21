@@ -27,6 +27,8 @@ private static Logger logger = LoggerFactory.getLogger(EchoHandler.class);
 
 private List<WebSocketSession> sessionList = new ArrayList<WebSocketSession>();
 
+
+
     /**
 
      * 클라이언트 연결 이후에 실행되는 메소드
