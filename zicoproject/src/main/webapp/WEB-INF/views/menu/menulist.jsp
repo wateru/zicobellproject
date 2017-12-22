@@ -4,7 +4,7 @@
 <%@ include file="../admin/header.jsp" %>
 
         <div class="content">
-            <div class="container-fluid">
+            <div class="container-fluid" style="padding: 0 10% 0 10%;">
                 <div class="row">
 					<c:forEach items="${menu}" var="menu">
 							<div class="col-lg-4 col-md-5">
@@ -44,6 +44,8 @@
 							</div>
 						</c:forEach>
 
+			
+
 					</div>
 					<form action="/menu/menuinsert" method="get">
 						<button type="submit" class="btn btn-info btn-fill btn-wd">등록</button>
@@ -53,53 +55,59 @@
 					</div>
 				</div>
 			</div>
+			
+			<form id="actionForm" action="/menu/menulist" method="get">		
+			<input type="hidden" name="page" value="${criteria.page}">
+			<input type="hidden" name="size" value="${criteria.size}">
+			</form>
+			
 			<script src="/resources/assets/js/pagination.js"></script>
-              <script>
-    $(document).ready(function() {
-    	 
-    
-    	
-	    var result = "${result}";
-	    
-	    var pageResult = makePage({page:${criteria.page}, total:${total}, size:${criteria.size}});
-	    
-	   
-	    var actionForm = $("#actionForm");
-	    
-	    
-	  
-	    $(".mypage").on("click", "li > a", function(event) {
-	    	event.preventDefault();
-	    	
-	    	var pageNum = $(this).attr("href");
-	    	
-	    	// alert("PAGE: " + pageNum);
-	    	actionForm.find("input[name='page']").val(pageNum);
-	    	actionForm.submit();
-	    });
-	    
-	    var str = "";
-	    
-	    if(pageResult.prev) {
-	    	str += "<li class='page-item'><a class='page-link' href=" + (parseInt(pageResult.first) - 1) + ">prev </a></li>";
-	    };
-	    
-	    for(var i = pageResult.first; i <= pageResult.last; i++) {
-	    	str += "<li class='page-item " + (pageResult.page == i ? "active" : "") + "'><a class='page-link' href=" + i + ">" + i + "</a></li>";
-	    };
-	
-	    if(pageResult.next) {
-	    	str += "<li class='page-item'><a class='page-link' href=" + (parseInt(pageResult.last) + 1) + ">Next </a></li>";
-	    };
-	    
-	    console.log(str);
-	    
-	    $(".mypage").html(str);
-	
-	    console.log(pageResult);
-	    
-	   
-    });
+             <script>
+             $(document).ready(function() {
+            	 
+             	var actionForm = $("#actionForm");
+             	
+         	   
+         	    
+         	    var pageResult = makePage({page:${criteria.page}, total:${total}, size:${criteria.size}});
+         	    
+         	   
+         	    
+         	    
+         	    
+         	    $(".mypage").on("click", "li > a", function(event) {
+         	    	event.preventDefault();
+         	    	
+         	    	var pageNum = $(this).attr("href");
+         	    	
+         	    	// alert("PAGE: " + pageNum);
+         	    	actionForm.find("input[name='page']").val(pageNum);
+         	    	actionForm.submit();
+         	    });
+         	    
+         	    var str = "";
+         	    
+         	    if(pageResult.prev) {
+         	    	str += "<li class='page-item'><a class='page-link' href=" + (parseInt(pageResult.first) - 1) + ">prev </a></li>";
+         	    };
+         	    
+         	    for(var i = pageResult.first; i <= pageResult.last; i++) {
+         	    	str += "<li class='page-item " + (pageResult.page == i ? "active" : "") + "'><a class='page-link' href=" + i + ">" + i + "</a></li>";
+         	    };
+         	
+         	    if(pageResult.next) {
+         	    	str += "<li class='page-item'><a class='page-link' href=" + (parseInt(pageResult.last) + 1) + ">Next </a></li>";
+         	    };
+         	    
+         	    console.log(str);
+         	    
+         	    $(".mypage").html(str);
+         	
+         	    console.log(pageResult);
+         	    
+         	    
+         	   
+             });
     </script>
 
 </body>

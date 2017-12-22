@@ -107,13 +107,11 @@ public class MenuController {
   
    
    @GetMapping("/menu/menulist")
-   public void menuList(Model model,Criteria cri) {
-	   
-	  log.info("원웅스");
-	   model.addAttribute("menu",serivce.getList());
-	   model.addAttribute("total",serivce.getListCount(cri));
-	   
-	   
+   public void menuList(Model model,Criteria cri) {	   	  
+	   model.addAttribute("menu",serivce.getList(cri));
+	   model.addAttribute("total",serivce.getListCount());
+	   System.out.println(cri.getSize());
+	   System.out.println(cri.getPage());
    }
    @GetMapping("/menu/token")
    public void token() {

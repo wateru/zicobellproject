@@ -3,7 +3,7 @@
 <%@ include file="../admin/header.jsp" %>
 
         <div class="content">
-				<div class="container-fluid">
+				<div class="container-fluid" style="padding: 0 10% 0 10%;">
 
 					<form id="actionForm" action="/menu/menuUpdatePost" method="post">
 						<div class="row">
@@ -47,6 +47,8 @@
 							</div>
 						</div>
 						<button type="submit" class="btn btn-info btn-fill btn-wd zico">수정하기</button>
+						<button id="listBtn" class="btn btn-info btn-fill btn-wd zico">목록</button>
+						
 					</form>
 					
 				</div>
@@ -66,6 +68,12 @@ $(".zico").on("click",function(e){
 	
 	$("#actionForm").submit();
 });
+
+$("#listBtn").on("click",function(e){
+	e.preventDefault();
+	location.href="/menu/menulist";
+	console.log("이동")
+})
 
 var dateArr = [];
 var fileNameArr = [];
@@ -103,10 +111,7 @@ $(".fileDrop").on("dragenter dragover", function(event){
             dateArr.push(date);
             fileNameArr.push(fileName);
             
-            //console.log(date);
-            //console.log(fileName);
-            //console.log(data);
-            //console.log(checkImageType(data));
+          
             totalPath.push(checkImageType(data));
             if(checkImageType(data)){
                str ="<span>" +"<input type=image style= 'margin :5px' class='imgName' name='imgName' value='"+data+"' src='displayFile?fileName="+data+"'/>"+"<small data-src="+data+">취소하기</small></span>";

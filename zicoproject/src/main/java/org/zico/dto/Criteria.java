@@ -7,7 +7,7 @@ public class Criteria {
 	
 	// 비어있는 생성자 기본 세팅
 	public Criteria() {
-		this(1, 10);
+		this(1, 9);
 	}
 
 	public Criteria(int page, int size) {
@@ -32,7 +32,7 @@ public class Criteria {
 	}
 	
 	public int getSize() {
-		return this.size != 0 ? this.size : 10;
+		return this.size != 0 ? this.size : 9;
 	}
 	
 }

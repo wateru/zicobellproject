@@ -15,9 +15,9 @@
 		<!-- Connection Pool Bean 설정 -->
    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
       <property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
-      <property name="url" value="jdbc:log4jdbc:mysql://192.168.0.16:3306/zico?useSSL=false"></property>
-      <property name="username" value="zico"></property>
-      <property name="password" value="java97"></property>
+      <property name="url" value="jdbc:log4jdbc:mysql://192.168.0.241:3306/zicobell?useSSL=false"></property>
+      <property name="username" value="zicobell"></property>
+      <property name="password" value="zico"></property>
    </bean>
    
    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">

@@ -21,9 +21,9 @@ public class MenuServiceImpl implements MenuService{
 	}
 
 	@Override
-	public List<Menu> getList() {
+	public List<Menu> getList(Criteria cri) {
 
-		return mapper.getMenu();
+		return mapper.getMenu(cri);
 	}
 
 	@Override
@@ -45,9 +45,9 @@ public class MenuServiceImpl implements MenuService{
 	}
 
 	@Override
-	public int getListCount(Criteria cri) {
+	public int getListCount() {
 		// TODO Auto-generated method stub
-		return mapper.getTotal(cri);
+		return mapper.getTotal();
 	}
 
 	

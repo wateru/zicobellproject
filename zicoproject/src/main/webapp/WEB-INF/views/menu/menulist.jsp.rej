@@ -1,9 +1,0 @@
-diff a/zicoproject/src/main/webapp/WEB-INF/views/menu/menulist.jsp b/zicoproject/src/main/webapp/WEB-INF/views/menu/menulist.jsp	(rejected hunks)
-@@ -10,7 +10,6 @@
- 							<div class="col-lg-4 col-md-5">
- 								<div class="card card-user">
- 									<div class="image">
--										<img src="displayFile?fileName=${menu.imgName}/">
- 										<img src="/resources/assets/img/1.PNG" alt="..." />
- 									</div>
- 									

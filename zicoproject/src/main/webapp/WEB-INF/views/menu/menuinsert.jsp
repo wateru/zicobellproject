@@ -3,62 +3,43 @@
 <%@ include file="../admin/header.jsp" %>
 
         <div class="content">
-				<div class="container-fluid">
+				<div class="container-fluid" style="padding: 0 10% 0 10%;">
 				
-				<form id="actionForm" action="/menu/insert" method="post">
+				<form method="post" action="/menu/insert">
 					<div class="row">
 							
 								<div class="form-group">
 									<label>Menu Name</label> <input type="text"
 										class="form-control border-input" name="menuName"
-										placeholder="메뉴이름">
+										placeholder="메뉴이름"/>
 								</div>
-								<div class="form-group">
+								<div class="form-group" styl: 0>
 									<label>Menu Price</label> <input type="number"
 										class="form-control border-input" name="menuPrice"
 										placeholder="가격">
 								</div>
 							
-							
-							
-							<div class="col-lg-4 col-md-5">
-								<div class="card card-user">
-									<div class="image">
-										<img src="/resources/assets/img/background.jpg" alt="..." />
+								<div class="col-lg-4 col-md-5">
+									<div class="card card-user">
+										<div class="image">
+											<img src="/resources/assets/img/background.jpg" alt="..." />
+										</div>
+										<div class="content fileDrop">
+	
+											<div class="icon-container">
+	                        				<span class="ti-image"></span><span class="icon-name"> 사진을 드레그 해주세요</span>
+	                        			</div>
+										</div>
+										<hr>
+										<div class="text-center">
+										</div>
 									</div>
-									<div class="content fileDrop">
-
-										<div class="icon-container">
-                        				<span class="ti-image"></span><span class="icon-name"> 사진을 드레그 해주세요</span>
-                        			</div>
-									</div>
-									<hr>
-									<div class="text-center">
-										<!-- 
-                                <div class="row">
-                                    <div class="col-md-3 col-md-offset-1">
-                                        <h5>12<br /><small>Files</small></h5>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <h5>2GB<br /><small>Used</small></h5>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <h5>24,6$<br /><small>Spent</small></h5>
-                                    </div>
-                               -->
-									</div>
-								</div>
-							</div>
-							
+								</div>													
 					</div>
-
-					<button type="submit" class="btn btn-info btn-fill btn-wd zico">등록</button>	
-					</form>
-					<form action="/menu/menulist" method="get"> 
-					<button type="submit" class="btn btn-info btn-fill btn-wd ">목록</button>
-					</form>
-				
-				</div>
+					<button  id="insertBtn" class="btn btn-info btn-fill btn-wd zico">등록</button>						
+					<button  id="listBtn" class="btn btn-info btn-fill  btn-wd ">목록</button>	
+					</form>	
+				</div>				
 			</div>
 		</div>
 		
@@ -67,6 +48,8 @@
         integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
         crossorigin="anonymous"></script>
 <script type="text/javascript">
+$(document).ready(function() {
+var actionForm = $("#actionForm");
 $(".fileDrop").on("click",".imgName",function(e){
 	e.preventDefault();
 });
@@ -84,6 +67,15 @@ var totalPath = [];
 $(".fileDrop").on("dragenter dragover", function(event){
     event.preventDefault();
  });
+ 
+
+
+$("#listBtn").on("click",function(e){
+	e.preventDefault();
+	location.href="/menu/menulist";
+	console.log("이동")
+})
+
  
  $(".fileDrop").on("drop", function(event){
     event.preventDefault();
@@ -172,6 +164,7 @@ $(".fileDrop").on("dragenter dragover", function(event){
           }
        }
     });
+});
 });
 </script>
 <%@ include file="../admin/footer.jsp" %>

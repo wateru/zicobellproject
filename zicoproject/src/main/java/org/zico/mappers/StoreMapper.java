@@ -17,3 +17,4 @@ public interface StoreMapper extends CRUDMapper<Store, Integer>{
 	public int getTotal(Criteria cri);
 	
 }
+

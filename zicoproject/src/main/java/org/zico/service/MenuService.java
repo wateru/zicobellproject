@@ -9,7 +9,7 @@ public interface MenuService {
 	
 	public void create(Menu menu);
 
-	public List<Menu> getList();
+	public List<Menu> getList(Criteria cri);
 	
 	public void remove(int menuNo);
 	
@@ -17,5 +17,5 @@ public interface MenuService {
 	
 	public void update(Menu menu);
 	
-	public int getListCount(Criteria cri);
+	public int getListCount();
 }
