@@ -1,27 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<!--
-	Transitive by TEMPLATED
-	templated.co @templatedco
-	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
--->
-<html>
-	<head>
-		<title>Transitive by TEMPLATED</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<link rel="stylesheet" href="/resources/assets/css/main.css" />
-		<!-- 아이콘 script -->
-		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-		
-		<!-- 스타일 -->
-		<style type="text/css">
+<%@ include file="header.jsp" %>
+	<style type="text/css">
 			table,th,td {
 				background: white;
 				text-align: center;
+				/* overflow:hidden;
+				text-overflow:ellipsis;
+				white-space:nowrap; */
 			}
 			.notice-integer{
 				width: 10%;
@@ -50,7 +36,8 @@
 			.ntitle a:link { color: black; text-decoration: none;}
 			.ntitle a:visited { color: #884EA0; text-decoration: none;}
 			.pagination {
-			    display: inline-block;
+			   display:inline-block;
+			   padding:0 calc(calc(100% - 600px)/2) 0 calc(calc(100% - 600px)/2);
 			}
 			
 			.pagination a {
@@ -69,30 +56,7 @@
 			.pagination a:hover:not(.active) {background-color: #ddd;}
 
 		</style>
-	</head>
-	<body>
-	<!-- 제이쿼리 CDN -->
-	<script
-			src="https://code.jquery.com/jquery-3.2.1.min.js"
-			integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-			crossorigin="anonymous"></script>
-
-
-		<!-- Header -->
-			<header id="header" class="reveal">
-				<div class="logo"><a href="#">B E L L<span>&nbsp;by Zico</span></a></div>
-				<a href="#menu" class="toggle"><span>Menu</span></a>
-			</header>
-
-		<!-- Nav -->
-			<nav id="menu">
-				<ul class="links">
-					<li><a href="index.html">Home</a></li>
-					<li><a href="generic.html">Generic</a></li>
-					<li><a href="elements.html">Elements</a></li>
-				</ul>
-			</nav>
-
+	
 			<c:set var="now" value="<%=new java.util.Date()%>" />
 			<c:set var="sysYear"><fmt:formatDate value="${now}" pattern="yy-MM-dd" /></c:set> 
 			
@@ -140,15 +104,8 @@
 						            </c:forEach>
 									</tbody>
 								</table>
-									<div class="pagination" style="float: center">
-										  <a href="#">&laquo;</a>
-										  <a href="1">1</a>
-										  <a href="2" class="active">2</a>
-										  <a href="3">3</a>
-										  <a href="4">4</a>
-										  <a href="5">5</a>
-										  <a href="6">6</a>
-										  <a href="#">&raquo;</a>
+									<div class="pagination">
+										  
 									</div>
 								</div>
 							<input value="등록" class="button special" onclick="location.href='/notice/insert'" type="button">
@@ -161,32 +118,18 @@
 						str='';
 					    var pageResult = makePage({ page:${criteria.page}, size:${criteria.size}, total:${total} });
 					    if(pageResult.prev){
-					    	str += "<a href="+ (pageResult.first - 1) +">&laquo;</a>";
+					    	str += "<a href=/notice/list/"+ (pageResult.first - 1) +">&laquo;</a>";
 					    }
 					   	for(var i = pageResult.first; i <= pageResult.last; i++){
 					   		str += "<a " + (pageResult.page == i ? "class='active'":"") + "href=/notice/list/"+i+">"+i+"</a>";
 					   	}
 					   	if(pageResult.next){
-					   		str += "<a href="+ (pageResult.last + 1) +">&raquo;</a>";
+					   		str += "<a href=/notice/list/"+ (pageResult.last + 1) +">&raquo;</a>";
 					   	}
 					   	$(".pagination").html(str);
+					 
 					  });
 					</script>	
 					<script type="text/javascript">
 					</script>
-					<div class="copyright">
-						&copy; Untitled Design: <a href="https://templated.co/">TEMPLATED</a>. Images <a href="https://unsplash.com/">Unsplash</a>. Video <a href="http://coverr.co/">Coverr</a>.
-					</div>
-				</div>
-			</footer>
-
-		<!-- Scripts -->
-			<script src="/resources/assets/js/jquery.min.js"></script>
-			<script src="/resources/assets/js/jquery.scrolly.min.js"></script>
-			<script src="/resources/assets/js/jquery.scrollex.min.js"></script>
-			<script src="/resources/assets/js/skel.min.js"></script>
-			<script src="/resources/assets/js/util.js"></script>
-			<script src="/resources/assets/js/main.js"></script>
-
-	</body>
-</html>
+<%@ include file="footer.jsp" %>

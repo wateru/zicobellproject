@@ -29,16 +29,16 @@
 
 		<!-- Header -->
 			<header id="header" class="alt">
-				<div class="logo"><a href="#">B E L L<span>&nbsp;by Zico</span></a></div>
+				<div class="logo"><a href="/">B E L L<span>&nbsp;by Zico</span></a></div>
 				<a href="#menu" class="toggle"><span>Menu</span></a>
 			</header>
 
 		<!-- Nav -->
 			<nav id="menu">
 				<ul class="links">
-					<li><a href="index.html">Home</a></li>
-					<li><a href="generic.html">Generic</a></li>
-					<li><a href="elements.html">Elements</a></li>
+					<li><a href="/">Home</a></li>
+					<li><a href="/notice/list">Notice</a></li>
+					<li><a href="/order/list">Order</a></li>
 				</ul>
 			</nav>
 
