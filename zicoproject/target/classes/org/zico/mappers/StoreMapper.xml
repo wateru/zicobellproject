@@ -5,32 +5,63 @@
   
 <mapper namespace="org.zico.mappers.StoreMapper">
 
+	<resultMap type="Store" id="storeMap">
+		<result property="sno" column="store_no" />
+		<result property="sname" column="store_name" />
+		<result property="saddr" column="store_addr" />
+		<result property="stel" column="store_tel" />
+		<result property="category" column="store_category" />
+		<result property="openTime" column="store_opentime" />
+		<result property="closeTime" column="store_closetime" />
+		<result property="simage" column="store_image" />
+		<result property="sid" column="store_member_id" />
+		<result property="lat" column="store_lat" />
+		<result property="lng" column="store_lng" />
+	</resultMap>
+
 	<!-- 매장등록 -->
 	<insert id="create">
-		insert into store (storename, storeaddr, storetel, opentime, closetime, lat, lng)
-		values (#{storeName}, #{storeAddr}, #{storeTel}, #{openTime}, #{closeTime}, #{lat}, #{lng})
+		insert into store (store_name, store_addr, store_tel, store_category,
+						   store_opentime, store_closetime, store_image,
+						   store_member_id, store_lat, store_lng)
+		values (#{sname}, #{saddr}, #{stel}, #{category},
+				#{openTime}, #{closeTime}, #{simage},
+				#{sid}, #{lat}, #{lng})
 	</insert>
 
-	<!-- 매장 상세 조회 -->
-	<select id="read" resultType="Store">
+	<!-- 매장목록 -->
+	<select id="list" resultType="Store" resultMap="storeMap">
 		select *
 		  from store
-		 where storeno = #{storeNo}
+		 order by store_no desc limit #{skip}, #{size}
+	</select>
+
+	<!-- 매장 상세 조회 -->
+	<select id="read" resultType="Store" resultMap="storeMap">
+		select *
+		  from store
+		 where store_no = #{sno}
 	</select>
 	
 	<!-- 매장수정 -->
 	<update id="update">
 		update store
-		   set storename = #{storeName}, storeaddr = #{storeAddr}, storetel = #{storeTel},
-		   	   opentime = #{openTime}, closetime = #{closeTime}, lat = #{lat}, lng = #{lng}
-		 where storeno = #{storeNo}
+		   set store_name = #{sname}, store_addr = #{saddr}, store_tel = #{stel}, store_category = #{category},
+		   	   store_opentime = #{openTime}, store_closetime = #{closeTime}, store_lat = #{lat}, store_lng = #{lng}
+		 where store_no = #{sno}
 	</update>
 	
 	<!-- 매장삭제 -->
 	<delete id="delete">
 		delete
 		  from store
-		 where storeno = #{storeNo}
+		 where store_no = #{sno}
 	</delete>
+	
+	<!-- 전체 매장 수 -->
+	<select id="count">
+		select count(store_no)
+		  from store
+	</select>
 
 </mapper>
