@@ -13,7 +13,7 @@
 										class="form-control border-input" name="menuName"
 										placeholder="메뉴이름"/>
 								</div>
-								<div class="form-group" styl: 0>
+								<div class="form-group" >
 									<label>Menu Price</label> <input type="number"
 										class="form-control border-input" name="menuPrice"
 										placeholder="가격">

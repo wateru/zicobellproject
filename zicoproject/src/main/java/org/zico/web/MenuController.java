@@ -22,6 +22,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -30,6 +31,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 @Controller
+@CrossOrigin(origins="*")
 @Log
 public class MenuController {
 
@@ -75,6 +77,8 @@ public class MenuController {
    public String insertPost(String menuName,int menuPrice,String imgName) {
 	   Menu menu=new Menu();
 	   log.info("이미지이름 :"+imgName);
+	   menu.setMenuCategory("치킨");
+	   menu.setStoreNo(1);
 	   menu.setMenuName(menuName);
 	   menu.setMenuPrice(menuPrice);
 	   menu.setImgName(imgName);
@@ -121,7 +125,13 @@ public class MenuController {
 	   
    }
    
-   
+   @GetMapping("/menu/order")
+   public void order(Model model,Criteria cri) {	   	  
+	   model.addAttribute("menu",serivce.getList(cri));
+	   model.addAttribute("total",serivce.getListCount());
+	   System.out.println(cri.getSize());
+	   System.out.println(cri.getPage());
+   }
    
    @ResponseBody
    @RequestMapping("/menu/displayFile")

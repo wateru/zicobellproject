@@ -5,13 +5,39 @@
   
 <mapper namespace="org.zico.mappers.MenuMapper">
 
-<insert id="create">
-		insert into menu (menuName, imgName, menuPrice)
-		values (#{menuName}, #{imgName}, #{menuPrice})
+<resultMap type="Menu" id="MenuMap">
+ 	<result property="menuNo" column="menu_no"/>
+ 	<result property="menuName" column="menu_name"/>
+ 	<result property="imgName" column="menu_img"/>
+ 	<result property="menuPrice" column="menu_price"/>
+ 	<result property="menuCategory" column="menu_category"/>
+ 	<result property="storeNo" column="menu_store_no"/>
+</resultMap>
+
+<insert id="create" >
+		insert into menu (menu_Name, menu_img, menu_price,menu_store_no,menu_category)
+		values (#{menuName}, #{imgName}, #{menuPrice},#{storeNo},#{menuCategory})
 	</insert>
+
+<select id="list" resultMap="MenuMap">
+	select * from menu order by menu_no desc limit #{skip},#{size}
+	
+</select>
+
+
+<select id="count" resultType="int">
+	select count(menu_no) from menu
+</select>	
+	
+<select id="read" resultMap="MenuMap">
+	select * from menu where menu_no=#{menuNo}
+</select>	
+	
+	
+	
 	
 	<delete id="delete">
-	delete from menu where menuNo=#{menoNo}		
+	delete from menu where menu_No=#{menuNo}		
 	</delete>
 	
 	<update id="update">

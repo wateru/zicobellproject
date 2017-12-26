@@ -9,15 +9,16 @@ import org.zico.domain.Menu;
 
 public interface MenuMapper extends CRUDMapper<Menu, Integer>{
 
-	@Select("select * from menu  order by menuNo desc limit #{skip}, #{size}")
+	@Select("select * from menu  order by menu_no desc limit #{skip}, #{size}")
 	public List<Menu> getMenu(Criteria cri);
 	
 	
-	@Select("select * from menu where menuno=#{menuNo}")
-	public Menu detailMenu(@Param(value="menuNo")int menuNo);
+	@Select("select * from menu where menuno=#{menuNo}" )
+	public Menu detailMenu(@Param(value="menu_No")int menuNo);
 	
-	@Select("select count(menuNo) from menu")
+	@Select("select count(menuno) from menu")
 	public int getTotal();
+	
 	
 	
 }

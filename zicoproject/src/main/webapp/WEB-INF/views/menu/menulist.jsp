@@ -3,51 +3,119 @@
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ include file="../admin/header.jsp" %>
 
+<style>
+.container {
+    position: relative;
+    width: 50%;
+}
+
+.image {
+  opacity: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: .5s ease;
+  backface-visibility: hidden;
+}
+
+.middle {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%)
+}
+
+.container:hover .image {
+  opacity: 0.3;
+}
+
+.container:hover .middle {
+  opacity: 1;
+}
+
+.text {
+  
+  color: white;
+  font-size: 16px;
+  padding: 16px 32px;
+}
+div.desc {
+    padding: 15px;
+    text-align: center;
+}
+
+</style>
         <div class="content">
             <div class="container-fluid" style="padding: 0 10% 0 10%;">
-                <div class="row">
-					<c:forEach items="${menu}" var="menu">
-							<div class="col-lg-4 col-md-5">
-								<div class="card card-user">
-									<div class="image">
-										<img src="/resources/assets/img/1.PNG" alt="..." />
-									</div>
-									 <div class="author">
-                                  <img class="avatar border-white" src="displayFile?fileName=${menu.imgName}/" alt="..."/>
-                                  <h4 class="title">${menu.menuName}<br/>
-                                     <a href="#"><small>${menu.menuPrice}</small></a>
-                                  </h4>
-                                </div>
-									
-									<hr>
-									<div class="text-center">
+		<div class="row">
+			<!--  
+			<c:forEach items="${menu}" var="menu">
+				<div class="col-lg-4 col-md-5">
+					<div class="card card-user">
+						<div class="image">
+							<img src="/resources/assets/img/1.PNG" alt="..." />
+						</div>
+						<div class="author">
+							<img class="avatar border-white"
+								src="displayFile?fileName=${menu.imgName}/" alt="..." />
+							<h4 class="title">${menu.menuName}<br /> <a href="#"><small>${menu.menuPrice}</small></a>
+							</h4>
+						</div>
 
-										<div class="row">
-											<div class="col-md-5 col-md-offset-1">
-												<form action=/menu/menuupdate method="get">
-													<input type="hidden" value="${menu.menuNo}" name="menuNo">
-													<button type="submit" class="btn btn-info btn-fill btn-wd">수정</button>
-												</form>
-											</div>
+						<hr>
+						<div class="text-center">
 
-											<div class="col-md-5">
-												<form action="/menu/delete" method="post">
-													<button type="submit" class="btn btn-info btn-fill btn-wd">삭제</button>
-													<input type="hidden" value="${menu.menuNo}" name="menuNo">
-												</form>
-											</div>
-
-										</div>
-
-									</div>
+							<div class="row">
+								<div class="col-md-5 col-md-offset-1">
+									<form action=/menu/menuupdate method="get">
+										<input type="hidden" value="${menu.menuNo}" name="menuNo">
+										<button type="submit" class="btn btn-info btn-fill btn-wd">수정</button>
+									</form>
 								</div>
+
+								<div class="col-md-5">
+									<form action="/menu/delete" method="post">
+										<button type="submit" class="btn btn-info btn-fill btn-wd">삭제</button>
+										<input type="hidden" value="${menu.menuNo}" name="menuNo">
+									</form>
+								</div>
+
 							</div>
-						</c:forEach>
 
-			
-
+						</div>
 					</div>
-					<form action="/menu/menuinsert" method="get">
+				</div>
+			</c:forEach>
+			
+-->
+			<c:forEach items="${menu}" var="menu">
+				<div class="container">
+					<img src="displayFile?fileName=${menu.imgName}/" alt="Avatar"
+						class="image" width="255" height="170">
+					<div class="middle">
+						<div class="text">
+							<form action=/menu/menuupdate method="get">
+								<input type="hidden" value="${menu.menuNo}" name="menuNo">
+								<button type="submit" class="btn btn-info btn-fill btn-wd">수정</button>
+							</form>
+							<form action="/menu/delete" method="post">
+								<button type="submit" class="btn btn-info btn-fill btn-wd">삭제</button>
+								<input type="hidden" value="${menu.menuNo}" name="menuNo">
+							</form>
+						</div>
+					</div>
+					<div class="desc">Add a description of the image here</div>
+				</div>
+			</c:forEach>
+
+		</div>
+
+
+
+		<form action="/menu/menuinsert" method="get">
 						<button type="submit" class="btn btn-info btn-fill btn-wd">등록</button>
 					</form>
 					<div class="paging">
