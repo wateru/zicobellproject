@@ -29,9 +29,11 @@
 
 			<style>
 			#flexgrid{
-				background-color:white;
 				margin: 0;
 				padding: 2.5rem 0 0 0;
+			}
+			#flexgrid div div{
+				background-color: white;
 			}
 			</style>
 
@@ -40,16 +42,59 @@
 				<div class="inner">
 					<div id="flexgrid">
 						<div>
+							<div>
+								<header>
+									<h3>맥도날드</h3>
+								</header>
+								<p>전화번호: 02 553 3519</p>
+								<p>주소:서울 서초구 서초대로55길 3</p>
+								<ul class="actions">
+									<li><a href="#" class="button alt">Learn More</a></li>
+								</ul>
+							</div>
+						</div>
+						<div>
+							<div>
 							<header>
-								<h3>맥도날드</h3>
+								<h3>마마스</h3>
 							</header>
-							<p>전화번호: 02 553 3519</p>
-							<p>주소:서울 서초구 서초대로55길 3</p>
+							<p>전화번호: 02 555 3519</p>
+							<p>주소:서울 서초구 서초대로51길 1</p>
 							<ul class="actions">
 								<li><a href="#" class="button alt">Learn More</a></li>
 							</ul>
+							</div>
 						</div>
 						<div>
+							<div>
+							<header>
+									<h3>서브웨이</h3>
+								</header>
+								<p>전화번호: 02 555 3519</p>
+								<p>주소:서울 서초구 서초대로51길 1</p>
+								<ul class="actions">
+									<li><a href="#" class="button alt">Learn More</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="inner">
+					<div id="flexgrid">
+						<div>
+							<div>
+								<header>
+									<h3>맥도날드</h3>
+								</header>
+								<p>전화번호: 02 553 3519</p>
+								<p>주소:서울 서초구 서초대로55길 3</p>
+								<ul class="actions">
+									<li><a href="#" class="button alt">Learn More</a></li>
+								</ul>
+							</div>
+						</div>
+						<div>
+							<div>
 							<header>
 								<h3>마마스</h3>
 							</header>
@@ -57,139 +102,170 @@
 							<ul class="actions">
 								<li><a href="#" class="button alt">Learn More</a></li>
 							</ul>
+							</div>
 						</div>
 						<div>
+							<div>
 							<header>
-								<h3>서브웨이</h3>
-							</header>
-							<p>Suspendisse mauris. Fusce accumsan mollis eros. Pellentesque a diam sit amet mi ullamcorper vehicula.</p>
-							<ul class="actions">
-								<li><a href="#" class="button alt">Learn More</a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-				<div class="inner">
-					<div id="flexgrid">
-						<div>
-							<header>
-								<h3>Tempus Feugiat</h3>
-							</header>
-							<p>Morbi interdum mollis sapien. Sed ac risus. Phasellus lacinia, magna a ullamcorper laoreet, lectus arcu</p>
-							<ul class="actions">
-								<li><a href="#" class="button alt">Learn More</a></li>
-							</ul>
-						</div>
-						<div>
-							<header>
-								<h3>Aliquam Nulla</h3>
-							</header>
-							<p>Ut convallis, sem sit amet interdum consectetuer, odio augue aliquam leo, nec dapibus tortor nibh sed </p>
-							<ul class="actions">
-								<li><a href="#" class="button alt">Learn More</a></li>
-							</ul>
-						</div>
-						<div>
-							<header>
-								<h3>Sed Magna</h3>
-							</header>
-							<p>Suspendisse mauris. Fusce accumsan mollis eros. Pellentesque a diam sit amet mi ullamcorper vehicula.</p>
-							<ul class="actions">
-								<li><a href="#" class="button alt">Learn More</a></li>
-							</ul>
+									<h3>서브웨이</h3>
+								</header>
+								<p>Suspendisse mauris. Fusce accumsan mollis eros. Pellentesque a diam sit amet mi ullamcorper vehicula.</p>
+								<ul class="actions">
+									<li><a href="#" class="button alt">Learn More</a></li>
+								</ul>
+							</div>
 						</div>
 					</div>
 				</div>
 				<div class="inner">
 					<div id="flexgrid">
 						<div>
-							<header>
-								<h3>Tempus Feugiat</h3>
-							</header>
-							<p>Morbi interdum mollis sapien. Sed ac risus. Phasellus lacinia, magna a ullamcorper laoreet, lectus arcu</p>
-							<ul class="actions">
-								<li><a href="#" class="button alt">Learn More</a></li>
-							</ul>
+							<div>
+								<header>
+									<h3>맥도날드</h3>
+								</header>
+								<p>전화번호: 02 553 3519</p>
+								<p>주소:서울 서초구 서초대로55길 3</p>
+								<ul class="actions">
+									<li><a href="#" class="button alt">Learn More</a></li>
+								</ul>
+							</div>
 						</div>
 						<div>
+							<div>
 							<header>
-								<h3>Aliquam Nulla</h3>
+								<h3>마마스</h3>
 							</header>
 							<p>Ut convallis, sem sit amet interdum consectetuer, odio augue aliquam leo, nec dapibus tortor nibh sed </p>
 							<ul class="actions">
 								<li><a href="#" class="button alt">Learn More</a></li>
 							</ul>
+							</div>
 						</div>
 						<div>
+							<div>
 							<header>
-								<h3>Sed Magna</h3>
-							</header>
-							<p>Suspendisse mauris. Fusce accumsan mollis eros. Pellentesque a diam sit amet mi ullamcorper vehicula.</p>
-							<ul class="actions">
-								<li><a href="#" class="button alt">Learn More</a></li>
-							</ul>
+									<h3>서브웨이</h3>
+								</header>
+								<p>Suspendisse mauris. Fusce accumsan mollis eros. Pellentesque a diam sit amet mi ullamcorper vehicula.</p>
+								<ul class="actions">
+									<li><a href="#" class="button alt">Learn More</a></li>
+								</ul>
+							</div>
 						</div>
 					</div>
 				</div>
 				<div class="inner">
 					<div id="flexgrid">
 						<div>
-							<header>
-								<h3>Tempus Feugiat</h3>
-							</header>
-							<p>Morbi interdum mollis sapien. Sed ac risus. Phasellus lacinia, magna a ullamcorper laoreet, lectus arcu</p>
-							<ul class="actions">
-								<li><a href="#" class="button alt">Learn More</a></li>
-							</ul>
+							<div>
+								<header>
+									<h3>맥도날드</h3>
+								</header>
+								<p>전화번호: 02 553 3519</p>
+								<p>주소:서울 서초구 서초대로55길 3</p>
+								<ul class="actions">
+									<li><a href="#" class="button alt">Learn More</a></li>
+								</ul>
+							</div>
 						</div>
 						<div>
+							<div>
 							<header>
-								<h3>Aliquam Nulla</h3>
+								<h3>마마스</h3>
 							</header>
 							<p>Ut convallis, sem sit amet interdum consectetuer, odio augue aliquam leo, nec dapibus tortor nibh sed </p>
 							<ul class="actions">
 								<li><a href="#" class="button alt">Learn More</a></li>
 							</ul>
+							</div>
 						</div>
 						<div>
+							<div>
 							<header>
-								<h3>Sed Magna</h3>
-							</header>
-							<p>Suspendisse mauris. Fusce accumsan mollis eros. Pellentesque a diam sit amet mi ullamcorper vehicula.</p>
-							<ul class="actions">
-								<li><a href="#" class="button alt">Learn More</a></li>
-							</ul>
+									<h3>서브웨이</h3>
+								</header>
+								<p>Suspendisse mauris. Fusce accumsan mollis eros. Pellentesque a diam sit amet mi ullamcorper vehicula.</p>
+								<ul class="actions">
+									<li><a href="#" class="button alt">Learn More</a></li>
+								</ul>
+							</div>
 						</div>
 					</div>
 				</div>
 				<div class="inner">
 					<div id="flexgrid">
 						<div>
-							<header>
-								<h3>Tempus Feugiat</h3>
-							</header>
-							<p>Morbi interdum mollis sapien. Sed ac risus. Phasellus lacinia, magna a ullamcorper laoreet, lectus arcu</p>
-							<ul class="actions">
-								<li><a href="#" class="button alt">Learn More</a></li>
-							</ul>
+							<div>
+								<header>
+									<h3>맥도날드</h3>
+								</header>
+								<p>전화번호: 02 553 3519</p>
+								<p>주소:서울 서초구 서초대로55길 3</p>
+								<ul class="actions">
+									<li><a href="#" class="button alt">Learn More</a></li>
+								</ul>
+							</div>
 						</div>
 						<div>
+							<div>
 							<header>
-								<h3>Aliquam Nulla</h3>
+								<h3>마마스</h3>
 							</header>
 							<p>Ut convallis, sem sit amet interdum consectetuer, odio augue aliquam leo, nec dapibus tortor nibh sed </p>
 							<ul class="actions">
 								<li><a href="#" class="button alt">Learn More</a></li>
 							</ul>
+							</div>
 						</div>
 						<div>
+							<div>
 							<header>
-								<h3>Sed Magna</h3>
+									<h3>서브웨이</h3>
+								</header>
+								<p>Suspendisse mauris. Fusce accumsan mollis eros. Pellentesque a diam sit amet mi ullamcorper vehicula.</p>
+								<ul class="actions">
+									<li><a href="#" class="button alt">Learn More</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="inner">
+					<div id="flexgrid">
+						<div>
+							<div>
+								<header>
+									<h3>맥도날드</h3>
+								</header>
+								<p>전화번호: 02 553 3519</p>
+								<p>주소:서울 서초구 서초대로55길 3</p>
+								<ul class="actions">
+									<li><a href="#" class="button alt">Learn More</a></li>
+								</ul>
+							</div>
+						</div>
+						<div>
+							<div>
+							<header>
+								<h3>마마스</h3>
 							</header>
-							<p>Suspendisse mauris. Fusce accumsan mollis eros. Pellentesque a diam sit amet mi ullamcorper vehicula.</p>
+							<p>Ut convallis, sem sit amet interdum consectetuer, odio augue aliquam leo, nec dapibus tortor nibh sed </p>
 							<ul class="actions">
 								<li><a href="#" class="button alt">Learn More</a></li>
 							</ul>
+							</div>
+						</div>
+						<div>
+							<div>
+							<header>
+									<h3>서브웨이</h3>
+								</header>
+								<p>Suspendisse mauris. Fusce accumsan mollis eros. Pellentesque a diam sit amet mi ullamcorper vehicula.</p>
+								<ul class="actions">
+									<li><a href="#" class="button alt">Learn More</a></li>
+								</ul>
+							</div>
 						</div>
 					</div>
 				</div>
