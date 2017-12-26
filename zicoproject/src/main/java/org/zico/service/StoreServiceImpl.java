@@ -20,8 +20,8 @@ public class StoreServiceImpl implements StoreService {
 	}
 
 	@Override
-	public Store detail(int storeNo) {
-		return sm.read(storeNo);
+	public Store detail(int sno) {
+		return sm.read(sno);
 	}
 
 	@Override
@@ -30,18 +30,18 @@ public class StoreServiceImpl implements StoreService {
 	}
 
 	@Override
-	public void remove(int storeNo) {
-		sm.delete(storeNo);
+	public void remove(int sno) {
+		sm.delete(sno);
 	}
 
 	@Override
 	public List<Store> getList(Criteria cri) {
-		return sm.getStore(cri);
+		return sm.list(cri);
 	}
 
 	@Override
-	public int getListCount(Criteria cri) {
-		return sm.getTotal(cri);
+	public int getListCount() {
+		return sm.count();
 	}
 
 }

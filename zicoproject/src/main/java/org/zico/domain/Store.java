@@ -5,8 +5,8 @@ import lombok.Data;
 @Data
 public class Store {
 
-	private int storeNo;
-	private String storeName, storeAddr, storeTel, openTime, closeTime;
+	private int sno;
+	private String sname, saddr, stel, category, openTime, closeTime, simage, sid;
 	private double lat, lng;
 	
 }

@@ -27,13 +27,13 @@ public class StoreController {
 	@GetMapping("/list")
 	public void list(Criteria cri, Model model) {
 		model.addAttribute("list", ss.getList(cri));
-		model.addAttribute("total", ss.getListCount(cri));
+		model.addAttribute("total", ss.getListCount());
 	}
 	
 	// 매장 상세 조회
 	@GetMapping("/detail")
-	public void detail(@RequestParam(name="storeNo") int storeNo, @ModelAttribute("cri") Criteria cri, Model model) {
-		model.addAttribute("store", ss.detail(storeNo));
+	public void detail(@RequestParam(name="sno") int sno, @ModelAttribute("cri") Criteria cri, Model model) {
+		model.addAttribute("store", ss.detail(sno));
 	}
 	
 	// 매장 등록
@@ -52,8 +52,8 @@ public class StoreController {
 	
 	// 매장 수정
 	@GetMapping("/update")
-	public void updateGet(@RequestParam(name="storeNo") int storeNo, @ModelAttribute("cri") Criteria cri, Model model) {
-		model.addAttribute("store", ss.detail(storeNo));
+	public void updateGet(@RequestParam(name="sno") int sno, @ModelAttribute("cri") Criteria cri, Model model) {
+		model.addAttribute("store", ss.detail(sno));
 	}
 	@PostMapping("/updatePost")
 	public String updatePost(Store store, Criteria cri, RedirectAttributes rttr) {
@@ -62,14 +62,14 @@ public class StoreController {
 		rttr.addFlashAttribute("cri", cri);
 		rttr.addFlashAttribute("result", "success");
 		
-		return "redirect:/store/detail?storeNo=" + store.getStoreNo()
+		return "redirect:/store/detail?sno=" + store.getSno()
 				+ "&page=" + cri.getPage() + "$size=" + cri.getSize();
 	}
 	
 	// 매장 삭제
 	@PostMapping("/delete")
-	public String delete(@RequestParam(name="storeNo") int storeNo, Criteria cri, RedirectAttributes rttr) {
-		ss.remove(storeNo);
+	public String delete(@RequestParam(name="sno") int sno, Criteria cri, RedirectAttributes rttr) {
+		ss.remove(sno);
 		
 		rttr.addFlashAttribute("cri", cri);
 		rttr.addFlashAttribute("result", "success");
