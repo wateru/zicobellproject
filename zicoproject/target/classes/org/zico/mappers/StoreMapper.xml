@@ -5,7 +5,7 @@
   
 <mapper namespace="org.zico.mappers.StoreMapper">
 
-	<resultMap type="Store" id="storeMap">
+	<resultMap type="Store" id="StoreMap">
 		<result property="sno" column="store_no" />
 		<result property="sname" column="store_name" />
 		<result property="saddr" column="store_addr" />
@@ -30,14 +30,14 @@
 	</insert>
 
 	<!-- 매장목록 -->
-	<select id="list" resultType="Store" resultMap="storeMap">
+	<select id="list" resultType="Store" resultMap="StoreMap">
 		select *
 		  from store
 		 order by store_no desc limit #{skip}, #{size}
 	</select>
 
 	<!-- 매장 상세 조회 -->
-	<select id="read" resultType="Store" resultMap="storeMap">
+	<select id="read" resultType="Store" resultMap="StoreMap">
 		select *
 		  from store
 		 where store_no = #{sno}
@@ -59,7 +59,7 @@
 	</delete>
 	
 	<!-- 전체 매장 수 -->
-	<select id="count">
+	<select id="count" resultType="int">
 		select count(store_no)
 		  from store
 	</select>
