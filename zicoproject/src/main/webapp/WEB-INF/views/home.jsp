@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <!--
 	Transitive by TEMPLATED
 	templated.co @templatedco
@@ -8,13 +8,19 @@
 -->
 <html>
 	<head>
+	
 		<title>Transitive by TEMPLATED</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="stylesheet" href="/resources/assets/css/main.css" />
 		<!-- 아이콘 script -->
 		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+		<link rel="stylesheet"  href="/resources/assets/css/login.css" />
+		<link rel="stylesheet"  href="/resources/assets/css/login2.css" />
+		<link rel="stylesheet"  href="/resources/assets/css/login4.css" />
 		<style type="text/css">
+		@import url(https://fonts.googleapis.com/css?family=Exo:100,200,400);
+		@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:700,400,300);
 			
 			
 		</style>
@@ -31,8 +37,115 @@
 			<header id="header" class="alt">
 				<div class="logo"><a href="/">B E L L<span>&nbsp;by Zico</span></a></div>
 				<a href="#menu" class="toggle"><span>Menu</span></a>
+			
+			
+			
+			
+			
+			<button id="myBtn">Open Modal</button>
+			
 			</header>
 
+<!-- The Modal -->
+<div id="myModal" class="modal" style="position:absolute; z-index:10">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="close">&times;</span>
+            <h2>Modal Header</h2>
+        </div>
+        <div class="modal-body">
+           
+           
+     			<!-- 여기가 모달 내용 -->
+				<div class="body"></div>
+				<div class="grad"></div>
+				<div class="header">
+					<div>
+						Zico<span>Project</span>
+					</div>
+					</div>
+				<br>
+					<form action="/login/idcheck" method="post">
+					<div class="login">
+						<input type="text" placeholder="username" name="member_id"><br>
+						<input type="password" placeholder="password" name="member_password"><br>
+						<a href="/login/modal">회원가입 </a>&nbsp;&nbsp; <span class="line"><input name="remember" id="remember" style="opacity:1; float:none; -webkit-appearance: checkbox; display: -webkit-inline-box; " type="checkbox" />&emsp; &emsp;로그인</span><br>
+						<button >login</button>
+					</div>
+					</form>
+           		<!-- 모달 -->
+ 
+           
+           
+        </div>
+
+    </div>
+
+</div>
+			<script>
+			
+			 //$("span.line").click(function(e) { if(!$(e.target).hasClass("area")){ alert('영역 밖입니다.'); } });  
+			/* $('input:checkbox[id="remember"]').attr("checked", true); */
+			/* $(".line").on("click",function(){
+				if($("#remember").attr("checked")){
+					$("#remember").attr("checked", false);
+				} else {
+					$("#remember").attr("checked", true);
+				}
+			}) */
+			
+			
+			$(".line").on("click",function(){
+				console.log("클릭 실행");
+				console.log("if문 실행되기 전 : " + $("#remember").prop("checked"));	
+				if($("#remember").prop("checked")){
+					$("#remember").prop("checked", false);
+				} else {
+					$("#remember").prop("checked", true);
+				}
+				console.log("if문 실행된 후 : " + $("#remember").prop("checked"));
+			});
+			</script>
+
+<script>
+    // Get the modal
+    var modal = document.getElementById('myModal');
+
+    // Get the button that opens the modal
+    var btn = document.getElementById("myBtn");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks the button, open the modal
+    btn.onclick = function() {
+        modal.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+    
+    
+     $(document).ready(function(){
+    	
+    	if("${loginstatus}" == "fail"){
+    		modal.style.display = "block";
+    	}
+    });
+   
+     
+</script>
 		<!-- Nav -->
 			<nav id="menu">
 				<ul class="links">
@@ -49,7 +162,7 @@
 			formats to work correctly.
 		-->
 			<section id="banner" data-video="/resources/images/home-video-1">
-				<div class="slide sli-left" style="z-index: 3; margin-right: 30px;">&nbsp;&nbsp;&nbsp;<i class="fa fa-angle-left fa-4x" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp;</div>
+				<div class="slide sli-left" style="z-index: 3; position:relative; margin-right: 30px;">&nbsp;&nbsp;&nbsp;<i class="fa fa-angle-left fa-4x" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp;</div>
 				<div class="inner sli" >
 					<div id="slidebox">
 					<ul id="slider">

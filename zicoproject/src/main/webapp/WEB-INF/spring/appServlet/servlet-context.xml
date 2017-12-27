@@ -49,13 +49,27 @@
 	
 	
 	
+	<beans:bean id="idcheck" class="org.zico.interceptor.IdCheck">
+    </beans:bean>
+	<beans:bean id="checktest" class="org.zico.interceptor.CheckInterceptor">
+    </beans:bean>
+    
 	<!-- Interceptor 설정 -->
-	<!-- <beans:bean id="orderInterceptor" class="org.zico.interceptor.OrderInterceptor"></beans:bean> 
-	<interceptors>
-		<interceptor>
-			<mapping path="/order"/>
-			<beans:ref bean="orderInterceptor"/>
-		</interceptor>
-	</interceptors>
-	 -->
+	  <interceptors> 
+        <interceptor>
+        <mapping path="/login/idcheck"/>
+          <beans:ref bean="idcheck"/>
+        </interceptor> 
+        
+        <interceptor>
+        <mapping path="/login/checktest"/>
+          <beans:ref bean="checktest"/>
+        </interceptor>
+         
+        <interceptor>
+        <mapping path="/member/mypageview"/>
+          <beans:ref bean="checktest"/>
+        </interceptor> 
+        
+     </interceptors> 
 </beans:beans>
