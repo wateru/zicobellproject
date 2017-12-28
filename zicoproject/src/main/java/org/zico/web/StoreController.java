@@ -1,19 +1,20 @@
 package org.zico.web;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.InputStream;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
+import java.util.UUID;
 
-import javax.annotation.Resource;
+import javax.imageio.ImageIO;
 
-import org.apache.commons.io.IOUtils;
+import org.imgscalr.Scalr;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,8 +26,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zico.domain.Store;
 import org.zico.dto.Criteria;
 import org.zico.service.StoreService;
-import org.zico.util.MediaUtils;
-import org.zico.util.UploadFileUtils;
 
 import lombok.extern.java.Log;
 
@@ -41,7 +40,7 @@ public class StoreController {
 	// 매장 전체 목록
 	@GetMapping("/list")
 	public void list(Criteria cri, Model model) {
-		model.addAttribute("list", ss.getList(cri));
+		model.addAttribute("store", ss.getList(cri));
 		model.addAttribute("total", ss.getListCount());
 	}
 	
@@ -56,11 +55,31 @@ public class StoreController {
 	public void insertGet(Criteria cri) {}
 	
 	@PostMapping("/postinsert")
-	public String insertPost(Store store, Criteria cri, RedirectAttributes rttr) {
+	public String insertPost(Store store, Criteria cri, RedirectAttributes rttr
+							, MultipartFile simage, Model model) {
 		
-		System.out.println(store.toString());
+		System.out.println("start");
+		String uuid = UUID.randomUUID().toString();
+		String uploadName = uuid + "_" + simage.getOriginalFilename();
+		model.addAttribute("uploadName", uploadName);
+		
+		
+		System.out.println("start1");
+		try {
+			OutputStream out = new FileOutputStream("c:\\uploadImage\\" + uploadName);
+			FileCopyUtils.copy(simage.getInputStream(), out);
+			
+			if(simage.getContentType().startsWith("image")) {
+				model.addAttribute("isImage", simage.getContentType().startsWith("image"));
+				makeThumnail(uploadName);
+			}
+		} catch(Exception e) {
+			log.warning(e.getMessage());
+		}
+		
+		store.setSimage(uploadName);
 		ss.create(store);
-		
+		System.out.println("start2");
 		rttr.addFlashAttribute("cri", cri);
 		rttr.addFlashAttribute("result", "success");
 		
@@ -73,7 +92,26 @@ public class StoreController {
 		model.addAttribute("store", ss.detail(sno));
 	}
 	@PostMapping("/postupdate")
-	public String updatePost(Store store, Criteria cri, RedirectAttributes rttr) {
+	public String updatePost(Store store, Criteria cri, RedirectAttributes rttr
+							, MultipartFile simage, Model model) {
+		
+		String uuid = UUID.randomUUID().toString();
+		String uploadName = uuid + "_" + simage.getOriginalFilename();
+		model.addAttribute("uploadName", uploadName);
+		
+		try {
+			OutputStream out = new FileOutputStream("c:\\uploadImage\\" + uploadName);
+			FileCopyUtils.copy(simage.getInputStream(), out);
+			
+			if(simage.getContentType().startsWith("image")) {
+				model.addAttribute("isImage", simage.getContentType().startsWith("iamge"));
+				makeThumnail(uploadName);
+			}
+		} catch(Exception e) {
+			log.warning(e.getMessage());
+		}
+		
+		store.setSimage(uploadName);
 		ss.update(store);
 		
 		rttr.addFlashAttribute("cri", cri);
@@ -94,72 +132,37 @@ public class StoreController {
 		return "redirect:/store/list?page=" + cri.getPage() + "&size=" + cri.getSize();
 	}
 	
-	// 파일(이미지) 업로드
-	@Resource(name="uploadPath")
-	private String uploadPath;
-	
-	@ResponseBody
-	@PostMapping(value="/uploadAjax", produces="text/plain;charset=UTF-8")
-	public ResponseEntity<String> uploadAjax(MultipartFile file, Model model) throws Exception {
+	private String makeThumnail(String fileName) throws Exception {
 		
-		return new ResponseEntity<> (
-				UploadFileUtils.uploadFile(
-						uploadPath, file.getOriginalFilename(), file.getBytes()),
-				HttpStatus.CREATED);
+		BufferedImage sourceImg = ImageIO.read(new File("c:\\uploadImage\\", fileName));
+		
+		BufferedImage destImg
+			= Scalr.resize(sourceImg, Scalr.Method.AUTOMATIC, Scalr.Mode.FIT_TO_HEIGHT, 368);
+		
+		String thumnailName = "c:\\uploadImage\\" + File.separator + "s_" + fileName;
+		
+		File newFile = new File(thumnailName);
+		String formatName = fileName.substring(fileName.lastIndexOf(".") + 1);
+		
+		ImageIO.write(destImg, formatName.toUpperCase(), newFile);
+		
+		return thumnailName;
 	}
 	
 	@ResponseBody
-	@RequestMapping("/displayFile")
-	public ResponseEntity<byte[]> displayFile(String fileName) throws Exception {
-		
-		InputStream in = null;
-		ResponseEntity<byte[]> entity = null;
-		
+	@GetMapping(value="/display", produces="image/jpeg")
+	public byte[] display(String name) {
 		try {
-			String formatName = fileName.substring(fileName.lastIndexOf(".") + 1);
-			MediaType mType = MediaUtils.getMediaType(formatName);
-			HttpHeaders headers = new HttpHeaders();
-			in = new FileInputStream(uploadPath + fileName);
+			FileInputStream in = new FileInputStream("c:\\uploadImage\\" + name);
+			ByteArrayOutputStream bas = new ByteArrayOutputStream();
+			FileCopyUtils.copy(in, bas);
 			
-			if(mType != null) {
-				headers.setContentType(mType);
-			}
-			else {
-				fileName = fileName.substring(fileName.indexOf("_") + 1);
-				headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-				headers.add("Content-Disposition", "attachment; filename=\""
-							+ new String(fileName.getBytes("UTF-8"), "ISO-8859-1") + "\"");
-			}
-			
-			entity = new ResponseEntity<byte[]> (
-						IOUtils.toByteArray(in),
-						headers, HttpStatus.CREATED);
+			return bas.toByteArray();
 		} catch(Exception e) {
 			e.printStackTrace();
-			entity = new ResponseEntity<byte[]> (HttpStatus.BAD_REQUEST);
-		} finally {
-			in.close();
-		}
-		return entity;
-	}
-	
-	@ResponseBody
-	@PostMapping("/deleteFile")
-	public ResponseEntity<String> deleteFile(String fileName) {
-		
-		String formatName = fileName.substring(fileName.lastIndexOf(".") + 1);
-		MediaType mType = MediaUtils.getMediaType(formatName);
-		
-		if(mType != null) {
-			String start = fileName.substring(0, 12);
-			String end = fileName.substring(14);
-			
-			new File(uploadPath + (start + end).replace('/', File.separatorChar)).delete();
 		}
 		
-		new File(uploadPath + fileName.replace('/', File.separatorChar)).delete();
-		
-		return new ResponseEntity<String> ("deleted", HttpStatus.OK);
+		return null;
 	}
 	
 }
