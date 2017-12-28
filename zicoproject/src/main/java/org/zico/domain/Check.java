@@ -5,8 +5,8 @@ import lombok.Data;
 @Data
 public class Check {
 	
-	String member_id;
-	String member_password;
-	Boolean remember;
+	private String member_id;
+	private String member_password;
+	private Boolean remember;
 	
 	}

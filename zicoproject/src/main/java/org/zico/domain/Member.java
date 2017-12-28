@@ -5,12 +5,13 @@ import lombok.Data;
 @Data
 public class Member {
 	
-	String uid;
-	String upassword;
-	String passwordquestion;
-	String passwordanswer;
-	String pnumber;
-	String grade;
+	private String mname;
+	private String mid;
+	private String mpassword;
+	private String manswer;
+	private String mqpassword;
+	private String mphone;
+	private String mgrade;
 	
 	
 }

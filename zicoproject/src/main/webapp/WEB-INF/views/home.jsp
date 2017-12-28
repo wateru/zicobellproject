@@ -71,7 +71,7 @@
 					<div class="login">
 						<input type="text" placeholder="username" name="member_id"><br>
 						<input type="password" placeholder="password" name="member_password"><br>
-						<a href="/login/modal">회원가입 </a>&nbsp;&nbsp; <span class="line"><input name="remember" id="remember" style="opacity:1; float:none; -webkit-appearance: checkbox; display: -webkit-inline-box; " type="checkbox" />&emsp; &emsp;로그인</span><br>
+						<a href="/login/insertmember">회원가입 </a>&nbsp;&nbsp; <span class="line"><input name="remember" id="remember" style="opacity:1; float:none; -webkit-appearance: checkbox; display: -webkit-inline-box; " type="checkbox" />&emsp; &emsp;로그인</span><br>
 						<button >login</button>
 					</div>
 					</form>

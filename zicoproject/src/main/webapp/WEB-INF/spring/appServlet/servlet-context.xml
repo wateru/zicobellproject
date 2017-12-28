@@ -66,10 +66,6 @@
           <beans:ref bean="checktest"/>
         </interceptor>
          
-        <interceptor>
-        <mapping path="/member/mypageview"/>
-          <beans:ref bean="checktest"/>
-        </interceptor> 
-        
+     
      </interceptors> 
 </beans:beans>

@@ -5,9 +5,9 @@ import org.apache.ibatis.annotations.Select;
 import org.zico.domain.Member;
 
 public interface MemberMapper {
-	@Insert("insert into member(id,password,passwordquestion,passwordanswer,pnumber,grade) values(#{id},#{password},#{passwordquestion},#{passwordanswer},#{pnumber},#{grade})")
+	@Insert("insert into member(member_name, member_id, member_password, member_pwd_hint, member_pwd_anwser, member_phone, member_grade )"
+			+ " values (#{mname},#{mid},#{mpassword},#{manswer},#{mqpassword},#{mphone},#{mgrade})")
 	public void insertmember(Member member);
 	
-	@Select("select * from member where id=#{id}")
-	public Member mypageview(String id);
+
 }

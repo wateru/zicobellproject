@@ -15,38 +15,31 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.util.WebUtils;
 import org.zico.domain.Check;
+import org.zico.domain.Member;
 import org.zico.service.LoginService;
+import org.zico.service.MemberService;
 
 @Controller
 @RequestMapping("/login")
-public class LoginController {
+public class MemberController {
 
 
 	@Autowired
 	LoginService loginmapper;
 	
+	@Autowired
+	MemberService memberservice;
 	
-	@GetMapping("/loginpage")
-	public void idcehck() {
-		System.out.println("이동되냐");
-	}
-	
-	@GetMapping("/final")
-	public void fianl() {
-		System.out.println("파이널 페이지 ");
-	}
-	
-	@GetMapping("/cookiecheck")
-	public void test() {
+	@GetMapping("/insertmember")
+	public void home1() {
 		
 	}
-	@GetMapping("/cookiecheck2")
-	public void test2() {
+	
+	@PostMapping("/insertmember")
+	public String insertmember(Member member) {
+		memberservice.memberinsert(member);
 		
-	}
-	@GetMapping("/homepage")
-	public void home() {
-		
+		return "/home";
 	}
 	
 	
