@@ -15,4 +15,5 @@ public interface ConnectorMapper extends CRUDMapper{
 
 	@Delete("delete from connector where connector_id = #{cid}")
 	public void delete(String cid);
+	
 }

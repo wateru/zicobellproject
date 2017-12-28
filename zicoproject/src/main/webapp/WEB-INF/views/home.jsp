@@ -142,6 +142,16 @@
     	if("${loginstatus}" == "fail"){
     		modal.style.display = "block";
     	}
+    	
+    	// 1) 세션 ID정보 가져옴
+    	<%	String id;
+    		id = (String)session.getAttribute("loginid2"); %>
+
+    	// 2) JSON 객체 생성 
+    		var obj = new Object();
+    	// 3) ID json에 저장
+    		obj.id = "<%=id%>";
+    	console.log(obj);
     });
    
      

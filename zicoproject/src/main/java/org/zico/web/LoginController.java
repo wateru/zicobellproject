@@ -97,13 +97,18 @@ public class LoginController {
 	public String loginpost(Check vo ,Model model) {
 		System.out.println("아이디체크오나");
 		Check check = loginmapper.idcheck(vo);
-		
+		Integer checkStoreNo = loginmapper.getStoreNo(vo.getMember_id());
+		System.out.println("storeno: " + checkStoreNo);
 		if(check !=null) {
 		model.addAttribute("id",vo.getMember_id());
 		System.out.println("아이디 :"+vo.getMember_id());
 		model.addAttribute("password",vo.getMember_password());
 		model.addAttribute("remember",vo.getRemember());
-				 
+		//storeno 확인
+			if(check != null) {
+				model.addAttribute("storeno",checkStoreNo);
+			}
+			
 		 return "/home";
 		}
 		

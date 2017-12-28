@@ -28,6 +28,5 @@ public class ConnectorServiceImpl implements ConnectorService{
 		// TODO Auto-generated method stub
 		return mapper.select(cid);
 	}
-	
 
 }

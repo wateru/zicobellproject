@@ -66,6 +66,12 @@
 			text-decoration: none;
 			color: black;
 		}
+		.micimg{
+			position: fixed;
+			top: calc(50% - 150px);
+			left: calc(50% - 150px);
+			display: none;
+		}
     	<!-- END Slide for 공지사항 -->
     </style>
     
@@ -197,7 +203,7 @@
                               </ul>
                         </li>
                         <li>
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <a href="order" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="ti-headphone"></i>
 								<p>음성 주문</p>
                             </a>

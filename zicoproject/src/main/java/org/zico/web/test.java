@@ -52,6 +52,14 @@ public class test {
 	public void user() {
 		
 	};
+	@GetMapping("/order")
+	public void order() {
+		
+	};
+	@GetMapping("/speech")
+	public void speech() {
+		
+	};
 	
 	
 	

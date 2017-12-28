@@ -17,5 +17,7 @@ public class LoginService {
 		return result;
 	}
 	
-	
+	public Integer getStoreNo(String smid) {
+		return loginmapper.selectstoreno(smid);
+	}
 }

@@ -22,13 +22,16 @@ public class IdCheck extends HandlerInterceptorAdapter {
 		
 		Object obj  = modelAndView.getModel().get("id");
 		Object obj2 = modelAndView.getModel().get("password");
+		Object obj3 = modelAndView.getModel().get("storeno");
 		if(obj == null) {
 			response.sendRedirect("/home?status=fail");
 			return;
 		}
 		HttpSession session =  request.getSession();
 		session.setAttribute("loginid2", obj);
-	
+		if(obj3 != null) {
+			session.setAttribute("storeno", obj3);
+		}
 	try { // tryCatch 안해주면 remember없이 로그인시 500에러뜸
 		Boolean remember = (Boolean) modelAndView.getModel().get("remember");
 		if (remember) {

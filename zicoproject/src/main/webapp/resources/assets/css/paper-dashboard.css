@@ -2752,7 +2752,11 @@ textarea.form-control {
     margin-right: -15px; }
 
   .table-responsive {
-    overflow: visible; } }
+    overflow: visible; } 
+  .order {
+    width: 33%;
+    height: 250px;
+    display: inline-block; } }
 @media (max-width: 991px) {
   .table-responsive {
     width: 100%;
@@ -2761,4 +2765,14 @@ textarea.form-control {
     overflow-x: scroll;
     overflow-y: hidden;
     -ms-overflow-style: -ms-autohiding-scrollbar;
-    -webkit-overflow-scrolling: touch; } }
+    -webkit-overflow-scrolling: touch; } 
+    .order {
+    width: 49%;
+    height: 250px;
+    display: inline-block;} }
+    
+@media (max-width: 600px) {
+  .order {
+    width: 100%;
+    height: 250px;
+    display: inline-block;} }
