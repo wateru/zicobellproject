@@ -1611,7 +1611,11 @@ z
 			html {
 				font-size: 12pt;
 			}
-
+			<!--  수정-->
+			.tt {width: 80px;}
+			.order{width: 30px;}
+			
+			
 		}
 
 		@media screen and (max-width: 736px) {
@@ -1619,6 +1623,8 @@ z
 			html {
 				font-size: 12pt;
 			}
+				.tt {width: 80px;}
+			.order{width: 150px;}
 
 		}
 
@@ -1627,7 +1633,8 @@ z
 			html {
 				font-size: 12pt;
 			}
-
+	.tt {width: 80px;}
+			.order{width: 30px;}
 		}
 
 	body {

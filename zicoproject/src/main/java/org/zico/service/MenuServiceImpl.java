@@ -22,8 +22,8 @@ public class MenuServiceImpl implements MenuService{
 
 	@Override
 	public List<Menu> getList(Criteria cri) {
-
-		return mapper.list(cri);
+		//System.out.println("service : " +  storeNo);
+		return mapper.menulist(cri);
 	}
 
 	@Override

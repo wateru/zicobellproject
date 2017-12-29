@@ -63,4 +63,8 @@ public class NoticeController {
 		service.add(notice);
 		return "redirect:list";
 	}
+	@GetMapping("/full")
+	public void full() {
+		
+	}
 }

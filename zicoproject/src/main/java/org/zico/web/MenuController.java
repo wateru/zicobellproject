@@ -1,13 +1,17 @@
 package org.zico.web;
 
+
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.IOUtils;
 import org.zico.domain.Menu;
+
 import org.zico.dto.Criteria;
 import org.zico.service.MenuService;
 import org.zico.util.MediaUtils;
@@ -49,13 +53,7 @@ public class MenuController {
 
 	   }
 	  
-	@GetMapping("/menu/menuupdate")
-	 public void menuUpdate(@RequestParam(name="menuNo")int menuNo,Model model){
-		
-		   
-		   model.addAttribute("menu",serivce.detali(menuNo));
-		    
-	   }
+	
 	
 	@RequestMapping(value="/menu/menuUpdatePost",method=RequestMethod.POST)
 	   public String menuUpdatePost(String menuName,int menuPrice,String imgName,int menuNo) {
@@ -74,11 +72,11 @@ public class MenuController {
 	
 	
    @RequestMapping(value="/menu/insert",method=RequestMethod.POST)
-   public String insertPost(String menuName,int menuPrice,String imgName) {
+   public String insertPost(String menuName,int menuPrice,String imgName,HttpSession session) {
 	   Menu menu=new Menu();
 	   log.info("이미지이름 :"+imgName);
 	   menu.setMenuCategory("치킨");
-	   menu.setStoreNo(1);
+	   menu.setStoreNo(Integer.parseInt(session.getAttribute("storeno").toString()));
 	   menu.setMenuName(menuName);
 	   menu.setMenuPrice(menuPrice);
 	   menu.setImgName(imgName);
@@ -109,11 +107,25 @@ public class MenuController {
                   HttpStatus.CREATED);
    }
   
-   
+   @GetMapping("/menu/menuupdate")
+	 public void menuUpdate(@RequestParam(name="menuNo")int menuNo,Model model){
+		
+		   
+		   model.addAttribute("menu",serivce.detali(menuNo));
+		    
+	   }
    @GetMapping("/menu/menulist")
-   public void menuList(Model model,Criteria cri) {	   	  
+   public void menuList(Model model,Criteria cri, HttpSession session) {	
+	   System.out.println("실행1");
+	   System.out.println(session.getAttribute("storeno"));
+	   cri.setStoreNo(Integer.parseInt(session.getAttribute("storeno").toString()));
 	   model.addAttribute("menu",serivce.getList(cri));
+	   System.out.println("실행2");
 	   model.addAttribute("total",serivce.getListCount());
+	   System.out.println(session.getAttribute("storeno"));
+
+	  System.out.println(Integer.parseInt(session.getAttribute("storeno").toString()));
+	  // model.addAttribute("menu", service.getList(session.getAttribute("id")))
 	   System.out.println(cri.getSize());
 	   System.out.println(cri.getPage());
    }
@@ -126,8 +138,9 @@ public class MenuController {
    }
    
    @GetMapping("/menu/order")
-   public void order(Model model,Criteria cri) {	   	  
-	   model.addAttribute("menu",serivce.getList(cri));
+   public void order(Model model,Criteria cri,HttpSession session,Menu menu) {	   	  
+	   
+	  model.addAttribute("menu",serivce.getList(cri));
 	   model.addAttribute("total",serivce.getListCount());
 	   System.out.println(cri.getSize());
 	   System.out.println(cri.getPage());
@@ -203,5 +216,12 @@ public class MenuController {
      }  
    //-------------------------------업로드-------------------------------
 	
+     @GetMapping("/menu/getToken")
+     public void getToken(String token, Model m) {
+    	 m.addAttribute("token",token);
+     }
+     @GetMapping("/menu/test")
+     public void test() {
+     }
 	
 }

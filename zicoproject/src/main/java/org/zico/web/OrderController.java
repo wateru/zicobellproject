@@ -13,4 +13,17 @@ public class OrderController {
 		
 	}
 	
+	@GetMapping("/order/menulist") 
+	public void menulist(){
+		
+	}
+	@GetMapping("/order/mlist") 
+	public void mlist(){
+		
+	}
+	@GetMapping("/order/store") 
+	public void store(){
+		
+	}
+	
 }

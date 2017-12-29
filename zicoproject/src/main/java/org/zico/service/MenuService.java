@@ -11,6 +11,7 @@ public interface MenuService {
 
 	public List<Menu> getList(Criteria cri);
 	
+	
 	public void remove(int menuNo);
 	
 	public Menu detali(int menuNo); 
@@ -18,4 +19,6 @@ public interface MenuService {
 	public void update(Menu menu);
 	
 	public int getListCount();
+
+	
 }

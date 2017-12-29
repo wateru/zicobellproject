@@ -11,6 +11,7 @@ public interface CRUDMapper<E, K> {
 	public void update(E vo);
 	public void delete(K key);
 	public List<E> list(Criteria cri);
+	public List<E> menulist(Criteria cri);
 	public int count();
 	
 	

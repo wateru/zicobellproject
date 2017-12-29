@@ -14,15 +14,15 @@
 
 <iframe src="https://zicobell-654d2.firebaseapp.com/token.html"></iframe>
 
-<c:forEach items="${menu}" var="menu">
-	<h3>${menu.menuNo}</h3>
+
+	
 	<div class="panel regPanel">
     메뉴:<input type="text" id="title"><br/>
     수량:<input type="text" id="content"><br/>
+   토큰:<input type="text" id="token">
     <button id="saveBtn">주문하기</button>
-    
 </div>
-</c:forEach>
+
 
 
 <script
@@ -51,6 +51,18 @@
 
 
 <script>
+//Retrieve Firebase Messaging object.
+const messaging = firebase.messaging();
+messaging.requestPermission()
+.then(function() {
+  console.log('Notification permission granted.');
+  // TODO(developer): Retrieve an Instance ID token for use with FCM.
+  // ...
+})
+.catch(function(err) {
+  console.log('Unable to get permission to notify.', err);
+});
+
 /*
 	test();
 	
@@ -68,7 +80,10 @@
 
     console.log(firebase);
   */
-    
+    function zico(token) {
+		console.log(token)
+		$("#token").val(token);
+	}
     
     function readAllData() {
         var memoList=firebase.database().ref().child('/order');
@@ -119,35 +134,30 @@
     readAllData();
 */
     $("#saveBtn").on("click",function () {
-        var order={메뉴:$("#title").val(), 수량:$("#content").val(),주문시간:new Date()};
+        var order={메뉴:$("#title").val(), 수량:$("#content").val(),토큰:$("#token").val()};
         //  firebase.database().ref("order/orderNo").set(order);
         createData(order);
-        $("#title").val("");
+        $("#title").val("")
         $("#content").val("");
     
+        
         var key="AAAALPU97BY:APA91bH_7GDP62fw8aoN9l9shyc8dfywoWLFyviKVhihx07arUhROm0cq4CtuHB0kGYhzN8WY48C538Jr8g_v9yc2VXW5Z_y3qdi1tViFTscvhRy8ytUa1ZfkluDBPvAnIK4SaRQAS0e";
 
 
         var notification={'title':'지코반점',
-            'body': "메뉴:"+order.메뉴+"수량:"+order.수량+"주문시간:"+order.주문시간 ,
+            'body': "메뉴:"+order.메뉴+"수량:"+order.수량+"토큰:"+order.토큰 ,
             'icon':'firebase-logo.png',
             'click_action':'http://localhost:8081'};
-
+		console.log('"'+$('#token').val()+'"');
+		console.log($('#token').val())
+       // var registrationToken=[$("#token").val()];
         var registrationToken=["fOtCYfJsTLo:APA91bEuZnOnOhIHwpQMVH3qH7T2pzBixpB1pGsKJU6k96DThUcBgP2wEPxRZBN3x_1b5yU3ZyQQvOHAYsMpENc3pqtaSL04fkri2bjQ_vOpuwYjGhUbGq3JOnEOLDI8uBZ86PJq21EU", "d3sPmGGk-uQ:APA91bEWF-4q_lEJB1rn1fRQFZjULPU-X5mOdkOVlI9lFeYH2k8-9YT-4BlELCw7imdfb7_Bv282-z_sSKDIolYizce29yDExsY811PTFljMWdma8MsDjoZtC5ckbm0k3JvwtyL3UnDs", "cxNym5RGpTw:APA91bHAPwZFwD22Jd7-t6_KJ4syP1KiJzHkefbKVRuV86hrHOHvjpKd5Dq6CVeN8K2El1dI8MLlTy3BbZSlJk1H_IIrDLuEJAiRHORw7qFsJpDsZ3pF_huDKFZ2f7DjvuHxWIX_Xsrx", "ejtdf-4H2k4:APA91bGSriuYaXY-ioOGX67utck2u1_KFHFY_nfpsqqckZvFojZdCOxPeyfUl_F0pDHGifXsj659hDVFqHeyoBM-9yX1wn_G0vYvbxXgX_gJoFDCgTlrj-tzICDgx9076Sfb_BIhXl-D"];
 //        var registrationToken="fOtCYfJsTLo:APA91bEuZnOnOhIHwpQMVH3qH7T2pzBixpB1pGsKJU6k96DThUcBgP2wEPxRZBN3x_1b5yU3ZyQQvOHAYsMpENc3pqtaSL04fkri2bjQ_vOpuwYjGhUbGq3JOnEOLDI8uBZ86PJq21EU";
-
+			
         //var registrationToken="d3sPmGGk-uQ:APA91bEWF-4q_lEJB1rn1fRQFZjULPU-X5mOdkOVlI9lFeYH2k8-9YT-4BlELCw7imdfb7_Bv282-z_sSKDIolYizce29yDExsY811PTFljMWdma8MsDjoZtC5ckbm0k3JvwtyL3UnDs";
         //var registrationToken="cxNym5RGpTw:APA91bHAPwZFwD22Jd7-t6_KJ4syP1KiJzHkefbKVRuV86hrHOHvjpKd5Dq6CVeN8K2El1dI8MLlTy3BbZSlJk1H_IIrDLuEJAiRHORw7qFsJpDsZ3pF_huDKFZ2f7DjvuHxWIX_Xsrx"
         //var registrationToken1="ejtdf-4H2k4:APA91bGSriuYaXY-ioOGX67utck2u1_KFHFY_nfpsqqckZvFojZdCOxPeyfUl_F0pDHGifXsj659hDVFqHeyoBM-9yX1wn_G0vYvbxXgX_gJoFDCgTlrj-tzICDgx9076Sfb_BIhXl-D";
-        /*
-          var registrationToken=[{
-                                  token:"fOtCYfJsTLo:APA91bEuZnOnOhIHwpQMVH3qH7T2pzBixpB1pGsKJU6k96DThUcBgP2wEPxRZBN3x_1b5yU3ZyQQvOHAYsMpENc3pqtaSL04fkri2bjQ_vOpuwYjGhUbGq3JOnEOLDI8uBZ86PJq21EU",
-                                  token2:"d3sPmGGk-uQ:APA91bEWF-4q_lEJB1rn1fRQFZjULPU-X5mOdkOVlI9lFeYH2k8-9YT-4BlELCw7imdfb7_Bv282-z_sSKDIolYizce29yDExsY811PTFljMWdma8MsDjoZtC5ckbm0k3JvwtyL3UnDs",
-                                  token3:"cxNym5RGpTw:APA91bHAPwZFwD22Jd7-t6_KJ4syP1KiJzHkefbKVRuV86hrHOHvjpKd5Dq6CVeN8K2El1dI8MLlTy3BbZSlJk1H_IIrDLuEJAiRHORw7qFsJpDsZ3pF_huDKFZ2f7DjvuHxWIX_Xsrx",
-                                  token4:"ejtdf-4H2k4:APA91bGSriuYaXY-ioOGX67utck2u1_KFHFY_nfpsqqckZvFojZdCOxPeyfUl_F0pDHGifXsj659hDVFqHeyoBM-9yX1wn_G0vYvbxXgX_gJoFDCgTlrj-tzICDgx9076Sfb_BIhXl-D"
-
-          }];
-          */
+  	//	var registrationToken =$("#token").val();
         fetch('https://fcm.googleapis.com/fcm/send', {
             'method': 'POST',
             'headers': {
@@ -156,8 +166,10 @@
             },
             'body': JSON.stringify({
                 'notification': notification,
-                'registration_ids': registrationToken
-
+                //'registration_ids': registrationToken
+                //'to':'"'+$('#token').val()+'"'
+                'to':registrationToken
+           
             })
 
 

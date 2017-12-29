@@ -6,7 +6,8 @@
 <style>
 .container {
     position: relative;
-    width: 50%;
+    width: 30%;
+    display: inline-block;
 }
 
 .image {
@@ -51,7 +52,7 @@ div.desc {
         <div class="content">
             <div class="container-fluid" style="padding: 0 10% 0 10%;">
 		<div class="row">
-			<!--  
+			 <!--  
 			<c:forEach items="${menu}" var="menu">
 				<div class="col-lg-4 col-md-5">
 					<div class="card card-user">
@@ -89,8 +90,9 @@ div.desc {
 					</div>
 				</div>
 			</c:forEach>
-			
--->
+			-->
+
+
 			<c:forEach items="${menu}" var="menu">
 				<div class="container">
 					<img src="displayFile?fileName=${menu.imgName}/" alt="Avatar"
@@ -110,7 +112,8 @@ div.desc {
 					<div class="desc">Add a description of the image here</div>
 				</div>
 			</c:forEach>
-
+ 
+ 
 		</div>
 
 

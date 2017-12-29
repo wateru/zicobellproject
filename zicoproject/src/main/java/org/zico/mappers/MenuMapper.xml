@@ -19,19 +19,23 @@
 		values (#{menuName}, #{imgName}, #{menuPrice},#{storeNo},#{menuCategory})
 	</insert>
 
-<select id="list" resultMap="MenuMap">
-	select * from menu order by menu_no desc limit #{skip},#{size}
-	
-</select>
 
 
 <select id="count" resultType="int">
 	select count(menu_no) from menu
+	where menu_store_no = #{storeNo}
 </select>	
 	
 <select id="read" resultMap="MenuMap">
 	select * from menu where menu_no=#{menuNo}
 </select>	
+<select id="menulist" resultMap="MenuMap">
+	select * 
+	from menu 
+	where menu_store_no = #{storeNo}
+	order by menu_no desc limit #{skip},#{size}
+	 
+</select>
 	
 	
 	

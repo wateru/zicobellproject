@@ -4,7 +4,15 @@ public class Criteria {
 
 	private int page;
 	private int size;
-	
+	private int storeNo;
+	public int getStoreNo() {
+		return storeNo;
+	}
+
+	public void setStoreNo(int storeNo) {
+		this.storeNo = storeNo;
+	}
+
 	// 비어있는 생성자 기본 세팅
 	public Criteria() {
 		this(1, 9);
