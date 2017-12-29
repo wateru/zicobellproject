@@ -3,10 +3,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="../admin/header.jsp"%>
 
+<style>
+	#map { width: 100%; height: 550px; }
+</style>
+
 <div class="content">
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-lg-4 col-md-6">
+			<div class="col-lg-8 col-md-6">
 				<div class="card card-user">
 					<div id="map"></div>
 				</div>
@@ -96,41 +100,38 @@
 </form>
 
 <script type="text/javascript"
-		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4deaf06ba409b58bb0f21bd522494473"></script>
+		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c7f42c5fca86621564f323cf9ba41c4e&libraries=services"></script>
 
 <script>
 
 	var mapContainer = document.getElementById('map');
-	var mapOption = {level: 3};
+	var mapOption = { center: new daum.maps.LatLng(33.450701, 126.570667), level: 3};
 	
+	var map = new daum.maps.Map(mapContainer, mapOption);
+	var geocoder = new daum.maps.services.Geocoder();
+	
+	geocoder.addressSearch('${store.saddr}', function(values, status) {
+		if(status === daum.maps.services.Status.OK) {
+			var coords = new daum.maps.LatLng(values[0].y, values[0].x);
+			 
+			var marker = new daum.maps.Marker({
+				map: map,
+				position: coords
+			});
+			
+			map.setCenter(coords);
+		}
+	});
+		
 	$(document).ready(function() {
 		
-		var map = new daum.maps.Map(mapContainer, mapOption);
-		var geocoder = new daum.maps.services.Geocoder();
-		
-		geocoder.addressSearch('${store.saddr}', function(values, status) {
-			if(status === daum.maps.services.Status.OK) {
-				var coords = new daum.maps.LatLng(values[0].y, values[0].x);
-				 
-				var marker = new daum.maps.Marker({
-					map: map,
-					position: coords
-				});
-				
-				var infowindow = new daum.maps.InfoWindow({
-					content: '<img src="display?name=s_' + '${store.simage}' + '" width="100" height="100">'
-				});
-				infowindow.open(map, marker);
-				
-				map.setCenter(coords);
-			}
-		});
-		
-		$("#listBtn").on("click", function() {
+		$("#listBtn").on("click", function(e) {
+			e.preventDefault();
 			$("#listForm").submit();
 		});
 		
-		$("#updateBtn").on("click", function() {
+		$("#updateBtn").on("click", function(e) {
+			e.preventDefault();
 			$("#updateForm").submit();
 		});
 
