@@ -56,21 +56,21 @@ public class StoreController {
 	
 	@PostMapping("/postinsert")
 	public String insertPost(Store store, Criteria cri, RedirectAttributes rttr
-							, MultipartFile simage, Model model) {
+							, MultipartFile imgFile, Model model) {
 		
 		System.out.println("start");
 		String uuid = UUID.randomUUID().toString();
-		String uploadName = uuid + "_" + simage.getOriginalFilename();
+		String uploadName = uuid + "_" + imgFile.getOriginalFilename();
 		model.addAttribute("uploadName", uploadName);
 		
 		
 		System.out.println("start1");
 		try {
 			OutputStream out = new FileOutputStream("c:\\uploadImage\\" + uploadName);
-			FileCopyUtils.copy(simage.getInputStream(), out);
+			FileCopyUtils.copy(imgFile.getInputStream(), out);
 			
-			if(simage.getContentType().startsWith("image")) {
-				model.addAttribute("isImage", simage.getContentType().startsWith("image"));
+			if(imgFile.getContentType().startsWith("image")) {
+				model.addAttribute("isImage", imgFile.getContentType().startsWith("image"));
 				makeThumnail(uploadName);
 			}
 		} catch(Exception e) {
@@ -93,18 +93,18 @@ public class StoreController {
 	}
 	@PostMapping("/postupdate")
 	public String updatePost(Store store, Criteria cri, RedirectAttributes rttr
-							, MultipartFile simage, Model model) {
+							, MultipartFile imgFile, Model model) {
 		
 		String uuid = UUID.randomUUID().toString();
-		String uploadName = uuid + "_" + simage.getOriginalFilename();
+		String uploadName = uuid + "_" + imgFile.getOriginalFilename();
 		model.addAttribute("uploadName", uploadName);
 		
 		try {
 			OutputStream out = new FileOutputStream("c:\\uploadImage\\" + uploadName);
-			FileCopyUtils.copy(simage.getInputStream(), out);
+			FileCopyUtils.copy(imgFile.getInputStream(), out);
 			
-			if(simage.getContentType().startsWith("image")) {
-				model.addAttribute("isImage", simage.getContentType().startsWith("iamge"));
+			if(imgFile.getContentType().startsWith("image")) {
+				model.addAttribute("isImage", imgFile.getContentType().startsWith("iamge"));
 				makeThumnail(uploadName);
 			}
 		} catch(Exception e) {

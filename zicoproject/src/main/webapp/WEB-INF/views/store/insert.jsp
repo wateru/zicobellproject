@@ -62,7 +62,7 @@
 								<div class="col-md-6">
 									<div class="form-group">
 										<label>Store-Image</label>
-										<input type="file" id="simage" name="simage">
+										<input type="file" id="simage" name="imgFile">
 									</div>
 								</div>
 							</div>
