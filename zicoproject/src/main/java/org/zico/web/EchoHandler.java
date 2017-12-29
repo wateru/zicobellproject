@@ -149,6 +149,7 @@ private List<WebSocketSession> sessionList = new ArrayList<WebSocketSession>();
 		System.out.println(storeno);
 		JSONArray socketArray = new JSONArray();
 		JSONObject socketInfo = new JSONObject();
+		System.out.println("전송부 : " +socketObject.toString());
 		socketArray = (JSONArray)socketObject.get(storeno);
 		for(int i = 0; i < socketArray.length(); i++) {
 			socketInfo = (JSONObject)socketArray.get(i);
