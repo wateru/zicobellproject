@@ -24,8 +24,8 @@
 								<div class="col-md-12">
 									<div class="form-group">
 										<label>Category</label>
-										<input type="text" class="form-control border-input"
-											   name="category" value="<c:out value='${store.category}' />">
+										<input type="text" class="form-control border-input" name="category"
+											   value="<c:out value='${store.category}' />" readonly onfocus="this.blur();">
 									</div>
 								</div>
 							</div>
@@ -34,8 +34,8 @@
 								<div class="col-md-12">
 									<div class="form-group">
 										<label>Address</label>
-										<input type="text" class="form-control border-input"
-											   name="saddr" value="<c:out value='${store.saddr}' />">
+										<input type="text" class="form-control border-input" name="saddr"
+											   value="<c:out value='${store.saddr}'/>" readonly onfocus="this.blur();">
 									</div>
 								</div>
 							</div>
@@ -44,8 +44,8 @@
 								<div class="col-md-12">
 									<div class="form-group">
 										<label>Tel</label>
-										<input type="text" class="form-control border-input"
-											   name="stel" value="<c:out value='${store.stel}' />">
+										<input type="text" class="form-control border-input" name="stel"
+											   value="<c:out value='${store.stel}'/>" readonly onfocus="this.blur();">
 									</div>
 								</div>
 							</div>
@@ -54,8 +54,8 @@
 								<div class="col-md-12">
 									<div class="form-group">
 										<label>Open-Time</label>
-										<input type="text" class="form-control border-input"
-											   name="openTime" value="<c:out value='${store.openTime}' />">
+										<input type="text" class="form-control border-input" name="openTime"
+											   value="<c:out value='${store.openTime}'/>" readonly onfocus="this.blur();">
 									</div>
 								</div>
 							</div>
@@ -64,8 +64,8 @@
 								<div class="col-md-12">
 									<div class="form-group">
 										<label>Close-Time</label>
-										<input type="text" class="form-control border-input"
-											   name="closeTime" value="<c:out value='${store.closeTime}' />">
+										<input type="text" class="form-control border-input" name="closeTime"
+											   value="<c:out value='${store.closeTime}'/>" readonly onfocus="this.blur();">
 									</div>
 								</div>
 							</div>
@@ -95,17 +95,12 @@
 	<input type="hidden" name="size" value="${cri.size}">
 </form>
 
-<script
-  src="https://code.jquery.com/jquery-3.2.1.min.js"
-  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-  crossorigin="anonymous"></script>
 <script type="text/javascript"
-		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c11ec9de65964d2209db67b6055bf01d"></script>
+		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4deaf06ba409b58bb0f21bd522494473"></script>
 
 <script>
 
-	var addr = "${store.saddr}";
-	var mapContainer = $("#map");
+	var mapContainer = document.getElementById('map');
 	var mapOption = {level: 3};
 	
 	$(document).ready(function() {
@@ -113,17 +108,17 @@
 		var map = new daum.maps.Map(mapContainer, mapOption);
 		var geocoder = new daum.maps.services.Geocoder();
 		
-		geocoder.addressSearch("'" + addr + "'", function(values, status) {
+		geocoder.addressSearch('${store.saddr}', function(values, status) {
 			if(status === daum.maps.services.Status.OK) {
 				var coords = new daum.maps.LatLng(values[0].y, values[0].x);
-				
+				 
 				var marker = new daum.maps.Marker({
 					map: map,
 					position: coords
 				});
 				
 				var infowindow = new daum.maps.InfoWindow({
-					content: '<img src="display?name=s_' + "${store.simage}" + '" width="100" height="100">'
+					content: '<img src="display?name=s_' + '${store.simage}' + '" width="100" height="100">'
 				});
 				infowindow.open(map, marker);
 				

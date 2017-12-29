@@ -58,13 +58,11 @@ public class StoreController {
 	public String insertPost(Store store, Criteria cri, RedirectAttributes rttr
 							, MultipartFile imgFile, Model model) {
 		
-		System.out.println("start");
 		String uuid = UUID.randomUUID().toString();
 		String uploadName = uuid + "_" + imgFile.getOriginalFilename();
 		model.addAttribute("uploadName", uploadName);
 		
 		
-		System.out.println("start1");
 		try {
 			OutputStream out = new FileOutputStream("c:\\uploadImage\\" + uploadName);
 			FileCopyUtils.copy(imgFile.getInputStream(), out);
@@ -79,7 +77,6 @@ public class StoreController {
 		
 		store.setSimage(uploadName);
 		ss.create(store);
-		System.out.println("start2");
 		rttr.addFlashAttribute("cri", cri);
 		rttr.addFlashAttribute("result", "success");
 		
