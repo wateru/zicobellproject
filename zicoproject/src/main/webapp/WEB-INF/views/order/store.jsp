@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-
 <%@ include file="header.jsp"%>
-
+<style>
+	#map { width: 100%; height: 550px; }
+</style>
 
 <!-- One -->
 <section id="one" class="wrapper style2">
@@ -15,14 +16,28 @@
 				<h2 id="elements">Elements</h2>
 				<div class="row 200%">
 					<div class="6u 12u$(medium)">
-
+					
+						
+							<span class="image fit heekyung"><img
+								src="/resources/images/pic01.jpg" alt="" /></span>
+							
+							<h3>놀란치킨</h3>
+							<hr>
+					
 						
 
 					</div>
+					
+					
+					
+					
+					
+					
 					<div class="6u 12u$(medium)">
-						<div>
+						
+						<div id="map"></div>
 							
-						</div>
+						
 					</div>
 
 				</div>
@@ -30,7 +45,29 @@
 		</div>
 	</div>
 </section>
+<script type="text/javascript"
+		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c7f42c5fca86621564f323cf9ba41c4e&libraries=services"></script>
 
+<script>
+var mapContainer = document.getElementById('map');
+var mapOption = { center: new daum.maps.LatLng(33.450701, 126.570667), level: 3};
+
+var map = new daum.maps.Map(mapContainer, mapOption);
+var geocoder = new daum.maps.services.Geocoder();
+
+geocoder.addressSearch('', function(values, status) {
+	if(status === daum.maps.services.Status.OK) {
+		var coords = new daum.maps.LatLng(values[0].y, values[0].x);
+		 
+		var marker = new daum.maps.Marker({
+			map: map,
+			position: coords
+		});
+		
+		map.setCenter(coords);
+	}
+});
+</script>
 <!-- Four -->
 
 

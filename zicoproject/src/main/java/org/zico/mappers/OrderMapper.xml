@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="org.zico.mappers.OrderMapper">
+
+<resultMap type="Order" id="OrderMap">
+ 	<result property="orderNo" column="order_no" />
+ 	<result property="storeNo" column="order_store_no" />
+ 	<result property="people" column="order_people"/>
+ 	<result property="totalPrice" column="order_totalprice"/>
+ 	<result property="memberId" column="order_member_id"/>
+ 	<result property="status" column="order_status"/>
+ 	<result property="pay" column="order_pay"/>
+</resultMap>
+
+	<resultMap type="Store" id="StoreMap">
+		<result property="sno" column="store_no" />
+		<result property="sname" column="store_name" />
+		<result property="saddr" column="store_addr" />
+		<result property="stel" column="store_tel" />
+		<result property="category" column="store_category" />
+		<result property="openTime" column="store_opentime" />
+		<result property="closeTime" column="store_closetime" />
+		<result property="simage" column="store_image" />
+		<result property="sid" column="store_member_id" />
+	</resultMap>
+
+	
+</mapper>
+  
