@@ -115,7 +115,7 @@ public class StoreController {
 		rttr.addFlashAttribute("result", "success");
 		
 		return "redirect:/store/detail?sno=" + store.getSno()
-				+ "&page=" + cri.getPage() + "$size=" + cri.getSize();
+				+ "&page=" + cri.getPage() + "&size=" + cri.getSize();
 	}
 	
 	// 매장 삭제

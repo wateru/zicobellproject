@@ -19,14 +19,14 @@
 									<div class="form-group">
 										<label>Store-Name</label>
 										<input type="text" class="form-control border-input"
-											   name="sname" placeholder="<c:out value='${store.sname}'/>" >
+											   name="sname" value="<c:out value='${store.sname}'/>" >
 									</div>
 								</div>
 								<div class="col-md-4">
 									<div class="form-group">
 										<label>Category</label>
 										<input type="text" class="form-control border-input"
-											   name="category" placeholder="<c:out value='${store.category}'/>" >
+											   name="category" value="<c:out value='${store.category}'/>" >
 									</div>
 								</div>
 							</div>
@@ -36,14 +36,14 @@
 									<div class="form-group">
 										<label>Address</label>
 										<input type="text" class="form-control border-input"
-											   name="saddr" placeholder="<c:out value='${store.saddr}'/>" >
+											   name="saddr" value="<c:out value='${store.saddr}'/>" >
 									</div>
 								</div>
 								<div class="col-md-4">
 									<div class="form-group">
 										<label>Tel</label>
 										<input type="text" class="form-control border-input"
-											   name="stel" placeholder="<c:out value='${store.stel}'/>" >
+											   name="stel" value="<c:out value='${store.stel}'/>" >
 									</div>
 								</div>
 							</div>
@@ -53,14 +53,14 @@
 									<div class="form-group">
 										<label>Open-Time</label>
 										<input type="text" class="form-control border-input timepicker"
-											   name="openTime" placeholder="<c:out value='${store.openTime}'/>" >
+											   name="openTime" value="<c:out value='${store.openTime}'/>" >
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="form-group">
 										<label>Close-Time</label>
 										<input type="text" class="form-control border-input timepicker"
-											   name="closeTime" placeholder="<c:out value='${store.closeTime}'/>" >
+											   name="closeTime" value="<c:out value='${store.closeTime}'/>" >
 									</div>
 								</div>
 							</div>
@@ -69,7 +69,7 @@
 								<div class="col-md-6">
 									<div class="form-group">
 										<label>Store-Image</label>
-										<input type="file" id="simage" name="imgFile">
+										<input type="file" id="simage" name="imgFile" >
 									</div>
 								</div>
 							</div>
@@ -111,14 +111,19 @@
 	
 	$(document).ready(function() {
 		
+		$("#listBtn").on("click", function() {
+			$("#listForm").submit();
+		});
+		
+		$("#updateBtn").on("click", function() {
+			$("#storeupdate").submit();
+		});
+		
 		$("#deleteBtn").on("click", function(e) {
 			e.preventDefault();
 			$("#storeupdate").attr("action", "/store/delete").submit();
 		});
 		
-		$("#listBtn").on("click", function() {
-			$("#listForm").submit();
-		});
 		
 	});
 </script>

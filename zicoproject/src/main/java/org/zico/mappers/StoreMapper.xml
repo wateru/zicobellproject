@@ -15,18 +15,14 @@
 		<result property="closeTime" column="store_closetime" />
 		<result property="simage" column="store_image" />
 		<result property="sid" column="store_member_id" />
-		<result property="lat" column="store_lat" />
-		<result property="lng" column="store_lng" />
 	</resultMap>
 
 	<!-- 매장등록 -->
 	<insert id="create">
 		insert into store (store_name, store_addr, store_tel, store_category,
-						   store_opentime, store_closetime, store_image,
-						   store_member_id, store_lat, store_lng)
+						   store_opentime, store_closetime, store_image, store_member_id)
 		values (#{sname}, #{saddr}, #{stel}, #{category},
-				#{openTime}, #{closeTime}, #{simage},
-				#{sid}, #{lat}, #{lng})
+				#{openTime}, #{closeTime}, #{simage}, #{sid})
 	</insert>
 
 	<!-- 매장목록 -->
@@ -46,8 +42,9 @@
 	<!-- 매장수정 -->
 	<update id="update">
 		update store
-		   set store_name = #{sname}, store_addr = #{saddr}, store_tel = #{stel}, store_category = #{category},
-		   	   store_opentime = #{openTime}, store_closetime = #{closeTime}, store_lat = #{lat}, store_lng = #{lng}
+		   set store_name = #{sname}, store_addr = #{saddr},
+		   	   store_tel = #{stel}, store_category = #{category},
+		   	   store_opentime = #{openTime}, store_closetime = #{closeTime}
 		 where store_no = #{sno}
 	</update>
 	
