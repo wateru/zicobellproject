@@ -23,7 +23,7 @@ public class CheckInterceptor extends HandlerInterceptorAdapter {
 		log.info("" + handler);
 
 		// 만일 HttpSession에 login 이름의 값이 없다면 "/login" 으로 튕겨냄
-		Object value = request.getSession().getAttribute("loginid2");
+		Object value = request.getSession().getAttribute("id");
 
 		if (value != null) {
 			log.info("이미 세션에 값이 존재한 사용자" + value);

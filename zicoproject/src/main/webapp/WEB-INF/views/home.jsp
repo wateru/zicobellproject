@@ -34,15 +34,14 @@
 
 
 		<!-- Header -->
-			<header id="header" class="alt">
+			<header id="header" class="alt" style="overflow:unset;">
 				<div class="logo"><a href="/">B E L L<span>&nbsp;by Zico</span></a></div>
 				<a href="#menu" class="toggle"><span>Menu</span></a>
 			
 			
 			
-			
-			
-			<button id="myBtn">Open Modal</button>
+			<form action="/login/logout" method="post"><button id="logout" style="" >로그아웃</button></form>
+			<button  id="myBtn"  style="width:20px; background:white; padding:0px; height:100%;">로그인</button>
 			
 			</header>
 
@@ -84,18 +83,32 @@
     </div>
 
 </div>
+
+			
+	
 			<script>
+			<%-- var sessionid = "<%=(String)session.getAttribute("loginid2")%>"
+
+			console.log("쎄션 "+sessionid);
 			
-			 //$("span.line").click(function(e) { if(!$(e.target).hasClass("area")){ alert('영역 밖입니다.'); } });  
-			/* $('input:checkbox[id="remember"]').attr("checked", true); */
-			/* $(".line").on("click",function(){
-				if($("#remember").attr("checked")){
-					$("#remember").attr("checked", false);
-				} else {
-					$("#remember").attr("checked", true);
-				}
-			}) */
+			var a=document.cookie.indexOf("loginid2=");
+			console.log("쿠키"+a);
+			if(sessionid != null){
+				$("#myBtn").show();
+				$("#logout").hide();
+			}else{
+				alert("알아처먹나 개자식아");
+				$("#myBtn").hide();
+				$("#logout").hide();
+				
+			}  --%>
+			/* if(sessionid == null){
+				alert("알아처먹나");
+				$("#logout").show();
+				$("#myBtn").hide();
+			} */
 			
+		
 			
 			$(".line").on("click",function(){
 				console.log("클릭 실행");
@@ -151,10 +164,23 @@
     		var obj = new Object();
     	// 3) ID json에 저장
     		obj.id = "<%=id%>";
-    	console.log(obj);
+    	/* console.log(obj); */
     });
    
      
+</script>
+<script>
+/*로그인 버튼 유무  */
+var sessionid ="<%=(String)session.getAttribute("loginid2")%>";
+var a=document.cookie.indexOf("loginid2=");
+if(sessionid != "null"){
+	$("#myBtn").hide();
+	$("#logout").show();
+}else{
+	$("#myBtn").show();
+	$("#logout").hide();
+} 
+
 </script>
 		<!-- Nav -->
 			<nav id="menu">

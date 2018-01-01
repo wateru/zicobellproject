@@ -28,7 +28,7 @@ public class IdCheck extends HandlerInterceptorAdapter {
 			return;
 		}
 		HttpSession session =  request.getSession();
-		session.setAttribute("loginid2", obj);
+		session.setAttribute("id", obj);
 		if(obj3 != null) {
 			session.setAttribute("storeno", obj3);
 		}

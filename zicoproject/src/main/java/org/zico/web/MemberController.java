@@ -20,7 +20,7 @@ import org.zico.service.LoginService;
 import org.zico.service.MemberService;
 
 @Controller
-@RequestMapping("/login")
+@RequestMapping("/login/*")
 public class MemberController {
 
 
@@ -49,10 +49,10 @@ public class MemberController {
 			throws IOException {
 		System.out.println("로그아웃");
 		
-		Object obj = session.getAttribute("loginid2");
+		Object obj = session.getAttribute("id");
 		System.out.println("obj"+obj);
 		if (obj != null) {
-			session.removeAttribute("loginid2");
+			session.removeAttribute("id");
 			session.invalidate();
 			
 			Cookie loginCookie = WebUtils.getCookie(request, "loginid");
@@ -69,7 +69,7 @@ public class MemberController {
 		
 		
 	
-		 return "/login/final";
+		 return "/home";
 	
 	}
 
