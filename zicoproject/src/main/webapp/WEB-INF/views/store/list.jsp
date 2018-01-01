@@ -5,22 +5,27 @@
 <link rel="stylesheet" type="text/css" href="../../../resources/assets/css/reset.css">
 <link rel="stylesheet" type="text/css" href="../../../resources/assets/css/responsive.css">
 
-<div class="listings">
-	<div class="wrapper">
-		<ul class="properties_list">
-			<c:forEach items="${store}" var="store">
-			<li>
-				<a href="<c:out value='${store.sno}'/>" class="target">
-				<img src="display?name=s_${store.simage}"
-					 class="property_image" width="330px" height="220px"/></a>
-				<div class="property_details">
-					<h1><c:out value="${store.sname}" /></h1>
+<div class="content">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="listings">
+				<div class="wrapper">
+					<ul class="properties_list">
+						<c:forEach items="${store}" var="store">
+						<li>
+							<a href="<c:out value='${store.sno}'/>" class="target">
+							<img src="display?name=s_${store.simage}" class="property_img"/></a>
+							<div class="property_details">
+								<h1><c:out value="${store.sname}" /></h1>
+							</div>
+						</li>
+						</c:forEach>
+					</ul>
 				</div>
-			</li>
-			</c:forEach>
-		</ul>
+				<button id="insertBtn" class="btn btn-info btn-fill btn-wd">신규 매장 등록</button>
+			</div>
+		</div>
 	</div>
-	<button id="insertBtn" class="btn btn-info btn-fill btn-wd">신규 매장 등록</button>
 </div>
 
 <form id="listForm" action="/store/list" method="get">
