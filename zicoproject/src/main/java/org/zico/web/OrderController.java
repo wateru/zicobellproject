@@ -14,7 +14,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.zico.dto.Criteria;
 import org.zico.service.OrderService;
 import org.zico.util.MediaUtils;
@@ -39,9 +41,14 @@ public class OrderController {
 		
 	}
 	@GetMapping("/order/mlist") 
-	public void mlist(){
-		
+	public void mlist(Criteria cri, Model model){
+		System.out.println("컨트롤러들어옴");
+		cri.setStoreNo(1);
+		System.out.println(cri.getStoreNo() +" 넣어줌");
+		System.out.println("매장번호 넣어줌");
+		model.addAttribute("menu", service.getMenuList(cri));
 	}
+	
 	@GetMapping("/order/store") 
 	public void store(Criteria cri, Model model){
 		model.addAttribute("store", service.getList(cri));
@@ -51,8 +58,10 @@ public class OrderController {
 	
 	   @Resource(name = "uploadPath")
 	   private String uploadPath;
+	  
 	   
-	 @RequestMapping("/menu/displayFile")
+	   @ResponseBody
+	   @RequestMapping("/order/displayFile")
 	   public ResponseEntity<byte[]>  displayFile(String fileName)throws Exception{
 
 	      InputStream in = null; 
@@ -93,6 +102,7 @@ public class OrderController {
 	      }
 	      return entity;    
 	   }
+	     
 	     
 	
 }

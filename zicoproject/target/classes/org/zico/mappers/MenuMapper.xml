@@ -46,10 +46,10 @@
 	
 	<update id="update">
 	update menu 
-	set menuName=#{menuName}, 
-		imgName=#{imgName},
-		menuPrice=#{menuPrice}
-	where menuNo=#{menuNo}
+	set menu_Name=#{menuName}, 
+		menu_img=#{imgName},
+		menu_price=#{menuPrice}
+	where menu_No=#{menuNo}
 	
 	</update>
 </mapper>

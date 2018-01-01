@@ -56,13 +56,14 @@ public class MenuController {
 	
 	
 	@RequestMapping(value="/menu/menuUpdatePost",method=RequestMethod.POST)
-	   public String menuUpdatePost(String menuName,int menuPrice,String imgName,int menuNo) {
+	   public String menuUpdatePost(String menuName,int menuPrice,String imgName,int menuNo,HttpSession session) {
 		   Menu menu=new Menu();
 		   log.info("이미지이름 :"+imgName);
 		   menu.setMenuName(menuName);
 		   menu.setMenuPrice(menuPrice);
 		   menu.setImgName(imgName);
 		   menu.setMenuNo(menuNo);
+		   menu.setStoreNo(Integer.parseInt(session.getAttribute("storeno").toString()));
 		   
 		   serivce.update(menu);
 		   
@@ -116,18 +117,14 @@ public class MenuController {
 	   }
    @GetMapping("/menu/menulist")
    public void menuList(Model model,Criteria cri, HttpSession session) {	
-	   System.out.println("실행1");
-	   System.out.println(session.getAttribute("storeno"));
+	   //System.out.println("들어옴");
+	   //System.out.println(Integer.parseInt(session.getAttribute("storeno").toString()));
 	   cri.setStoreNo(Integer.parseInt(session.getAttribute("storeno").toString()));
+	   //cri.setStoreNo(2);
+	   //session.setAttribute("dsadsadas", asdasd);
 	   model.addAttribute("menu",serivce.getList(cri));
-	   System.out.println("실행2");
 	   model.addAttribute("total",serivce.getListCount());
-	   System.out.println(session.getAttribute("storeno"));
-
-	  System.out.println(Integer.parseInt(session.getAttribute("storeno").toString()));
 	  // model.addAttribute("menu", service.getList(session.getAttribute("id")))
-	   System.out.println(cri.getSize());
-	   System.out.println(cri.getPage());
    }
    @GetMapping("/menu/token")
    public void token() {

@@ -60,19 +60,20 @@
 				<div class="row 200%">
 					<div class="8u 12u$(medium)">
 
+						<c:forEach items="${menu}" var="menu">
 						<div class="container">
 							<span class="image fit heekyung"><img
-								src="/resources/images/pic01.jpg" alt="" /></span>
+								src="displayFile?fileName=${menu.imgName}/" alt="" /></span>
 							<div class="heekyungmiddle">
 								<div class="heekyungtext">선택</div>
 							</div>
 						</div>
 						<h3>
-							<span>메뉴:안동찜닭</span> <span>가격:3000원</span>
+							<span>메뉴:${menu.menuName}</span> <span>가격:${menu.menuPrice}원</span>
 						</h3>
 
 						<hr>
-
+						</c:forEach>
 
 					</div>
 					<div class="4u 12u$(medium)">

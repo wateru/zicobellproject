@@ -17,15 +17,12 @@
 				<div class="row 200%">
 					<div class="6u 12u$(medium)">
 					
-						
-							<span class="image fit heekyung"><img
-								src="/resources/images/pic01.jpg" alt="" /></span>
-							
-							<h3>놀란치킨</h3>
-							<hr>
-					
-						
-
+						<c:forEach items="${store}" var="store">
+						<span class="image fit heekyung"><img
+								src="displayFile?fileName=${store.simage}/" alt="" /></span>
+						<h3><c:out value="${store.sname}" /></h3>
+						<hr>
+						</c:forEach>
 					</div>
 					
 					
