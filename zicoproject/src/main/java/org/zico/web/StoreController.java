@@ -9,6 +9,7 @@ import java.io.OutputStream;
 import java.util.UUID;
 
 import javax.imageio.ImageIO;
+import javax.servlet.http.HttpSession;
 
 import org.imgscalr.Scalr;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,8 +57,7 @@ public class StoreController {
 	
 	@PostMapping("/postinsert")
 	public String insertPost(Store store, Criteria cri, RedirectAttributes rttr
-							, MultipartFile imgFile, Model model) {
-		
+							, MultipartFile imgFile, Model model, HttpSession session) {
 		String uuid = UUID.randomUUID().toString();
 		String uploadName = uuid + "_" + imgFile.getOriginalFilename();
 		model.addAttribute("uploadName", uploadName);
@@ -76,9 +76,10 @@ public class StoreController {
 		}
 		
 		store.setSimage(uploadName);
+		store.setSid(session.getAttribute("id").toString());
+		
 		ss.create(store);
 		rttr.addFlashAttribute("cri", cri);
-		rttr.addFlashAttribute("result", "success");
 		
 		return "redirect:/store/list";
 	}
@@ -90,7 +91,7 @@ public class StoreController {
 	}
 	@PostMapping("/postupdate")
 	public String updatePost(Store store, Criteria cri, RedirectAttributes rttr
-							, MultipartFile imgFile, Model model) {
+							, MultipartFile imgFile, Model model, HttpSession session) {
 		
 		String uuid = UUID.randomUUID().toString();
 		String uploadName = uuid + "_" + imgFile.getOriginalFilename();
@@ -101,7 +102,7 @@ public class StoreController {
 			FileCopyUtils.copy(imgFile.getInputStream(), out);
 			
 			if(imgFile.getContentType().startsWith("image")) {
-				model.addAttribute("isImage", imgFile.getContentType().startsWith("iamge"));
+				model.addAttribute("isImage", imgFile.getContentType().startsWith("image"));
 				makeThumnail(uploadName);
 			}
 		} catch(Exception e) {
@@ -109,10 +110,10 @@ public class StoreController {
 		}
 		
 		store.setSimage(uploadName);
-		ss.update(store);
+		store.setSid(session.getAttribute("id").toString());
 		
+		ss.update(store);
 		rttr.addFlashAttribute("cri", cri);
-		rttr.addFlashAttribute("result", "success");
 		
 		return "redirect:/store/detail?sno=" + store.getSno()
 				+ "&page=" + cri.getPage() + "&size=" + cri.getSize();
