@@ -37,7 +37,7 @@ public class OrderServiceImpl implements OrderService {
 	public List<Menu> getMenuList(Criteria cri) {
 		// TODO Auto-generated method stub
 		System.out.println("서비스 들어옴");
-		return menuMapper.list(cri);
+		return menuMapper.menulist(cri);
 		
 	}
 

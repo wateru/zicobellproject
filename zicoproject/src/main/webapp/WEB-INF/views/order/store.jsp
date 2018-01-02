@@ -20,7 +20,11 @@
 						<c:forEach items="${store}" var="store">
 						<span class="image fit heekyung"><img
 								src="displayFile?fileName=${store.simage}/" alt="" /></span>
-						<h3><c:out value="${store.sname}" /></h3>
+						<h3>
+						<a href="<c:out value='${store.sno}'/>" class="target">
+						<c:out value="${store.sname}" /></a></h3>
+						
+						
 						<hr>
 						</c:forEach>
 					</div>
@@ -41,6 +45,9 @@
 			</div>
 		</div>
 	</div>
+	<form id="listForm" action="/order/mlist" method="get">
+	<input type="hidden" name="sno">
+	</form>
 </section>
 <script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c7f42c5fca86621564f323cf9ba41c4e&libraries=services"></script>
@@ -48,6 +55,7 @@
 <script>
 var mapContainer = document.getElementById('map');
 var mapOption = { center: new daum.maps.LatLng(33.450701, 126.570667), level: 3};
+var listForm = $("#listForm");
 
 var map = new daum.maps.Map(mapContainer, mapOption);
 var geocoder = new daum.maps.services.Geocoder();
@@ -63,6 +71,17 @@ geocoder.addressSearch('', function(values, status) {
 		
 		map.setCenter(coords);
 	}
+});
+
+
+$(".target").on("click", function(e) {
+	e.preventDefault();
+
+	var sno = $(this).attr("href");
+	
+	listForm.find("input[name='sno']").val(sno);
+	listForm.attr("action", "/order/mlist").submit();
+	
 });
 </script>
 <!-- Four -->

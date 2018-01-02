@@ -206,29 +206,20 @@ if(sessionid != "null"){
 					<div id="slidebox">
 					<ul id="slider">
 						<li>
-								<h1><b>1.</b>Transitive</h1>
-								<p>A full responsive, business-oriented HTML5/CSS3 template<br />
-								built by <a href="https://templated.co/">Templated</a> and released under the <a href="https://templated.co/license">Creative Commons</a>.</p>
-								<a href="#one" class="button special scrolly">Get Started</a>
+								<h1><b></b>예약</h1>
+								<p>원하는 매장을 미리 예약하고 주문하세요
+								<br>당신의 시간이 절약됩니다</p>
+								<a href="http://localhost:8000/order/store" class="button special scrolly">예약하기</a>
 						</li>
 						<li>
-								<h1><b>2.</b>Transitive</h1>
-								<p>A full responsive, business-oriented HTML5/CSS3 template<br />
-								built by <a href="https://templated.co/">Templated</a> and released under the <a href="https://templated.co/license">Creative Commons</a>.</p>
-								<a href="#one" class="button special scrolly">Get Started</a>
+								<h1><b></b>매장관리</h1>
+								<p>당신의 매장을 관리하세요
+								<br>
+								효율적으로 매장을 관리할수 있도록 도와드립니다.
+								</p>
+								<a href="http://localhost:8000/admin/dashboard" class="button special scrolly">매장관리</a>
 						</li>
-						<li>
-								<h1><b>3.</b>Transitive</h1>
-								<p>A full responsive, business-oriented HTML5/CSS3 template<br />
-								built by <a href="https://templated.co/">Templated</a> and released under the <a href="https://templated.co/license">Creative Commons</a>.</p>
-								<a href="#one" class="button special scrolly">Get Started</a>
-						</li>
-						<li>
-								<h1><b>4.</b>Transitive</h1>
-								<p>A full responsive, business-oriented HTML5/CSS3 template<br />
-								built by <a href="https://templated.co/">Templated</a> and released under the <a href="https://templated.co/license">Creative Commons</a>.</p>
-								<a href="#one" class="button special scrolly">Get Started</a>
-						</li>
+						
 					</ul>
 					</div>
 				</div>
@@ -320,7 +311,7 @@ if(sessionid != "null"){
 		            nextSliding();
 		        }, 7);
 		    }
-		    setInterval(nextSlide,10000);
+		    setInterval(nextSlide,100000);
 		    $(".sli-right").on("click",function(){
 		        nextSlide();
 		    });

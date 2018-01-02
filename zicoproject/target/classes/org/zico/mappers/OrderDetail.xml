@@ -10,6 +10,7 @@
  	<result property="storeNo" column="detail_storeno" />
  	<result property="count" column="detail_count"/>
  	<result property="price" column="detail_price"/>
+ 	<result property="token" column="detail_token"/>
 </resultMap>
 
 </mapper>

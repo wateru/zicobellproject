@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.zico.dto.Criteria;
 import org.zico.service.OrderService;
@@ -40,10 +41,22 @@ public class OrderController {
 	public void menulist(){
 		
 	}
+	@GetMapping("/order/test") 
+	public void test(){
+		
+	}
+	@GetMapping("/order/pay") 
+	public void pay(){
+		
+	}
+	@GetMapping("/order/paytest") 
+	public void paytest(){
+		
+	}
 	@GetMapping("/order/mlist") 
-	public void mlist(Criteria cri, Model model){
+	public void mlist(Criteria cri, Model model,@RequestParam(name="sno")int storeNo){
+		cri.setStoreNo(storeNo);
 		System.out.println("컨트롤러들어옴");
-		cri.setStoreNo(1);
 		System.out.println(cri.getStoreNo() +" 넣어줌");
 		System.out.println("매장번호 넣어줌");
 		model.addAttribute("menu", service.getMenuList(cri));
