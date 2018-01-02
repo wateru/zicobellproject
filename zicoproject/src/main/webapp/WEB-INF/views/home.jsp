@@ -158,7 +158,7 @@
     	
     	// 1) 세션 ID정보 가져옴
     	<%	String id;
-    		id = (String)session.getAttribute("loginid2"); %>
+    		id = (String)session.getAttribute("id"); %>
 
     	// 2) JSON 객체 생성 
     		var obj = new Object();
@@ -171,8 +171,8 @@
 </script>
 <script>
 /*로그인 버튼 유무  */
-var sessionid ="<%=(String)session.getAttribute("loginid2")%>";
-var a=document.cookie.indexOf("loginid2=");
+var sessionid ="<%=(String)session.getAttribute("id")%>";
+var a=document.cookie.indexOf("id=");
 if(sessionid != "null"){
 	$("#myBtn").hide();
 	$("#logout").show();
@@ -180,6 +180,7 @@ if(sessionid != "null"){
 	$("#myBtn").show();
 	$("#logout").hide();
 } 
+
 
 </script>
 		<!-- Nav -->
