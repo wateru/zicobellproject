@@ -52,8 +52,6 @@
     <!--  Notifications Plugin    -->
     <script src="/resources/assets/js/bootstrap-notify.js"></script>
 
-    <!--  Google Maps Plugin    -->
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
 
     <!-- Paper Dashboard Core javascript and methods for Demo purpose -->
 	<script src="/resources/assets/js/paper-dashboard.js"></script>

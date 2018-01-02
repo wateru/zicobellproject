@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="org.zico.mappers.NoticeMapper">
+
+	<resultMap type="Notice" id="NoticeMap">
+		<result property="nno" column="notice_no" />
+		<result property="ntitle" column="notice_title" />
+		<result property="ncontent" column="notice_content" />
+		<result property="nid" column="notice_member_id" />
+		<result property="regdate" column="notice_regdate" />
+		<result property="nhits" column="notice_hits" />
+	</resultMap>
+
+
+	<!-- 공지 읽기 -->
+	<select id="read" resultType="Notice" resultMap="NoticeMap">
+		select * from notice where notice_no = #{nno}
+	</select>
+
+	<!-- 공지 리스트 읽기 -->
+	<select id="list" resultMap="NoticeMap">
+		select * from notice order by notice_no desc limit #{skip}, #{size}
+	</select>
+	
+	<!-- 공지 총 개수 -->
+	<select id ="count" resultType="Integer">
+		select count(notice_no) from notice
+	</select>
+
+	<!-- 공지 생성  -->
+	<insert id="create">
+		insert into notice(notice_title, notice_content, notice_member_id) values(#{ntitle}, #{ncontent}, #{nid})
+	</insert>
+	
+	<!-- 공지 수정 -->
+	<update id="update">
+		update notice set notice_title = #{ntitle}, notice_content = #{ncontent} where notice_no = #{nno}
+	</update>
+	
+	<!-- 공지 삭제 -->
+	<delete id="delete">
+		delete from notice where notice_no = #{nno}
+	</delete>
+	
+	
+
+
+</mapper>

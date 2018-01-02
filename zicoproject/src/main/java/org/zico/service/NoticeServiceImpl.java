@@ -16,19 +16,21 @@ public class NoticeServiceImpl implements NoticeService {
 	
 	@Override
 	public Notice get(Integer tno) {
-		return mapper.select(tno);
+		return mapper.read(tno);
 	}
 
 	@Override
 	public List<Notice> getList(Criteria cri) {
-		return mapper.selectList(cri);
+		return mapper.list(cri);
 	}
 
+	// 생성
 	@Override
 	public void add(Notice notice) {
-		mapper.insert(notice);
+		mapper.create(notice);
 	}
-
+	
+	// 삭제
 	@Override
 	public void remove(Integer nno) {
 		mapper.delete(nno);
@@ -46,7 +48,7 @@ public class NoticeServiceImpl implements NoticeService {
 
 	@Override
 	public Integer getDetailCount() {
-		return mapper.selectDetailCount();
+		return mapper.count();
 	}
 	
 }

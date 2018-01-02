@@ -8,5 +8,5 @@ import lombok.Data;
 public class Notice {
 	private Integer nno, nhits;
 	private String ntitle, ncontent, nid;
-	private Date regdate, updatedate;
+	private Date regdate;
 }

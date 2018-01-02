@@ -24,7 +24,7 @@
 
 
     <!--  Fonts and icons     -->
-    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
     <link href="/resources/assets/css/themify-icons.css" rel="stylesheet">
     
@@ -71,6 +71,19 @@
 			top: calc(50% - 150px);
 			left: calc(50% - 150px);
 			display: none;
+			z-index: 10;
+			opacity: 0.5;
+		}
+		.guide{
+			position: fixed;
+			text-align: center;
+			width: 300px;
+			top: calc(50% - 10px);
+			left: calc(50% - 150px);
+			display: none;
+			z-index: 20;
+			color: black;
+			font-size: 20px;
 		}
     	<!-- END Slide for 공지사항 -->
     </style>

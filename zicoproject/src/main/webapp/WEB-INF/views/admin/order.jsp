@@ -4,6 +4,8 @@
 	<style>
 		
 	</style>
+	<div class="guide"></div>
+	<div class="talking"></div>
 	<img class="micimg" src="/resources/assets/img/Mic-Animation.gif">
         <div class="content">
             <div class="container-fluid">
@@ -77,16 +79,20 @@ function sendMessage() {
 
 //evt 파라미터는 웹소켓을 보내준 데이터다.(자동으로 들어옴)
 function onMessage(evt) {
-	console.log("11")
     var data = evt.data;
 	console.log(data);
     if (data.search("btn") > 0) {
 		console.log( $("iframe").length)
 		if ($("iframe").length == 0) {
-			$(".speech").append("<iframe width='400' height='600' frameborder='0px' src='https://192.168.0.241:8001/admin/speech'></iframe>");
+			console.log("생성")
+			$(".talking").append("<iframe width='0' height='0' frameborder='0px' src='https://192.168.0.241:8001/admin/speech'></iframe>");
+			$(".guide").text("말씀해주세요.");			
 			$(".micimg").css("display","block");
+			$(".guide").css("display","block");
 		} else {
-			$(".speech").html("");
+			console.log("안됨")
+			$(".talking").html("");
+			$(".guide").css("display","none");
 			$(".micimg").css("display","none");
 		}
 	} 
@@ -99,9 +105,21 @@ function onClose(evt) {
     $("#data").append("연결 끊김");
 }
 
+var closespeech = function() {
+	$(".talking").html("");
+	$(".guide").css("display","none");
+	$(".micimg").css("display","none");
+}
+
+var guidemsg = function(message) {
+	$(".guide").text(message)	
+}
+
+
 $(document).ready(function() {
     var json = JSON.stringify(obj);
     console.log(json);
+
 });
 </script>
 

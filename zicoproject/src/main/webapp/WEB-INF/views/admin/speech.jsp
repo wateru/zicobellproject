@@ -8,7 +8,7 @@
 	response.setContentType("text/html;charset=UTF-8");
 %>
 
-<style>
+<!-- <style>
     * {
         font-family: Verdana, Arial, sans-serif;
     }
@@ -86,31 +86,30 @@
         background-color:transparent;
         padding: 0;
     }
-</style>
-<h1 class="center" id="headline">
+</style> -->
+<!-- <h1 class="center" id="headline">
     <a href="http://dvcs.w3.org/hg/speech-api/raw-file/tip/speechapi.html">
-        Web Speech API</a> Demonstration</h1>
+        Web Speech API</a> Demonstration</h1> -->
 <div id="info">
-    <p id="info_start">Click on the microphone icon and begin speaking.</p>
-    <p id="info_speak_now">Speak now.</p>
-    <p id="info_no_speech">No speech was detected. You may need to adjust your
+    <p id="info_start">다시 시도해주세요.</p>
+    <p id="info_speak_now">말씀하세요.</p>
+    <p id="info_no_speech">언어가 감지되지 않았습니다. 
         <a href="//support.google.com/chrome/bin/answer.py?hl=en&amp;answer=1407892">
-            microphone settings</a>.</p>
+            마이크 세팅</a>을 설정해야 합니다..</p>
     <p id="info_no_microphone" style="display:none">
         No microphone was found. Ensure that a microphone is installed and that
+        마이크를 찾을 수 없습니다. 올바른 
         <a href="//support.google.com/chrome/bin/answer.py?hl=en&amp;answer=1407892">
-            microphone settings</a> are configured correctly.</p>
+            마이크 세팅</a> 을 확인하시려면 클릭하세요.</p>
     <p id="info_allow">Click the "Allow" button above to enable your microphone.</p>
-    <p id="info_denied">Permission to use microphone was denied.</p>
-    <p id="info_blocked">Permission to use microphone is blocked. To change,
-        go to chrome://settings/contentExceptions#media-stream</p>
-    <p id="info_upgrade">Web Speech API is not supported by this browser.
-        Upgrade to <a href="//www.google.com/chrome">Chrome</a>
+    <p id="info_denied">마이크사용권한이 거부되었습니다.</p>
+    <p id="info_blocked">마이크 사용권한이 거부되었습니다. 해당 경로에서 변경 할수 있습니다. chrome://settings/contentExceptions#media-stream</p>
+    <p id="info_upgrade">최신 Chrome브라우저에서만 사용이 가능합니다. <a href="//www.google.com/chrome">Chrome</a>
         version 25 or later.</p>
 </div>
 <div class="right">
     <button id="start_button" onclick="startButton(event)">
-        <img id="start_img" src="mic.gif" alt="Start"></button>
+        <img id="start_img" alt="Start"></button>
 </div>
 <div id="results">
     <span id="final_span" class="final"></span>
@@ -118,7 +117,7 @@
     <p>
 </div>
 <div class="center">
-    <div class="sidebyside" style="text-align:right">
+<!--     <div class="sidebyside" style="text-align:right">
         <button id="copy_button" class="button" onclick="copyButton()">
             Copy and Paste</button>
         <div id="copy_info" class="info">
@@ -132,7 +131,7 @@
             Text sent to default email application.<br>
             (See chrome://settings/handlers to change.)
         </div>
-    </div>
+    </div> -->
     <p>
     <div id="div_language">
         <select id="select_language" onchange="updateCountry()"></select>
@@ -143,6 +142,10 @@
         <span id="result"></span>
     </div>
 </div>
+<script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
 <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
 <script
     src="https://code.jquery.com/jquery-3.2.1.min.js"
@@ -161,8 +164,7 @@
     firebase.initializeApp(config);
 </script>
 <script>
-    var langs =
-        [['한국어',            ['ko-KR']]];
+    var langs = [['한국어',            ['ko-KR']]];
 
     //selectbox 활성화
     for (var i = 0; i < langs.length; i++) {
@@ -171,8 +173,7 @@
     select_language.selectedIndex = 0;
     updateCountry();
     select_dialect.selectedIndex = 0;
-    showInfo('info_start');
-
+    parent.guidemsg($('#info_start').text());
     // 국가 선택
     function updateCountry() {
         //
@@ -186,7 +187,7 @@
         select_dialect.style.visibility = list[1].length == 1 ? 'hidden' : 'visible';
     }
 
-    var create_email = false;
+    /* var create_email = false; */
     var final_transcript = '';
     var recognizing = false;
     var ignore_onend;
@@ -203,27 +204,27 @@
 
         recognition.onstart = function() {
             recognizing = true;
-            showInfo('info_speak_now');
-            start_img.src = 'mic-animate.gif';
+            parent.guidemsg($('#info_speak_now').text());
+            //start_img.src = 'mic-animate.gif';
         };
 
         //음성인식 에러시
         recognition.onerror = function(event) {
             if (event.error == 'no-speech') {
-                start_img.src = 'mic.gif';
-                showInfo('info_no_speech');
+                //start_img.src = 'mic.gif';
+                parent.guidemsg($('#info_no_speech').text());
                 ignore_onend = true;
             }
             if (event.error == 'audio-capture') {
-                start_img.src = 'mic.gif';
-                showInfo('info_no_microphone');
+                //start_img.src = 'mic.gif';
+                parent.guidemsg($('#info_no_microphone').text());
                 ignore_onend = true;
             }
             if (event.error == 'not-allowed') {
                 if (event.timeStamp - start_timestamp < 100) {
-                    showInfo('info_blocked');
+	                parent.guidemsg($('#info_blocked').text());
                 } else {
-                    showInfo('info_denied');
+                   parent.guidemsg($('#info_denied').text());
                 }
                 ignore_onend = true;
             }
@@ -234,9 +235,9 @@
             if (ignore_onend) {
                 return;
             }
-            start_img.src = 'mic.gif';
+            //start_img.src = 'mic.gif';
             if (!final_transcript) {
-                showInfo('info_start');
+            	parent.guidemsg($('#info_start').text());
                 return;
             }
             showInfo('');
@@ -246,10 +247,10 @@
                 range.selectNode(document.getElementById('final_span'));
                 window.getSelection().addRange(range);
             }
-            if (create_email) {
+            /* if (create_email) {
                 create_email = false;
                 createEmail();
-            }
+            } */
         };
 
         // 음성인식 완료시
@@ -263,7 +264,7 @@
                     console.log(JSON.stringify(json));
                     $.ajax({
                         type: 'POST', //post,get,등..전송방식
-                        url: '/test',
+                        url: '/postorder',
                         contentType : 'application/json; charset=UTF-8',
                         dataType: 'json',//데이타 타입
                         data: JSON.stringify(json),
@@ -274,10 +275,11 @@
                                 firebase.database().ref().child('order').push(data);                           }
                                 var order={메뉴:data.data, 수량:data.data,주문시간:new Date()};
                                 createData(order);      
-                                parent.sock.send("exit");
+                                parent.closespeech();
                         },
                         error: function(e){
                         	console.log(e);
+                        	parent.closespeech();
                         	console.log("에러발생");
                         }
                     });
@@ -312,15 +314,16 @@
         ignore_onend = false;
         final_span.innerHTML = '';
         interim_span.innerHTML = '';
-        start_img.src = 'mic-slash.gif';
-        showInfo('info_allow');
+        //start_img.src = 'mic-slash.gif';
+        parent.guidemsg($('#info_allow').text());
         showButtons('none');
         start_timestamp = event.timeStamp;
+        console.log(event.timeStamp);
     }
-
+    startButton(event);
     function upgrade() {
         start_button.style.visibility = 'hidden';
-        showInfo('info_upgrade');
+        parent.guidemsg($('#info_upgrade').text());
     }
 
     var two_line = /\n\n/g;
@@ -334,7 +337,7 @@
         return s.replace(first_char, function(m) { return m.toUpperCase(); });
     }
 
-    function createEmail() {
+/*     function createEmail() {
         var n = final_transcript.indexOf('\n');
         if (n < 0 || n >= 80) {
             n = 40 + final_transcript.substring(40).indexOf(' ');
@@ -342,9 +345,9 @@
         var subject = encodeURI(final_transcript.substring(0, n));
         var body = encodeURI(final_transcript.substring(n + 1));
         window.location.href = 'mailto:?subject=' + subject + '&body=' + body;
-    }
+    } */
 
-    function copyButton() {
+/*     function copyButton() {
         if (recognizing) {
             recognizing = false;
             recognition.stop();
@@ -352,9 +355,9 @@
         copy_button.style.display = 'none';
         copy_info.style.display = 'inline-block';
         showInfo('');
-    }
+    } */
 
-    function emailButton() {
+/*     function emailButton() {
         if (recognizing) {
             create_email = true;
             recognizing = false;
@@ -365,11 +368,12 @@
         email_button.style.display = 'none';
         email_info.style.display = 'inline-block';
         showInfo('');
-    }
+    } */
 
 
-    function showInfo(s) {
-        if (s) {
+/*     function showInfo(s) {
+    	parent.guidemsg($("'#." + s + "'").text())
+         if (s) {
             for (var child = info.firstChild; child; child = child.nextSibling) {
                 if (child.style) {
                     child.style.display = child.id == s ? 'inline' : 'none';
@@ -378,18 +382,19 @@
             info.style.visibility = 'visible';
         } else {
             info.style.visibility = 'hidden';
-        }
+        } 
     }
-
+ */
     var current_style;
     function showButtons(style) {
         if (style == current_style) {
             return;
         }
         current_style = style;
-        copy_button.style.display = style;
-        email_button.style.display = style;
-        copy_info.style.display = 'none';
-        email_info.style.display = 'none';
+        /* copy_button.style.display = style; */
+        /* email_button.style.display = style; */
+        /* copy_info.style.display = 'none'; */
+        /* email_info.style.display = 'none'; */
+        
     }
 </script>
