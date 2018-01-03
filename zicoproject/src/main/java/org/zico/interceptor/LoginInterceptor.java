@@ -46,6 +46,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		//	nicknameCookie.setPath("/");
 			response.addCookie(loginCookie);
 		//	response.addCookie(nicknameCookie);
+
 			
 			
 		}

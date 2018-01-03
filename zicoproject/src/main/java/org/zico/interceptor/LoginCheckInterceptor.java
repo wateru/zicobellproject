@@ -43,6 +43,8 @@ public class LoginCheckInterceptor extends HandlerInterceptorAdapter {
 				return true;
 			}
 		}
+		
+		
 		log.info("세션에도 없고, 쿠키도 없다");
 		response.sendRedirect("/member/loginpage");
 		return false;
