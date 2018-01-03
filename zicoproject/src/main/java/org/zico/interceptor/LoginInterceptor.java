@@ -8,7 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-public class IdCheck extends HandlerInterceptorAdapter {
+public class LoginInterceptor extends HandlerInterceptorAdapter {
 
 	
 	
@@ -38,7 +38,7 @@ public class IdCheck extends HandlerInterceptorAdapter {
 	try { // tryCatch 안해주면 remember없이 로그인시 500에러뜸
 		Boolean remember = (Boolean) modelAndView.getModel().get("remember");
 		if (remember) {
-			Cookie loginCookie = new Cookie("loginid", (String)obj); // 쿠키에는 문자열만 가능
+			Cookie loginCookie = new Cookie("id", (String)obj); // 쿠키에는 문자열만 가능
 			//	Cookie nicknameCookie = new Cookie("nickname", obj2.toString()); // 쿠키에는 문자열만 가능
 			loginCookie.setMaxAge(60 * 60 * 24 * 7); // 일주일
 			loginCookie.setPath("/");
@@ -47,8 +47,6 @@ public class IdCheck extends HandlerInterceptorAdapter {
 			response.addCookie(loginCookie);
 		//	response.addCookie(nicknameCookie);
 			
-			System.out.println("쎄션 "+session.getAttribute("loginid2"));
-			System.out.println("쿠키 "+loginCookie.getValue());
 			
 		}
 	} catch (Exception e) {

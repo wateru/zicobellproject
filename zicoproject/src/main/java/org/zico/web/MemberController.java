@@ -20,23 +20,25 @@ import org.zico.service.LoginService;
 import org.zico.service.MemberService;
 
 @Controller
-@RequestMapping("/login/*")
+@RequestMapping("/member/*")
 public class MemberController {
 
 
 	@Autowired
 	LoginService loginmapper;
 	
+	
+	
 	@Autowired
 	MemberService memberservice;
 	
-	@GetMapping("/insertmember")
-	public void home1() {
+	@GetMapping("/insert")
+	public void insert() {
 		
 	}
 	
-	@PostMapping("/insertmember")
-	public String insertmember(Member member) {
+	@PostMapping("/insert")
+	public String insert(Member member) {
 		memberservice.memberinsert(member);
 		
 		return "/home";
@@ -45,7 +47,7 @@ public class MemberController {
 	
 	
 	@PostMapping("/logout")
-	public String logoutGet( HttpServletRequest request, HttpServletResponse response, HttpSession session)
+	public String logout( HttpServletRequest request, HttpServletResponse response, HttpSession session)
 			throws IOException {
 		System.out.println("로그아웃");
 		
@@ -55,7 +57,7 @@ public class MemberController {
 			session.removeAttribute("id");
 			session.invalidate();
 			
-			Cookie loginCookie = WebUtils.getCookie(request, "loginid");
+			Cookie loginCookie = WebUtils.getCookie(request, "id");
 			System.out.println("로그아웃2");
 
 			if (loginCookie != null) {
@@ -82,20 +84,20 @@ public class MemberController {
 		
 		System.out.println("url "+url);
 		
-		return "/login/checktest";
+		return "/member/checktest";
 	}
 	
 	
-	@PostMapping("/idcheck")
-	public String loginpost(Check vo ,Model model) {
+	@PostMapping("/login")
+	public String login(Check vo ,Model model) {
 		System.out.println("아이디체크오나");
 		Check check = loginmapper.idcheck(vo);
 		Integer checkStoreNo = loginmapper.getStoreNo(vo.getMember_id());
 		Integer checkGrade = loginmapper.getGrade(vo.getMember_id());
-		System.out.println("storeno: " + checkStoreNo);
+
+		
 		if(check !=null) {
 		model.addAttribute("id",vo.getMember_id());
-		System.out.println("아이디 :"+vo.getMember_id());
 		model.addAttribute("password",vo.getMember_password());
 		model.addAttribute("remember",vo.getRemember());
 		//storeno 확인
@@ -108,4 +110,13 @@ public class MemberController {
 		}
 		return "/home";
 	}
+	
+	@GetMapping("/mypage")
+	public void mypage(Model m,HttpSession session) {
+		String id = (String)session.getAttribute("id");
+		Member member=memberservice.mypage(id);
+		m.addAttribute("member",member);
+	}
+	
+	
 }

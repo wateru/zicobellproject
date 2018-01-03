@@ -15,5 +15,11 @@ public class MembertServiceImpl implements MemberService{
 			membermapper.insertmember(member);
 	};
 	
+	public Member mypage(String id) {
+		
+		return membermapper.mypage(id);
+		
+	};
+	
 
 }

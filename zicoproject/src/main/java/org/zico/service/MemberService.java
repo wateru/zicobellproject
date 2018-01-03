@@ -8,5 +8,5 @@ public interface MemberService {
 	
 	public void memberinsert(Member member);
 	
-
+	public Member mypage(String id);
 }

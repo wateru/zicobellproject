@@ -64,11 +64,11 @@
 					</div>
 					</div>
 				<br>
-					<form action="/login/idcheck" method="post">
+					<form action="/member/login" method="post">
 					<div class="login">
 						<input type="text" placeholder="username" name="member_id"><br>
 						<input type="password" placeholder="password" name="member_password"><br>
-						<a href="/login/insertmember">회원가입 </a>&nbsp;&nbsp; <span class="line"><input name="remember" id="remember" style="opacity:1; float:none; -webkit-appearance: checkbox; display: -webkit-inline-box; " type="checkbox" />&emsp; &emsp;로그인</span><br>
+						<a href="/member/insert">회원가입 </a>&nbsp;&nbsp; <span class="line"><input name="remember" id="remember" style="opacity:1; float:none; -webkit-appearance: checkbox; display: -webkit-inline-box; " type="checkbox" />&emsp; &emsp;로그인</span><br>
 						<button >login</button>
 					</div>
 					</form>
@@ -133,7 +133,7 @@
     	/* console.log(obj); */
 	});     
 </script>
-<form id="logout" action="/login/logout" method="post" style="display:none"></form>
+<form id="logout" action="/member/logout" method="post" style="display:none"></form>
 <script>
 /*로그인 버튼 유무  */
 $(document).ready(function() { 

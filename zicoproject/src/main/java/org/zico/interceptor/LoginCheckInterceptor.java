@@ -12,7 +12,7 @@ import lombok.extern.java.Log;
 
 //서블릿 필터와 유사  파라미터가 한두개씩 더 붙어있는 형태
 @Log
-public class CheckInterceptor extends HandlerInterceptorAdapter {
+public class LoginCheckInterceptor extends HandlerInterceptorAdapter {
 
 
 	@Override
@@ -32,19 +32,19 @@ public class CheckInterceptor extends HandlerInterceptorAdapter {
 
 		if (value == null) {
 			log.info("세션에 없음 쿠키 확인");
-			Cookie idCookie = WebUtils.getCookie(request, "loginid");
+			Cookie idCookie = WebUtils.getCookie(request, "id");
 			
 			
 			log.info("쿠키: " + idCookie);
 
 			if (idCookie != null) {
 				log.info("쿠키는 존재하므로 세션에 담자");
-				request.getSession().setAttribute("loginid", idCookie.getValue());
+				request.getSession().setAttribute("id", idCookie.getValue());
 				return true;
 			}
 		}
 		log.info("세션에도 없고, 쿠키도 없다");
-		response.sendRedirect("/login/loginpage");
+		response.sendRedirect("/member/loginpage");
 		return false;
 		/*
 		 * if(loginCookie == null) { response.sendRedirect("/login"); return false; }

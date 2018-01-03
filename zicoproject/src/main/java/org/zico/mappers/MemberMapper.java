@@ -9,5 +9,5 @@ public interface MemberMapper {
 			+ " values (#{mname},#{mid},#{mpassword},#{manswer},#{mqpassword},#{mphone},#{mgrade})")
 	public void insertmember(Member member);
 	
-
+	public Member mypage(String id);
 }

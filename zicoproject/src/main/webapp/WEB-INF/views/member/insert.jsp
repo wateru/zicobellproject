@@ -52,7 +52,6 @@
 										<label for="dept">Class</label>
 										<div class="select-wrapper" >
 											<select name="mgrade" >
-												<option value="1">관리자</option>
 												<option value="2">매니저</option>
 												<option value="3">손님</option>
 											</select>
