@@ -23,12 +23,15 @@ public class IdCheck extends HandlerInterceptorAdapter {
 		Object obj  = modelAndView.getModel().get("id");
 		Object obj2 = modelAndView.getModel().get("password");
 		Object obj3 = modelAndView.getModel().get("storeno");
+		Object obj4 = modelAndView.getModel().get("grade");
 		if(obj == null) {
 			response.sendRedirect("/home?status=fail");
 			return;
 		}
+		response.sendRedirect("/home");
 		HttpSession session =  request.getSession();
 		session.setAttribute("id", obj);
+		session.setAttribute("grade", obj4);
 		if(obj3 != null) {
 			session.setAttribute("storeno", obj3);
 		}
@@ -49,7 +52,6 @@ public class IdCheck extends HandlerInterceptorAdapter {
 			
 		}
 	} catch (Exception e) {
-
 	}
 		
 		}

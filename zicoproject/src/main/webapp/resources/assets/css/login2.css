@@ -25,17 +25,21 @@ Copyright (c) 2015 Daniel Eden
 /* Modal Content */
 .modal-content {
     position: relative;
-    background-color: #fefefe;
+    /* background-color: #fefefe; */
     margin: auto;
     padding: 0;
     border: 1px solid #888;
-    width: 80%;
+    width: 60%;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
     -webkit-animation-name: animatetop;
     -webkit-animation-duration: 0.4s;
     animation-name: animatetop;
     animation-duration: 0.4s
 }
+/* 마이노의 모달*/
+
+
+
 
 /* Add Animation */
 @-webkit-keyframes animatetop {
@@ -65,7 +69,7 @@ Copyright (c) 2015 Daniel Eden
 
 .modal-header {
     padding: 2px 16px;
-    background-color: #5cb85c;
+    /* background-color: #5cb85c; */
     color: white;
 }
 

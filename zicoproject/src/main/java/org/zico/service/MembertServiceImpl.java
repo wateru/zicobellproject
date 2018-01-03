@@ -6,7 +6,7 @@ import org.zico.domain.Member;
 import org.zico.mappers.MemberMapper;
 
 @Service
-public class MembertServiceImple implements MemberService{
+public class MembertServiceImpl implements MemberService{
 	
 	@Autowired
 	MemberMapper membermapper;

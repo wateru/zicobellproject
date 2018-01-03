@@ -17,7 +17,6 @@
 		<link rel="stylesheet" href="/resources/assets/css/main.css" />
 		<!-- 아이콘 script -->
 		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-		<link rel="stylesheet"  href="/resources/assets/css/login.css" />
 		<link rel="stylesheet"  href="/resources/assets/css/login2.css" />
 		<link rel="stylesheet"  href="/resources/assets/css/login4.css" />
 		<style type="text/css">
@@ -38,13 +37,13 @@
 		<!-- Header -->
 			<header id="header" class="alt" style="overflow:unset;">
 				<div class="logo"><a href="/">B E L L<span>&nbsp;by Zico</span></a></div>
+				<a id="login" style="display:none">Login</a>
+				<a id="signin" style="display:none">Signin</a>
+				<a id="afterlogin" style="display:none">Mypage</a>
+				<a id="aftersignin" style="display:none">Logout</a>
+				<a id="manage" href="/admin/dashboard" style="display:none">manage</a>
+				</div>
 				<a href="#menu" class="toggle"><span>Menu</span></a>
-			
-			
-			
-			<form action="/login/logout" method="post"><button id="logout" style="" >로그아웃</button></form>
-			<button  id="myBtn"  style="width:20px; background:white; padding:0px; height:100%;">로그인</button>
-			
 			</header>
 
 <!-- The Modal -->
@@ -54,11 +53,8 @@
     <div class="modal-content">
         <div class="modal-header">
             <span class="close">&times;</span>
-            <h2>Modal Header</h2>
         </div>
         <div class="modal-body">
-           
-           
      			<!-- 여기가 모달 내용 -->
 				<div class="body"></div>
 				<div class="grad"></div>
@@ -77,41 +73,12 @@
 					</div>
 					</form>
            		<!-- 모달 -->
- 
-           
-           
         </div>
 
     </div>
 
-</div>
-
-			
-	
+</div>	
 			<script>
-			<%-- var sessionid = "<%=(String)session.getAttribute("loginid2")%>"
-
-			console.log("쎄션 "+sessionid);
-			
-			var a=document.cookie.indexOf("loginid2=");
-			console.log("쿠키"+a);
-			if(sessionid != null){
-				$("#myBtn").show();
-				$("#logout").hide();
-			}else{
-				alert("알아처먹나 개자식아");
-				$("#myBtn").hide();
-				$("#logout").hide();
-				
-			}  --%>
-			/* if(sessionid == null){
-				alert("알아처먹나");
-				$("#logout").show();
-				$("#myBtn").hide();
-			} */
-			
-		
-			
 			$(".line").on("click",function(){
 				console.log("클릭 실행");
 				console.log("if문 실행되기 전 : " + $("#remember").prop("checked"));	
@@ -127,35 +94,32 @@
 <script>
     // Get the modal
     var modal = document.getElementById('myModal');
-
     // Get the button that opens the modal
-    var btn = document.getElementById("myBtn");
-
+    var btn = document.getElementById("login");
     // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close")[0];
-
+    var span = document.getElementsByClassName("close")[0];    
     // When the user clicks the button, open the modal
     btn.onclick = function() {
         modal.style.display = "block";
+        $("#slidebox").css("display","none");
     }
-
     // When the user clicks on <span> (x), close the modal
     span.onclick = function() {
         modal.style.display = "none";
+        $("#slidebox").css("display","block");
     }
-
     // When the user clicks anywhere outside of the modal, close it
     window.onclick = function(event) {
         if (event.target == modal) {
             modal.style.display = "none";
+            $("#slidebox").css("display","block");
         }
-    }
-    
-    
+    }    
      $(document).ready(function(){
     	
     	if("${loginstatus}" == "fail"){
     		modal.style.display = "block";
+    		$("#slidebox").css("display","none");
     	}
     	
     	// 1) 세션 ID정보 가져옴
@@ -167,22 +131,40 @@
     	// 3) ID json에 저장
     		obj.id = "<%=id%>";
     	/* console.log(obj); */
-    });
-   
-     
+	});     
 </script>
+<form id="logout" action="/login/logout" method="post" style="display:none"></form>
 <script>
 /*로그인 버튼 유무  */
-var sessionid ="<%=(String)session.getAttribute("id")%>";
-var a=document.cookie.indexOf("id=");
-if(sessionid != "null"){
-	$("#myBtn").hide();
-	$("#logout").show();
-}else{
-	$("#myBtn").show();
-	$("#logout").hide();
-} 
+$(document).ready(function() { 
+	var sessionid ="<%=(String)session.getAttribute("id")%>";
+	var sessiongrade = "<%=(Integer)session.getAttribute("grade")%>";
+	console.log(sessiongrade)
+		if(sessionid == "null"){
+			console.log("11")
+			$("#login").css("display","inline-block");
+			$("#signin").css("display","inline-block");
+			$("#afterlogin").css("display","none");
+			$("#aftersignin").css("display","none");
+			$("#manage").css("display","none");				
+			$("#manager").css("display","none")
+		}else{
+			console.log("22")
+			$("#login").css("display","none");
+			$("#signin").css("display","none");
+			$("#afterlogin").css("display","inline-block");
+			$("#aftersignin").css("display","inline-block");
+			if(sessiongrade <= 2){
+				console.log("왜");
+				$("#manage").css("display","inline-block");
+				$("#manager").css("display","inline-block");
+			}
+		}
+});
 
+	$("#aftersignin").on("click",function(){
+		$("#logout").submit();
+	})
 
 </script>
 		<!-- Nav -->
@@ -191,6 +173,7 @@ if(sessionid != "null"){
 					<li><a href="/">Home</a></li>
 					<li><a href="/notice/list">Notice</a></li>
 					<li><a href="/order/list">Order</a></li>
+					<li id="manager" style="display:none;"><a href="/admin/dashboard">manage</a></li>
 				</ul>
 			</nav>
 

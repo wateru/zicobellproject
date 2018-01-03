@@ -5,7 +5,7 @@ Licensed under the MIT license - http://opensource.org/licenses/MIT
 Copyright (c) 2015 Daniel Eden
 */
 
-body{
+/* body{
 	margin: 0;
 	padding: 0;
 	background: #fff;
@@ -13,7 +13,7 @@ body{
 	color: #fff;
 	font-family: Arial;
 	font-size: 12px;
-}
+} */
 
 .body{
 	position: absolute;
@@ -42,49 +42,6 @@ body{
 	opacity: 0.7;
 }
 
-.header{
-	position: absolute;
-	top: calc(50% - 35px);
-	left: calc(50% - 255px);
-	z-index: 2;
-}
-
-.header div{
-	float: left;
-	color: #fff;
-	font-family: 'Exo', sans-serif;
-	font-size: 35px;
-	font-weight: 200;
-}
-
-.header div span{
-	color: #5379fa !important;
-}
-
-.login{
-	position: absolute;
-	top: calc(50% - 75px);
-	left: calc(50% - 50px);
-	height: 30%;
-	width: 50%;
-	padding: 10px;
-	z-index: 2;
-}
-
-.login input[type=text]{
-  	max-width: 244px;
-  	min-width: 100px;
-  	width: 100%;
-	height: 18%;
-	background: transparent;
-	border: 1px solid rgba(255,255,255,0.6);
-	border-radius: 2px;
-	color: #fff;
-	font-family: 'Exo', sans-serif;
-	font-size: 16px;
-	font-weight: 400;
-	padding: 4px;
-}
 
 .chk-span label {
     font-size: 14px;
@@ -95,37 +52,6 @@ body{
     position: relative;
     top: 10px;
     padding-left: 0;
-}
-
-  .login a { 
-  	    padding: 2PX 25px 2PX 20px;
-    font-size: 17px;
-    max-width: 350px;
-    min-width: 100px;
-    width: 100%;
-    height: 12%;
-    background: transparent;
-    border: 1px solid rgba(255,255,255,0.6);
-    border-radius: 2px;
-    color: #fff;
-    font-family: 'Exo', sans-serif;
-    font-weight: 400;
-    text-decoration: none;
-  				  }
- 
-.login span{
-		max-width: 250px;
-  	min-width: 50px;
-  	width: 100%;
-	height: 12%;
-	background: transparent;
-	border: 1px solid rgba(255,255,255,0.6);
-	border-radius: 2px;
-	color: #fff;
-	font-family: 'Exo', sans-serif;
-	font-size: 17px;
-	font-weight: 400;
-	padding:  2PX 22px 2PX 17px;
 }
 
 .checkbox .chk-span.checked {
@@ -158,22 +84,6 @@ body{
 	
 }
 
-.login input[type=password]{
-	max-width: 244px;
-  	min-width: 100px;
-  	width: 100%;
-	height: 18%;
-	background: transparent;
-	border: 1px solid rgba(255,255,255,0.6);
-	border-radius: 2px;
-	color: #fff;
-	font-family: 'Exo', sans-serif;
-	font-size: 16px;
-	font-weight: 400;
-	padding: 4px;
-	margin-top: -3px;
-}
-
 /* .login input[type=button]{
 
   	width: 100%;
@@ -194,25 +104,7 @@ body{
 	margin-top: 10px;
 }
  */
-button{
 
-  	width: 100%;
-	height: 20%;
-	max-width: 244px;
-    min-width: 100px;
-    max-height: 50px;
-    min-height: 25px;
-	background: #fff;
-	border: 1px solid #fff;
-	cursor: pointer;
-	border-radius: 2px;
-	
-	font-family: 'Exo', sans-serif;
-	font-size: 16px;
-	font-weight: 400;
-	padding: 6px;
-	margin-top: 10px;
-}
 
 
 .login input[type=button]:hover{
@@ -246,19 +138,3 @@ button{
 }
 
 
-span.line{
-	border: 1px solid rgba(255,255,255,0.6);
-	padding: 2PX 22px 2PX 18px;
-	font-size: 17px;
-	max-width: 350px;
-  	min-width: 100px;
-  	width: 100%;
-	height: 12%;
-	background: transparent;
-	border: 1px solid rgba(255,255,255,0.6);
-	border-radius: 2px;
-	color: #fff;
-	font-family: 'Exo', sans-serif;
-	font-weight: 400;
-	text-decoration:none;
-}

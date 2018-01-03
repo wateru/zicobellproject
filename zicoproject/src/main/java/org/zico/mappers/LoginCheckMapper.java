@@ -11,4 +11,7 @@ public interface LoginCheckMapper {
 	//storeid 확인
 	@Select("select store_no from store where store_member_id = #{smid};")
 	public Integer selectstoreno(String smid);
+	
+	@Select("select member_grade from member where member_id = #{smid};")
+	public Integer selectGrade(String smid);
 }

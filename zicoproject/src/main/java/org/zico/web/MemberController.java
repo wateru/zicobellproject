@@ -63,7 +63,7 @@ public class MemberController {
 				loginCookie.setPath("/");
 				loginCookie.setMaxAge(0);
 				// log.info("삭제 후 쿠키: " + loginCookie.getValue());
-				response.addCookie(loginCookie);
+			response.addCookie(loginCookie);
 			}
 		}
 		
@@ -91,6 +91,7 @@ public class MemberController {
 		System.out.println("아이디체크오나");
 		Check check = loginmapper.idcheck(vo);
 		Integer checkStoreNo = loginmapper.getStoreNo(vo.getMember_id());
+		Integer checkGrade = loginmapper.getGrade(vo.getMember_id());
 		System.out.println("storeno: " + checkStoreNo);
 		if(check !=null) {
 		model.addAttribute("id",vo.getMember_id());
@@ -100,11 +101,11 @@ public class MemberController {
 		//storeno 확인
 			if(check != null) {
 				model.addAttribute("storeno",checkStoreNo);
+				model.addAttribute("grade",checkGrade);
 			}
 			
 		 return "/home";
 		}
-		
 		return "/home";
 	}
 }

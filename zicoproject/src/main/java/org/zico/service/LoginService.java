@@ -20,4 +20,8 @@ public class LoginService {
 	public Integer getStoreNo(String smid) {
 		return loginmapper.selectstoreno(smid);
 	}
+	
+	public Integer getGrade(String smid) {
+		return loginmapper.selectGrade(smid);
+	}
 }
