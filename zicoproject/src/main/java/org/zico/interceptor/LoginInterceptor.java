@@ -45,9 +45,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		//	nicknameCookie.setMaxAge(60 * 60 * 24 * 7); // 일주일
 		//	nicknameCookie.setPath("/");
 			response.addCookie(loginCookie);
-		//	response.addCookie(nicknameCookie);
-
-			
+		//	response.addCookie(nicknameCookie);			
 			
 		}
 	} catch (Exception e) {
