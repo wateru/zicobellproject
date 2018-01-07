@@ -216,9 +216,9 @@
                               </ul>
                         </li>
                         <li>
-                            <a href="order" class="dropdown-toggle" data-toggle="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="ti-headphone"></i>
-								<p>음성 주문</p>
+								<p><a>음성 주문</a></p>
                             </a>
                         </li>
 						<li>

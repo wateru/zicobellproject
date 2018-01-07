@@ -259,12 +259,12 @@
             for (var i = event.resultIndex; i < event.results.length; ++i) {
                 if (event.results[i].isFinal) {
                     final_transcript += event.results[i][0].transcript;
-                    var json = { data: event.results[i][0].transcript};
+                    var json = { no: parent.storeno(), data: event.results[i][0].transcript};
                     var jsonData = JSON.stringify(json);
                     console.log(JSON.stringify(json));
                     $.ajax({
                         type: 'POST', //post,get,등..전송방식
-                        url: '/postorder',
+                        url: '/admin/postorder',
                         contentType : 'application/json; charset=UTF-8',
                         dataType: 'json',//데이타 타입
                         data: JSON.stringify(json),
@@ -272,7 +272,7 @@
                             console.log(firebase);
                             console.log(data);
                             function createData(data,callback) {
-                                firebase.database().ref().child('order').push(data);                           }
+                                firebase.database().ref().child('order').push(data);}
                                 var order={메뉴:data.data, 수량:data.data,주문시간:new Date()};
                                 createData(order);      
                                 parent.closespeech();

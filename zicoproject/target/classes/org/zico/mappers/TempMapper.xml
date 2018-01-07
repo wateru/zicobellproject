@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="org.zico.mappers.TempMapper">
+
+<resultMap type="Order" id="OrderMap">
+ 	<result property="orderNo" column="order_no" />
+ 	<result property="storeNo" column="order_store_no" />
+ 	<result property="people" column="order_people"/>
+ 	<result property="totalPrice" column="order_totalprice"/>
+ 	<result property="memberId" column="order_member_id"/>
+ 	<result property="status" column="order_status"/>
+ 	<result property="pay" column="order_pay"/>
+</resultMap>
+
+<resultMap type="OrderDetail" id="OrderDetilMap">
+ 	<result property="orderNo" column="detail_orderno" />
+ 	<result property="menuNo" column="detail_menuno" />
+ 	<result property="storeNo" column="detail_storeno" />
+ 	<result property="count" column="detail_count"/>
+ 	<result property="price" column="detail_price"/>
+ 	<result property="token" column="detail_token"/>
+</resultMap>
+
+<select id="selectOrder" resultType="Order" resultMap="OrderMap">
+	select * from zicobell.order where order_store_no = #{orderNo} and order_status = '결제완료';
+</select>
+
+<select id="selectOrderDetail" resultType="OrderDetail" resultMap="OrderDetilMap">
+	select * from orderdetail where detail_order_no = #{orederNo};
+</select>
+
+
+</mapper>
