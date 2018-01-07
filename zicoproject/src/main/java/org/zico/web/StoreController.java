@@ -124,7 +124,7 @@ public class StoreController {
 		int sno = (int)session.getAttribute("storeno");
 		ss.remove(sno);
 		
-		session.setAttribute("storeno", "");
+		session.removeAttribute("storeno");
 		return "redirect:/admin/dashboard";
 	}
 	
