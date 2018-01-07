@@ -186,4 +186,29 @@
 <!-- Main End-->
 <!-- Main End-->
 <!-- Main End-->
+
+<script>
+	/*로그인 버튼 유무  */
+	$(document).ready(function() { 
+		var sessionno = "<%=(Integer)session.getAttribute("storeno")%>";
+		var sessionid ="<%=(String)session.getAttribute("id")%>";
+		var sessiongrade = "<%=(Integer)session.getAttribute("grade")%>";
+		console.log(sessionno);
+		if(sessionno > 0) {
+			console.log("22")
+			$(".newstore").css("display","none");
+			$(".storeinfo").css("display","block");
+		} else {
+			console.log("11")
+			$(".newstore").css("display","block");
+			$(".storeinfo").css("display","none");
+		}
+	});
+	
+	$("#aftersignin").on("click",function(){
+		$("#logout").submit();
+	});
+	
+	</script>
+
 <%@ include file="footer.jsp" %>

@@ -200,17 +200,11 @@
 								<p>매장</p>
                             </a>
                               <ul class="dropdown-menu">
-                              	<c:choose>
-	                              	<c:when test="${sessionScope.storeno == null}">
-	                                	<li><a href="/store/insert">매장등록</a></li>
-	                                </c:when>
-	                                <c:otherwise>
-	                                	<li><a href="/store/detail">매장정보</a></li>
-	                                </c:otherwise>
-                                </c:choose>
+                               	<li class="newstore"><a href="/store/insert">매장등록</a></li>
+                               	<li class="storeinfo"><a href="/store/detail">매장정보</a></li>
                               </ul>
                         </li>
-                        <li class="dropdown">
+                        <li class="dropdown storeinfo">
                               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     <i class="ti-receipt"></i>
 									<p>메뉴</p>

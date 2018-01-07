@@ -64,7 +64,6 @@ public class StoreController {
 		String uploadName = uuid + "_" + imgFile.getOriginalFilename();
 		model.addAttribute("uploadName", uploadName);
 		
-		
 		try {
 			OutputStream out = new FileOutputStream("c:\\uploadImage\\" + uploadName);
 			FileCopyUtils.copy(imgFile.getInputStream(), out);
@@ -116,15 +115,16 @@ public class StoreController {
 		store.setSid(session.getAttribute("id").toString());
 		
 		ss.update(store);
-		
 		return "redirect:/store/detail";
 	}
 	
 	// 매장 삭제
 	@PostMapping("/delete")
-	public String delete(@RequestParam(name="sno") int sno, Criteria cri, RedirectAttributes rttr) {
+	public String delete(Criteria cri, RedirectAttributes rttr, HttpSession session) {
+		int sno = (int)session.getAttribute("storeno");
 		ss.remove(sno);
 		
+		session.setAttribute("storeno", "");
 		return "redirect:/admin/dashboard";
 	}
 	
