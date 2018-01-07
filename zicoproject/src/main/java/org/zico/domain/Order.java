@@ -5,6 +5,6 @@ import lombok.Data;
 @Data
 public class Order {
 
-		int orderNo,storeNo,people,totalPrice;
-		String memberId,status,pay;
+	private int orderNo,storeNo,people,totalPrice;
+	private	String memberId,status,pay;
 }

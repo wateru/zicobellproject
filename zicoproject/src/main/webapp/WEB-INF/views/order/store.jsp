@@ -21,7 +21,7 @@
 						<span class="image fit heekyung"><img
 								src="displayFile?fileName=${store.simage}/" alt="" /></span>
 						<h3>
-						<a href="<c:out value='${store.sno}'/>" class="target">
+						<a href=mlist?sno=<c:out value='${store.sno}'/> class="target">
 						<c:out value="${store.sname}" /></a></h3>
 						
 						

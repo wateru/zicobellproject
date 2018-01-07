@@ -109,7 +109,7 @@ div.desc {
 							</form>
 						</div>
 					</div>
-					<div class="desc">Add a description of the image here</div>
+					<div class="desc">${menu.menuName}</div>
 				</div>
 			</c:forEach>
  

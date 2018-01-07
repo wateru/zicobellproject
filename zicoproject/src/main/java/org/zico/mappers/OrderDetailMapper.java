@@ -1,7 +1,7 @@
 package org.zico.mappers;
 
-import org.zico.domain.Menu;
+import org.zico.domain.OrderDetail;
 
-public interface OrderDetailMapper extends CRUDMapper<Menu, Integer>{
+public interface OrderDetailMapper extends CRUDMapper<OrderDetail, Integer>{
 
 }

@@ -399,7 +399,7 @@ aside {
 									<li class="subtotal">Subtotal</li>
 								</ul>
 							</div>
-							<div class="basket-product">
+							<!-- <div class="basket-product">
 								<div class="item">
 									<div class="product-image">
 										<img src="/resources/images/garbage.jpg"
@@ -424,14 +424,38 @@ aside {
 								<div class="remove">
 									<button>Remove</button>
 								</div>
+							</div> -->
+						
+					
+						
+					<c:forEach items="${detail}" var="detail">
+							<div class="basket-product">
+								<div class="item">
+									<div class="product-image">
+										<img src="displayFile?fileName=${detail.menuImg}/"
+											alt="Placholder Image 2" class="product-frame">
+									</div>
+									<div class="product-details">
+										<h1>
+											<strong><span class="item-quantity">${detail.count}</span> x</strong> ${detail.menuName}
+										</h1>
+									</div>
+								</div>
+								<div class="price">${detail.price}</div>
+								<div class="quantity">
+									<input type="number" value="${detail.count}" min="1" class="quantity-field">
+								</div>
+								<div class="subtotal">${detail.subTotal}</div>
+								<input type="hidden" name="menuNo" value="${detail.menuNo}">
+								<div class="remove">
+								<input type="hidden" name="menuNo" value="${detail.menuNo}">
+									<button>Remove</button>
+								</div>
 							</div>
-						
-						
+							
+						</c:forEach>  
 							<label>인원수
 							<input type="text" value=""placeholder="인원수를 작성해주세요" />
-							</label>
-							<label>예약자
-							<span><input type="text" value="" placeholder="예약 성함을 작성해주세요" /></span> 
 							</label>
 							<label>예약 시간
 							<span><input type="text" value="" placeholder="예약 시간을 작성해주세요" /></span>
@@ -443,6 +467,7 @@ aside {
 											<option value="1">지금결재</option>
 							</select>
 							</label>
+							
 							<div class="12u$">
 								<ul class="actions">
 									<li><input type="submit" value="주문 하기" /></li>
@@ -462,7 +487,7 @@ aside {
 								</div>
 								<div class="summary-subtotal">
 									<div class="subtotal-title">Subtotal</div>
-									<div class="subtotal-value final-value" id="basket-subtotal">130.00</div>
+									<div class="subtotal-value final-value" id="basket-subtotal">${order.totalPrice}</div>
 									<div class="summary-promo hide">
 										<div class="promo-title">Promotion</div>
 										<div class="promo-value final-value" id="basket-promo"></div>
@@ -470,14 +495,12 @@ aside {
 								</div>							
 								<div class="summary-total">
 									<div class="total-title">Total</div>
-									<div class="total-value final-value" id="basket-total">130.00</div>
+									<div class="total-value final-value" id="basket-total">${order.totalPrice}</div>
 								</div>
 								<div class="summary-checkout">
 									<button class="checkout-cta">Go to Secure Checkout</button>
 								</div>
 							</div>
-					
-
 					</div>
 
 				</div>
@@ -522,7 +545,7 @@ $('.promo-code-cta').click(function() {
   //If there is a promoPrice that has been set (it means there is a valid promoCode input) show promo
   if (promoPrice) {
     $('.summary-promo').removeClass('hide');
-    $('.promo-value').text(promoPrice.toFixed(2));
+    $('.promo-value').text(promoPrice.toFixed(0));
     recalculateCart(true);
   }
 });
@@ -554,14 +577,14 @@ function recalculateCart(onlyTotal) {
   if (onlyTotal) {
     /* Update total display */
     $('.total-value').fadeOut(fadeTime, function() {
-      $('#basket-total').html(total.toFixed(2));
+      $('#basket-total').html(total.toFixed(0));
       $('.total-value').fadeIn(fadeTime);
     });
   } else {
     /* Update summary display. */
     $('.final-value').fadeOut(fadeTime, function() {
-      $('#basket-subtotal').html(subtotal.toFixed(2));
-      $('#basket-total').html(total.toFixed(2));
+      $('#basket-subtotal').html(subtotal.toFixed(0));
+      $('#basket-total').html(total.toFixed(0));
       if (total == 0) {
         $('.checkout-cta').fadeOut(fadeTime);
       } else {
@@ -583,7 +606,7 @@ function updateQuantity(quantityInput) {
   /* Update line price display and recalc cart totals */
   productRow.children('.subtotal').each(function() {
     $(this).fadeOut(fadeTime, function() {
-      $(this).text(linePrice.toFixed(2));
+      $(this).text(linePrice.toFixed(0));
       recalculateCart();
       $(this).fadeIn(fadeTime);
     });
@@ -605,11 +628,25 @@ function updateSumItems() {
 function removeItem(removeButton) {
   /* Remove row from DOM and recalc cart total */
   var productRow = $(removeButton).parent().parent();
+  
+
+  console.log($(this).children.input);
   productRow.slideUp(fadeTime, function() {
     productRow.remove();
+  
     recalculateCart();
     updateSumItems();
   });
+  $.ajax({
+      url:'/order/menuDelet',
+      data:formData ,
+      dataType:"int",
+      processData: false,
+      contentType: false,
+      type: 'POST',
+      success: "데이터가 지워짐"
+   
+   });
 }
 </script>
 <!-- Four -->

@@ -37,9 +37,6 @@
 	 
 </select>
 	
-	
-	
-	
 	<delete id="delete">
 	delete from menu where menu_No=#{menuNo}		
 	</delete>

@@ -132,10 +132,9 @@ button,
 
 .price:before,
 .subtotal:before,
-.subtotal-value:before,
 .total-value:before,
 .promo-value:before {
-  content: '£';
+
 }
 
 .hide {
@@ -325,7 +324,6 @@ aside {
 }
 
 .subtotal-title,
-.subtotal-value,
 .total-title,
 .total-value,
 .promo-title,
@@ -471,25 +469,25 @@ aside {
 					<div class="8u 12u$(medium)">
 
 						<c:forEach items="${menu}" var="menu">
-						<div class="container">
-							<span class="image left fit heekyung"><img
-								src="displayFile?fileName=${menu.imgName}/"  /></span>
-					
+							<div class="container">
+								<span class="image left fit heekyung"><img
+									src="displayFile?fileName=${menu.imgName}/"  /></span>
 						
-						<h3 class="hees">
-							<span>메뉴:${menu.menuName}</span> 
-							<br>
-							<br>
-							<br>
-							<br>
-							<span>가격:${menu.menuPrice}원</span>
-							<input type="hidden" id="menu" value="${menu.menuName}">
-							<input type="hidden" id="price" value="${menu.menuPrice}">
-						</h3>
-						
-						</div>
-
-						<hr>
+							
+								<h3 class="hees">
+									<span>메뉴:${menu.menuName}</span> 
+									<br>
+									<br>
+									
+									<span>가격:${menu.menuPrice}원</span>
+									<input type="hidden" id="menu" value="${menu.menuName}">
+									<input type="hidden"id="menuNo" value="${menu.menuNo}">
+									<input type="hidden" id="price" value="${menu.menuPrice}">
+								</h3>
+							
+							</div>
+	
+							<hr>
 						</c:forEach>
 					<!-- 
 					<c:forEach items="${menu}" var="menu">
@@ -512,20 +510,28 @@ aside {
 					
 					
 					<div class="4u 12u$(medium)">
+					<form method="post" action="/order/postpaytest">
+					<c:forEach items="${menu}" var="menu">
+					<input type="hidden" name="storeNo" value="${menu.storeNo}">
+					</c:forEach>
 						<div class="summary">
         <div class="summary-total-items"><span class="total-items"></span> Items in your Bag</div>
-        <div class="summary-subtotal">
+        <div class="summary-subtotal heehee" >
           
         </div>
         
         <div class="summary-total">
           <div class="total-title">Total</div>
-          <div class="total-value final-value" id="basket-total">12</div>
+          <input type="hidden" id="totalheekyung" name="totalheekyung" value=0>
+          <div class="total-value final-value" id="basket-total">
+          	
+          </div>
         </div>
         <div class="summary-checkout">
-          <button class="checkout-cta">Go to Secure Checkout</button>
+          <button class="checkout-cta">주문하기</button>
         </div>
       </div>
+      </form>
 						</div>
 					</div>
 
@@ -533,12 +539,25 @@ aside {
 			</div>
 		</div>
 	
+	
+	
+	
+	
 </section>
 <script>
-	$(".container").on("click", function(){
 
+	$(".container").on("click", function(e){
 		var menu = $(this).children("h3").children("#menu").val(); 
-		var price = $(this).children("h3").children("#price").val(); 
+		var menuNo = $(this).children("h3").children("#menuNo").val(); 
+		var price = $(this).children("h3").children("#price").val();       
+		var menuid = menu.replace(" ", ""); 
+		var menuid2="#"+menuid+"count";
+		$("menuid2").on('input',function(){
+			console.log($(this).val());
+			
+		});
+		
+// 		console.log( menu );
 
 		// 		var menu = $(this).children("#name").val();
 // 		var price = $(this).children("#price").val();
@@ -546,16 +565,84 @@ aside {
 // 		console.log(menu);
 // 		console.log(price);
 		
-		if($(".summary-subtotal").children("#"+menu).length == 0){
+//		console.log($(".summary-subtotal").children("#"+menu).length);
+		if($(".summary-subtotal").children("#"+menuid).length == 0){
 			var str = '';
-			str = '<div class="subtotal-title" id="'+ menu +'">'+ menu +'</div> <div class="subtotal-value final-value" id="basket-subtotal '+ menu +'price">'+ price +'<input type="number" id="'+menu+'count" value="1" min="1" class="quantity-field">'+'</div>';
+			str = '<div id="'+ menuid +'"><div class="subtotal-title">'+menu +'</div> '+
+					'<input class="quantity-field" type="number" name="menuheeCount" id="'+menuid+'count" value="1" min="1">'+
+					'<input type="hidden" name="menuNo" value='+menuNo+'>' +
+					'<input type="hidden" name="menuName" value='+menu+'>' +
+					'<input type="hidden" name="menuPrice" class="popprice"  value='+price+'>' +
+					'<input type="hidden" name="heeSubTotalPrice" class="totprice" value='+price+'>' +
+					'<div class="subtotal-value final-value hee" id="basket-subtotal '+ menu +'price">'+ price +'</div></div><br>';
 			$(".summary-subtotal").append(str);
-		} else {
-			$("#"+menu+"count").val( ($("#"+menu+"count").val() * 1)  + 1);
+			totprice();
+		}else{
+			
+			
+			e.preventDefault();
+// 			var $price = $(".hee");
+// 			var result = $price.text() *1;
+
+ //			$("#"+menuid+"count").val( ($("#"+menuid+"count").val() * 1)  + 1);
+// 			$price.text( result + price*1 );
 		}
 	});
+	$(".heehee").on("click",".quantity-field",function(){
+		var $this = $(this);
+		console.log("변경");
+		$this.siblings(".hee").text($this.siblings(".popprice").val() * $this.val());
+		$this.siblings(".totprice").val($this.siblings(".popprice").val() * $this.val());
+		totprice();
+	});
+	var totprice = function(){
+		var tot = 0;
+		for(var i = 0; i < $(".heehee .totprice").size(); i++){
+			tot += ($(".heehee .totprice")[i].value * 1)
+		}
+		$("#basket-total").text(tot + " 원")
+		$("#totalheekyung").val(tot);
+		
+	}
+
+	
+	/* 
+	
+	var menuid2="#"+menuid+"count";
+	$("menuid2").on('input',function(){
+		console.log($(this).val());
+		
+	});
+	 */
 	
 	
+// 	$(".container").on("click", function(){
+
+// 		var menu = $(this).children("h3").children("#menu").val(); 
+// 		var price = $(this).children("h3").children("#price").val();       
+
+// 		// 		var menu = $(this).children("#name").val();
+// // 		var price = $(this).children("#price").val();
+
+// // 		console.log(menu);
+// // 		console.log(price);
+		
+// 		if($(".summary-subtotal").children("#"+menu).length == 0){
+// 			var str = '';
+// 			str = '<div class="subtotal-title" id="'+ menu +'">'+ "&nbsp;"+menu +'</div> <div class="subtotal-value final-value hee" id="basket-subtotal '+ menu +'price">'+ price +'</div>';
+// 			$(".summary-subtotal").append(str);
+// 		} else {
+// 			var $price = $(".hee");
+// 			var result = $price.text() *1;
+//  			$("#"+menu+"count").val( ($("#"+menu+"count").val() * 1)  + 1);
+// 			$price.text( result + price*1 );
+// 		}
+// 	});
+	
+// 	$(".heehee").on("change", "input[type='number']", function(){
+// 		console.log("바뀌어쪙");
+// 	});
+
 </script>
 
 <!-- Four -->

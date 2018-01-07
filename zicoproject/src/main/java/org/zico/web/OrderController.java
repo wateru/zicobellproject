@@ -1,9 +1,11 @@
 package org.zico.web;
 
+import java.io.Console;
 import java.io.FileInputStream;
 import java.io.InputStream;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +16,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.zico.domain.Order;
+import org.zico.domain.OrderDetail;
 import org.zico.dto.Criteria;
 import org.zico.service.OrderService;
 import org.zico.util.MediaUtils;
@@ -28,10 +32,8 @@ import lombok.extern.java.Log;
 @Log
 @RequestMapping("/order/*")
 public class OrderController {
-	
 	@Autowired
-	private OrderService service;
-	
+	private OrderService orderService;	
 	@GetMapping("/order/list") 
 	public void list(){
 		
@@ -49,23 +51,84 @@ public class OrderController {
 	public void pay(){
 		
 	}
+	@PostMapping("/order/postpaytest")
+	public String postpaytest(String menuName,String menuPrice,String heeSubTotalPrice,String menuheeCount,int totalheekyung,int storeNo,String menuNo
+			,HttpSession session) {
+		Order order =new Order();
+		order.setStoreNo(storeNo);
+		order.setTotalPrice(totalheekyung);
+		order.setStatus("주문중");
+		order.setMemberId(session.getAttribute("id").toString());
+		String[] menuNameArr = menuName.split(",");
+		String[] menuPriceArr =menuPrice.split(","); 
+		String[] heeSubTotalPriceArr =heeSubTotalPrice.split(",");
+		String[] menuheeCountArr=menuheeCount.split(",");
+		String[] menuNoArr = menuNo.split(",");
+		if(orderService.comparisonCount(order) == 0) {
+			log.info("혹시 요길로 오시나욥?");
+			int orderNo = orderService.insert(order);	
+			for(int i=0;i<menuNameArr.length;i++) {
+				OrderDetail orderDetail = new OrderDetail();
+				orderDetail.setMenuName(menuNameArr[i]);
+				orderDetail.setPrice(Integer.parseInt(menuPriceArr[i]));
+				orderDetail.setSubTotal(Integer.parseInt(heeSubTotalPriceArr[i]));
+				orderDetail.setCount(Integer.parseInt(menuheeCountArr[i]));
+				orderDetail.setMenuNo(Integer.parseInt(menuNoArr[i]));
+				orderDetail.setOrderNo(orderNo);
+				orderDetail.setStoreNo(storeNo);
+				orderService.detailInsert(orderDetail);			
+			}
+		}else {
+				log.info("똑똑 ? 들어오십니까?");
+				int orderNo = orderService.orderNoSelect(order);
+				
+				orderService.detailDelete(orderNo);
+				orderService.orderUpdate(order);
+				for(int i=0;i<menuNameArr.length;i++) {
+					OrderDetail orderDetail = new OrderDetail();
+					orderDetail.setMenuName(menuNameArr[i]);
+					orderDetail.setPrice(Integer.parseInt(menuPriceArr[i]));
+					orderDetail.setSubTotal(Integer.parseInt(heeSubTotalPriceArr[i]));
+					orderDetail.setCount(Integer.parseInt(menuheeCountArr[i]));
+					orderDetail.setMenuNo(Integer.parseInt(menuNoArr[i]));
+					orderDetail.setOrderNo(orderNo);
+					orderDetail.setStoreNo(storeNo);
+					orderService.detailInsert(orderDetail);								
+			}
+			}
+		return "redirect:/order/paytest";
+	}
 	@GetMapping("/order/paytest") 
-	public void paytest(){
+	public void paytest(HttpSession session,Model model){
+		Order order=new Order();
+		OrderDetail orderDetail = new OrderDetail();
+		order.setStatus("주문중");
+		order.setMemberId(session.getAttribute("id").toString());
+		orderDetail.setStatus("주문중");
+		orderDetail.setMemberId(session.getAttribute("id").toString());	
+		model.addAttribute("order",orderService.orderList(order));
+		model.addAttribute("detail",orderService.orderDetailList(orderDetail));
+	}
+	@PostMapping("/order/postapy")
+	public void postpay(String menuName,HttpSession session) {
 		
 	}
+	@PostMapping("/order/menuDelete")
+	public String menuDelete(int menuNo) {
+		log.info("일단오나 확인");
+		return "redirect:/order/paytest";
+	}
+	
 	@GetMapping("/order/mlist") 
 	public void mlist(Criteria cri, Model model,@RequestParam(name="sno")int storeNo){
 		cri.setStoreNo(storeNo);
-		System.out.println("컨트롤러들어옴");
-		System.out.println(cri.getStoreNo() +" 넣어줌");
-		System.out.println("매장번호 넣어줌");
-		model.addAttribute("menu", service.getMenuList(cri));
+		model.addAttribute("menu", orderService.getMenuList(cri));
 	}
 	
 	@GetMapping("/order/store") 
 	public void store(Criteria cri, Model model){
-		model.addAttribute("store", service.getList(cri));
-		model.addAttribute("total", service.getListCount());
+		model.addAttribute("store", orderService.getList(cri));
+		model.addAttribute("total", orderService.getListCount());
 	}
 	
 	

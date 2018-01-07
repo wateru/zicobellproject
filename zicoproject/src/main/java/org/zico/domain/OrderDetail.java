@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class OrderDetail {
-	int orederNo,menuNo,storeNo,count,price;
-	String token;
+	private int orderNo,menuNo,storeNo,count,price,subTotal;
+	private String token,menuName,status,memberId,menuImg;
 }

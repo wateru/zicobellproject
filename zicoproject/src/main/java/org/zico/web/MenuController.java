@@ -77,7 +77,9 @@ public class MenuController {
 	   Menu menu=new Menu();
 	   log.info("이미지이름 :"+imgName);
 	   menu.setMenuCategory("치킨");
+	   System.out.println(Integer.parseInt(session.getAttribute("storeno").toString()));
 	   menu.setStoreNo(Integer.parseInt(session.getAttribute("storeno").toString()));
+	   //menu.setStoreNo(5);
 	   menu.setMenuName(menuName);
 	   menu.setMenuPrice(menuPrice);
 	   menu.setImgName(imgName);
@@ -117,10 +119,10 @@ public class MenuController {
 	   }
    @GetMapping("/menu/menulist")
    public void menuList(Model model,Criteria cri, HttpSession session) {	
-	   //System.out.println("들어옴");
-	   //System.out.println(Integer.parseInt(session.getAttribute("storeno").toString()));
+	   System.out.println("들어옴");
+	   System.out.println(Integer.parseInt(session.getAttribute("storeno").toString()));
 	   cri.setStoreNo(Integer.parseInt(session.getAttribute("storeno").toString()));
-	   //cri.setStoreNo(2);
+	   //cri.setStoreNo(5);
 	   //session.setAttribute("dsadsadas", asdasd);
 	   model.addAttribute("menu",serivce.getList(cri));
 	   model.addAttribute("total",serivce.getListCount());

@@ -13,6 +13,11 @@ public interface CRUDMapper<E, K> {
 	public List<E> list(Criteria cri);
 	public List<E> menulist(Criteria cri);
 	public int count();
+	public int last();
+	public E orderlist(E vo);
+	public List<E> orderDetailList(E vo);
+	public int comparisonCount(E vo);
+	public int orderNoSelect(E vo);
 	
 	
 }
