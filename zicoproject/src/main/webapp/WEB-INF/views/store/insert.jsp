@@ -100,7 +100,6 @@
 		
 		$("#insertBtn").on("click", function(e) {
 			e.preventDefault();
-			console.log("Aaaa")
 			$("#storeinsert").submit();
 		});
 		
