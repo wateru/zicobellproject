@@ -9,7 +9,7 @@
 			<div class="col-lg-8 col-md-7">
 				<div class="card">
 					<div class="header">
-						<h4 class="title">신규 매장 등록</h4>
+						<h4 class="title">신규매장등록</h4>
 					</div>
 					<div class="content">
 						<form id="storeinsert" action="/store/postinsert" method="post" enctype="multipart/form-data">
@@ -68,8 +68,8 @@
 							</div>
 
 							<div class="text-center">
-								<button type="button" id="listBtn"
-										class="btn btn-info btn-fill btn-wd">목록으로</button>
+								<button type="button" id="prevBtn"
+										class="btn btn-info btn-fill btn-wd">이전페이지</button>
 								<button type="submit" id="insertBtn"
 										class="btn btn-info btn-fill btn-wd">매장등록</button>
 							</div>
@@ -81,9 +81,7 @@
 	</div>
 </div>
 
-<form id="listForm" action="/store/list" method="get">
-	<input type="hidden" name="page" value="${criteria.page}">
-	<input type="hidden" name="size" value="${criteria.size}">
+<form id="prevForm" action="/admin/dashboard" method="get">
 </form>
 
 <script
@@ -103,8 +101,8 @@
 			$("#storeinsert").submit();
 		});
 		
-		$("#listBtn").on("click", function() {
-			$("#listForm").submit();
+		$("#prevBtn").on("click", function() {
+			$("#prevForm").submit();
 		});
 		
 	});

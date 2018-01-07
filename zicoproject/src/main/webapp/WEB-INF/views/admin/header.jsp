@@ -179,7 +179,7 @@
                         <span class="icon-bar bar2"></span>
                         <span class="icon-bar bar3"></span>
                     </button>
-                    <a class="navbar-brand" href="#">Z I C O Bell</a>
+                    <a class="navbar-brand" href="/home">Z I C O Bell</a>
                 </div>
                 
                 <div class="collapse navbar-collapse">
@@ -200,32 +200,47 @@
 								<p>매장</p>
                             </a>
                               <ul class="dropdown-menu">
-                                <li><a href="/store/insert">매장 등록</a></li>
-                                <li><a href="/store/update">매장정보수정</a></li>
+                              	<c:choose>
+	                              	<c:when test="${sessionScope.storeno == null}">
+	                                	<li><a href="/store/insert">매장등록</a></li>
+	                                </c:when>
+	                                <c:otherwise>
+	                                	<li><a href="/store/detail">매장정보</a></li>
+	                                </c:otherwise>
+                                </c:choose>
                               </ul>
                         </li>
                         <li class="dropdown">
                               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     <i class="ti-receipt"></i>
 									<p>메뉴</p>
-									<b class="caret"></b>
                               </a>
                               <ul class="dropdown-menu">
-                                <li><a href="/menu/menulist">메뉴 리스트</a></li>
-                                <li><a href="/menu/insert">메뉴 등록</a></li>
+                                <li><a href="/menu/menulist">메뉴리스트</a></li>
+                                <li><a href="/menu/insert">메뉴등록</a></li>
                               </ul>
                         </li>
                         <li>
                             <a href="/admin/order" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="ti-headphone"></i>
-								<p>음성 주문</p>
+								<p>음성주문</p>
                             </a>
                         </li>
 						<li>
-                            <a href="#">
-								<i class="ti-settings"></i>
-								<p>Settings</p>
-                            </a>
+							<c:choose>
+								<c:when test="${sessionScope.id == null}">
+		                            <a href="#">
+										<i class="ti-power-off"></i>
+										<p>Login</p>
+		                            </a>
+	                            </c:when>
+	                            <c:otherwise>
+		                            <a href="#">
+										<i class="ti-power-off"></i>
+										<p>Logout</p>
+		                            </a>
+	                            </c:otherwise>
+                            </c:choose>
                         </li>
                     </ul>
 

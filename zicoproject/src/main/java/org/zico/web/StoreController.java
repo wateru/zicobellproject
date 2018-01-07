@@ -81,14 +81,15 @@ public class StoreController {
 		store.setSid(session.getAttribute("id").toString());
 		
 		ss.create(store);
-		rttr.addFlashAttribute("cri", cri);
 		
-		return "redirect:/store/list";
+		return "redirect:/admin/dashboard";
 	}
 	
 	// 매장 수정
 	@GetMapping("/update")
-	public void updateGet(@RequestParam(name="sno") int sno, @ModelAttribute("cri") Criteria cri, Model model) {
+	public void updateGet(@ModelAttribute("cri") Criteria cri, Model model, HttpSession session) {
+		int sno = (int) session.getAttribute("storeno");
+		
 		model.addAttribute("store", ss.detail(sno));
 	}
 	@PostMapping("/postupdate")
@@ -115,19 +116,16 @@ public class StoreController {
 		store.setSid(session.getAttribute("id").toString());
 		
 		ss.update(store);
-		rttr.addFlashAttribute("cri", cri);
 		
-		return "redirect:/store/detail?sno=" + store.getSno()
-				+ "&page=" + cri.getPage() + "&size=" + cri.getSize();
+		return "redirect:/store/detail";
 	}
 	
 	// 매장 삭제
 	@PostMapping("/delete")
 	public String delete(@RequestParam(name="sno") int sno, Criteria cri, RedirectAttributes rttr) {
 		ss.remove(sno);
-		rttr.addFlashAttribute("cri", cri);
 		
-		return "redirect:/store/list?page=" + cri.getPage() + "&size=" + cri.getSize();
+		return "redirect:/admin/dashboard";
 	}
 	
 	private String makeThumnail(String fileName) throws Exception {

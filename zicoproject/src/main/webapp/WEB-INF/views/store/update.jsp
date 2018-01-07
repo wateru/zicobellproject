@@ -10,7 +10,7 @@
 			<div class="col-lg-8 col-md-7">
 				<div class="card">
 					<div class="header">
-						<h4 class="title">매장 정보 수정</h4>
+						<h4 class="title">매장정보수정</h4>
 					</div>
 					<div class="content">
 						<form id="storeupdate" action="/store/postupdate" method="post" enctype="multipart/form-data">
@@ -75,8 +75,8 @@
 							</div>
 
 							<div class="text-center">
-								<button type="button" id="listBtn"
-										class="btn btn-info btn-fill btn-wd">목록으로</button>
+								<button type="button" id="prevBtn"
+										class="btn btn-info btn-fill btn-wd">이전페이지</button>
 								<button type="submit" id="updateBtn"
 										class="btn btn-info btn-fill btn-wd">수정</button>
 								<button type="submit" id="deleteBtn"
@@ -84,8 +84,6 @@
 							</div>
 							
 							<input type="hidden" name="sno" value="${store.sno}">
-							<input type="hidden" name="page" value="${cri.page}">
-							<input type="hidden" name="size" value="${cri.size}">
 						</form>
 					</div>
 				</div>
@@ -94,9 +92,7 @@
 	</div>
 </div>
 
-<form id="listForm" action="/store/list" method="get">
-	<input type="hidden" name="page" value="${cri.page}">
-	<input type="hidden" name="size" value="${cri.size}">
+<form id="prevForm" action="/store/detail" method="get">
 </form>
 
 <script
@@ -111,8 +107,8 @@
 	
 	$(document).ready(function() {
 		
-		$("#listBtn").on("click", function() {
-			$("#listForm").submit();
+		$("#prevBtn").on("click", function() {
+			$("#prevForm").submit();
 		});
 		
 		$("#updateBtn").on("click", function() {

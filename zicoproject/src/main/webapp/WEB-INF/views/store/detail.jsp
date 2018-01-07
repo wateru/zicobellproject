@@ -75,10 +75,10 @@
 							</div>
 
 							<div class="text-center">
-								<button id="listBtn"
-										class="btn btn-info btn-fill btn-wd">목록으로</button>
+								<button id="prevBtn"
+										class="btn btn-info btn-fill btn-wd">이전페이지</button>
 								<button id="updateBtn"
-										class="btn btn-info btn-fill btn-wd">매장 정보 수정</button>
+										class="btn btn-info btn-fill btn-wd">매장정보수정</button>
 							</div>
 						</form>
 					</div>
@@ -88,15 +88,10 @@
 	</div>
 </div>
 
-<form id="listForm" action="/store/list" method="get">
-	<input type="hidden" name="page" value="${cri.page}">
-	<input type="hidden" name="size" value="${cri.size}">
+<form id="adminForm" action="/admin/dashboard" method="get">
 </form>
 
 <form id="updateForm" action="/store/update" method="get">
-	<input type="hidden" name="sno" value="${store.sno}">
-	<input type="hidden" name="page" value="${cri.page}">
-	<input type="hidden" name="size" value="${cri.size}">
 </form>
 
 <script type="text/javascript"
@@ -125,9 +120,9 @@
 		
 	$(document).ready(function() {
 		
-		$("#listBtn").on("click", function(e) {
+		$("#adminBtn").on("click", function(e) {
 			e.preventDefault();
-			$("#listForm").submit();
+			$("#adminForm").submit();
 		});
 		
 		$("#updateBtn").on("click", function(e) {
