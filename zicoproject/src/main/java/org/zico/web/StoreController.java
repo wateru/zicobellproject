@@ -47,7 +47,9 @@ public class StoreController {
 	
 	// 매장 상세 조회
 	@GetMapping("/detail")
-	public void detail(@RequestParam(name="sno") int sno, @ModelAttribute("cri") Criteria cri, Model model) {
+	public void detail(@ModelAttribute("cri") Criteria cri, Model model, HttpSession session) {
+		int sno = (int) session.getAttribute("storeno");
+		
 		model.addAttribute("store", ss.detail(sno));
 	}
 	
@@ -123,9 +125,7 @@ public class StoreController {
 	@PostMapping("/delete")
 	public String delete(@RequestParam(name="sno") int sno, Criteria cri, RedirectAttributes rttr) {
 		ss.remove(sno);
-		
 		rttr.addFlashAttribute("cri", cri);
-		rttr.addFlashAttribute("result", "success");
 		
 		return "redirect:/store/list?page=" + cri.getPage() + "&size=" + cri.getSize();
 	}
