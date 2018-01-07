@@ -40,7 +40,7 @@
                             <div class="content">
                                 <div class="row">
                                     <div class="col-xs-5">
-                                        <div class="icon-big icon-success text-center">
+                                        <div class="icon-big ic on-success text-center">
                                             <i class="ti-wallet"></i>
                                         </div>
                                     </div>
@@ -71,7 +71,6 @@
                                     </div>
                                     <div class="col-xs-7">
                                         <div class="numbers">
-                                            <p>일일 방문팀</p>
                                             30
                                         </div>
                                     </div>
@@ -112,7 +111,6 @@
                     </div>
                 </div>
                 <div class="row">
-
                     <div class="col-md-12">
                         <div class="card">
                             <div class="header">
