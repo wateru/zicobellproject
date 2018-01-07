@@ -79,8 +79,7 @@ public class StoreController {
 		store.setSimage(uploadName);
 		store.setSid(session.getAttribute("id").toString());
 		
-		ss.create(store);
-		
+		session.setAttribute("storeno", ss.create(store));
 		return "redirect:/admin/dashboard";
 	}
 	

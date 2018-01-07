@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.zico.domain.Store;
 import org.zico.dto.Criteria;
 import org.zico.mappers.StoreMapper;
@@ -14,9 +15,12 @@ public class StoreServiceImpl implements StoreService {
 	@Autowired
 	private StoreMapper sm;
 	
+	@Transactional
 	@Override
-	public void create(Store store) {
+	public int create(Store store) {
 		sm.create(store);
+		
+		return sm.last();
 	}
 
 	@Override

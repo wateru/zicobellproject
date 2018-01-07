@@ -25,6 +25,10 @@
 				#{openTime}, #{closeTime}, #{simage}, #{sid})
 	</insert>
 
+	<select id="last" resultType="int">
+		select last_insert_id()
+	</select>
+
 	<!-- 매장목록 -->
 	<select id="list" resultType="Store" resultMap="StoreMap">
 		select *

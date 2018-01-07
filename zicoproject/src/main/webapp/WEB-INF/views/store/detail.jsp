@@ -88,7 +88,7 @@
 	</div>
 </div>
 
-<form id="adminForm" action="/admin/dashboard" method="get">
+<form id="prevForm" action="/admin/dashboard" method="get">
 </form>
 
 <form id="updateForm" action="/store/update" method="get">
@@ -120,9 +120,9 @@
 		
 	$(document).ready(function() {
 		
-		$("#adminBtn").on("click", function(e) {
+		$("#prevBtn").on("click", function(e) {
 			e.preventDefault();
-			$("#adminForm").submit();
+			$("#prevForm").submit();
 		});
 		
 		$("#updateBtn").on("click", function(e) {

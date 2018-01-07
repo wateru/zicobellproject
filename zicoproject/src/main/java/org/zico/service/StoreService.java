@@ -7,7 +7,7 @@ import org.zico.dto.Criteria;
 
 public interface StoreService {
 
-	public void create(Store store);
+	public int create(Store store);
 	
 	public Store detail(int sno);
 	
