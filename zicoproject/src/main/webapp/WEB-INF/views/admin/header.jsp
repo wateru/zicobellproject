@@ -199,26 +199,26 @@
                                 <i class="ti-archive"></i>
 								<p>매장</p>
                             </a>
+                              <ul class="dropdown-menu">
+                                <li><a href="/store/insert">매장 등록</a></li>
+                                <li><a href="/store/update">매장정보수정</a></li>
+                              </ul>
                         </li>
                         <li class="dropdown">
                               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     <i class="ti-receipt"></i>
-                                    <p class="notification">2</p>
 									<p>메뉴</p>
 									<b class="caret"></b>
                               </a>
                               <ul class="dropdown-menu">
-                                <li><a href="#">메뉴 리스트</a></li>
-                                <li><a href="#">메뉴 등록</a></li>
-                                <!-- <li><a href="#">Notification 3</a></li>
-                                <li><a href="#">Notification 4</a></li>
-                                <li><a href="#">Another notification</a></li> -->
+                                <li><a href="/menu/menulist">메뉴 리스트</a></li>
+                                <li><a href="/menu/insert">메뉴 등록</a></li>
                               </ul>
                         </li>
                         <li>
-                            <a class="dropdown-toggle" data-toggle="dropdown">
+                            <a href="/admin/order" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="ti-headphone"></i>
-								<p><a>음성 주문</a></p>
+								<p>음성 주문</p>
                             </a>
                         </li>
 						<li>

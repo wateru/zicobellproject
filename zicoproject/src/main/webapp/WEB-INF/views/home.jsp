@@ -33,7 +33,7 @@
 
 	<!-- Header -->
 	<header id="header" class="alt" style="overflow:unset;">
-		<div class="logo"><a href="/">B E L L<span>&nbsp;by Zico</span></a></div>
+		<div class="logo"><a href="/home">B E L L<span>&nbsp;by Zico</span></a></div>
 			<a id="login" style="display:none">Login</a>
 			<a id="signin" style="display:none">Signin</a>
 			<a id="afterlogin" style="display:none">Mypage</a>
