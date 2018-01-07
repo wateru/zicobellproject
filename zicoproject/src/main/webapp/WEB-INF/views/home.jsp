@@ -34,11 +34,11 @@
 	<!-- Header -->
 	<header id="header" class="alt" style="overflow:unset;">
 		<div class="logo"><a href="/home">B E L L<span>&nbsp;by Zico</span></a></div>
-			<a id="login" style="display:none">Login</a>
-			<a id="signin" style="display:none">Signin</a>
-			<a id="afterlogin" style="display:none">Mypage</a>
-			<a id="aftersignin" style="display:none">Logout</a>
-			<a id="manage" href="/admin/dashboard" style="display:none">manage</a>
+			<a class="none-inlineblock" id="login" style="display:none">Login</a>
+			<a class="none-inlineblock"  style="display:none">Signin</a>
+			<a class="user-inlineblock" style="display:none">Mypage</a>
+			<a class="user-inlineblock" id="aftersignin" style="display:none">Logout</a>
+			<a class="manage-inlineblock" href="/admin/dashboard" style="display:none">manage</a>
 		</div>
 		<a href="#menu" class="toggle"><span>Menu</span></a>
 	</header>
@@ -86,7 +86,7 @@
 				console.log("if문 실행된 후 : " + $("#remember").prop("checked"));
 			});
 	</script>
-	<script>
+	<script> 
 	    // Get the modal
 	    var modal = document.getElementById('myModal');
 	    // Get the button that opens the modal
@@ -136,22 +136,17 @@
 		console.log(sessiongrade)
 			if(sessionid == "null"){
 				console.log("11")
-				$("#login").css("display","inline-block");
-				$("#signin").css("display","inline-block");
-				$("#afterlogin").css("display","none");
-				$("#aftersignin").css("display","none");
-				$("#manage").css("display","none");				
-				$("#manager").css("display","none")
+				$(".none-inlineblock").css("display","inline-block");
+				$(".user-inlineblock").css("display","none");
+				$(".manage-inlineblock").css("display","none");				
+				$(".manage-listitem").css("display","none")
 			}else{
 				console.log("22")
-				$("#login").css("display","none");
-				$("#signin").css("display","none");
-				$("#afterlogin").css("display","inline-block");
-				$("#aftersignin").css("display","inline-block");
+				$(".none-inlineblock").css("display","none");
+				$(".user-inlineblock").css("display","inline-block");
 				if(sessiongrade <= 2){
-					console.log("왜");
-					$("#manage").css("display","inline-block");
-					$("#manager").css("display","inline-block");
+					$(".manage-inlineblock").css("display","inline-block");
+					$(".manage-listitem").css("display","list-item");
 				}
 			}
 	});
@@ -166,8 +161,8 @@
 		<ul class="links">
 			<li><a href="/home">Home</a></li>
 			<li><a href="/notice/list">Notice</a></li>
-			<li><a href="/order/list">Order</a></li>
-			<li id="manager" style="display:none;"><a href="/admin/dashboard">manage</a></li>
+			<li><a href="/order/store">Order</a></li>
+			<li class="manage-listitem" style="display:none;"><a href="/admin/dashboard">manage</a></li>
 		</ul>
 	</nav>
 
