@@ -430,6 +430,8 @@ aside {
 						
 					<c:forEach items="${detail}" var="detail">
 							<div class="basket-product">
+								<input type="hidden" class="menuname" value="${detail.menuName}">
+								<input type="hidden" class="menucount" value="${detail.count}">
 								<div class="item">
 									<div class="product-image">
 										<img src="displayFile?fileName=${detail.menuImg}/"
@@ -460,14 +462,14 @@ aside {
 							<label>예약 시간
 							<span><input type="text" value="" placeholder="예약 시간을 작성해주세요" /></span>
 							</label>
-						</div>
-						<label>결재방법
+							<label>결제방법
 							<select name="demo-category" id="demo-category">
-											<option value="1">방문후 결재</option>
-											<option value="1">지금결재</option>
+											<option value="current">방문후 결재</option>
+											<option value="kakao">지금결재</option>
 							</select>
 							</label>
 							
+						</div>
 							<div class="12u$">
 								<ul class="actions">
 									<li><input type="submit" value="주문 하기" /></li>
@@ -509,6 +511,8 @@ aside {
 	</div>
 </section>
 
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script>
 var promoCode;
 var promoPrice;
@@ -648,6 +652,86 @@ function removeItem(removeButton) {
    
    });
 }
+
+var IMP = window.IMP;
+IMP.init('imp98404187');
+$(".checkout-cta").on("click",function(){
+if($("#demo-category").val() == "kakao"){
+	IMP.request_pay({
+	    pg : 'kakao', // version 1.1.0부터 지원.
+	    pay_method : 'card',
+	    merchant_uid : 'merchant_1234567890' + new Date().getTime(),
+	    name : '주문명:결제테스트',
+	    amount : 1000,
+	    buyer_email : 'iamport@siot.do',
+	    buyer_name : '구매자이름',
+	    buyer_tel : '',
+	    buyer_addr : '서울특별시 강남구 삼성동',
+	    buyer_postcode : '123-456',
+	    m_redirect_url : 'http://192.168.0.241:8000/order/paytest'
+	}, function(rsp) {
+	    if ( rsp.success ) {
+	        var msg = '결제가 완료되었습니다.';
+	        msg += '고유ID : ' + rsp.imp_uid;
+	        msg += '상점 거래ID : ' + rsp.merchant_uid;
+	        msg += '결제 금액 : ' + rsp.paid_amount;
+	        msg += '카드 승인번호 : ' + rsp.apply_num;
+	        postpay();
+
+	    } else {
+	        var msg = '결제에 실패하였습니다.';
+	        msg += '에러내용 : ' + rsp.error_msg;
+	        msg += '결제에 실패하셨습니다.'
+	    }
+	    alert(msg);
+	});
+} else {
+	postpay();
+			
+}
+});
+
+console.log($(".basket-product").children(".menuname").val())
+
+function postpay(){ 
+	var receiptArray = new Array();
+	for(var i = 0; i < $(".basket-product").length; i++){
+	var receiptDetail = {"menu":$( $(".basket-product")[i] ).children(".menuname").val(),
+						"count":$( $(".basket-product")[i] ).children(".menucount").val()}; 
+		receiptArray.push(receiptDetail);
+	}
+	var receipt = {"no":"${order.storeNo}",
+				"orderno":"${order.orderNo}",
+				"totalprice":"${order.totalPrice}",
+				"people":$(".people").val(),
+				"id":'${order.memberId}',
+				"pay":$("#demo-category").val(),
+				"status":"결제완료",
+				"token":"hi",
+				"menulist":receiptArray};
+
+	$.ajax({
+	    type: 'POST', //post,get,등..전송방식
+	    url: '/clientorder',
+	    contentType : 'application/json; charset=UTF-8',
+// 	    dataType: 'text',//데이타 타입
+	    data: JSON.stringify(receipt),
+	    success: function(data){
+	    	console.log(data)
+	    	console.log("성공이다.");
+	        location.href="/home";
+	    },
+	    error:function(request,status,error){
+	        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+	       }
+	    /* error: function(e){
+	    	console.log(e);
+	    	console.log("실패다.");
+	    	
+	    } */
+	});
+}
+
 </script>
 <!-- Four -->
 

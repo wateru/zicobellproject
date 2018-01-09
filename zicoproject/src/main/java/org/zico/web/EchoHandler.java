@@ -7,13 +7,11 @@ import java.util.Map;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -24,6 +22,8 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 import org.zico.domain.Connector;
 import org.zico.domain.Order;
 import org.zico.domain.OrderDetail;
+import org.zico.domain.TempOrder;
+import org.zico.domain.TempOrderDetail;
 import org.zico.service.ConnectorService;
 import org.zico.service.TempService;
 
@@ -135,42 +135,23 @@ private List<WebSocketSession> sessionList = new ArrayList<WebSocketSession>();
 	logger.info("{} 연결 끊김", session.getId());
     }
 	
-/*	// 주방에서 주문하는 부분
+
+    
 	@PostMapping("/clientorder")
-	public void postClientOrder(String storeno, Model m) throws Exception { 
-		logger.info(storeno);
+	@ResponseBody
+	public String postClientOrder(@RequestBody String json, Model m) throws Exception { 
+		Order order = new Order();
+		OrderDetail orderDetail = new OrderDetail();
+		JSONObject receipt = new JSONObject(json);
+		receipt.put("message", "order");
+		receipt.put("token", "hi");
+		logger.info(receipt.toString());
+		receipt.get("no");
+		
 		JSONArray socketArray = new JSONArray();
 		JSONObject socketInfo = new JSONObject();
 		logger.info("전송부 : " +socketObject.toString());
-		socketArray = (JSONArray)socketObject.get("3");
-		
-		
-		
-		JSONObject receipt = new JSONObject();
-		JSONArray receiptArray = new JSONArray();
-		String[] menu = {"자장면","짬뽕","탕수육"};
-		int[] count = {3,2,1};
-		logger.info(""+menu[0]);
-		logger.info(""+menu[1]);
-		logger.info(""+menu[2]);
-		for(int i = 0; i < 3; i++) {
-			JSONObject receiptDetail = new JSONObject();
-			logger.info(""+i);
-			receiptDetail.put("menu", menu[i]);
-			receiptDetail.put("count", count[i]);
-			receiptArray.put(i, receiptDetail);
-			logger.info(receiptArray.toString());
-		}
-
-		receipt.put("no",3);
-		receipt.put("orderno", 15);
-		receipt.put("people", 5);
-		receipt.put("totalprice", 25000);
-		receipt.put("pay", "kakao");
-		receipt.put("status", "wait");
-		receipt.put("message", "order");
-		receipt.put("menulist", receiptArray);
-		logger.info(receipt.toString());
+		socketArray = (JSONArray)socketObject.get(receipt.get("no").toString());
 		for(int i = 0; i < socketArray.length(); i++) {
 			socketInfo = (JSONObject)socketArray.get(i);
 			sessionList.add((WebSocketSession)socketInfo.get("SessionInfo"));
@@ -179,10 +160,11 @@ private List<WebSocketSession> sessionList = new ArrayList<WebSocketSession>();
 			sess.sendMessage(new TextMessage(receipt.toString()));
 		}
 		sessionList = new ArrayList<WebSocketSession>();
-	}*/
-    
-	@PostMapping("/clientorder")
-	public void postClientOrder(String storeno, Model m) throws Exception { 
+		return "success";
+	}
+	
+	@PostMapping("/bell")
+	public void postBell(String storeno, Model m) throws Exception {
 		logger.info(storeno);
 		JSONArray socketArray = new JSONArray();
 		JSONObject socketInfo = new JSONObject();
@@ -197,6 +179,7 @@ private List<WebSocketSession> sessionList = new ArrayList<WebSocketSession>();
 		}
 		sessionList = new ArrayList<WebSocketSession>();
 	}
+	
 	
 	// 주방에서 음성이 처리되는 부분
 	@PostMapping("/admin/postorder")
