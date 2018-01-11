@@ -1,6 +1,5 @@
 package org.zico.web;
 
-import java.io.Console;
 import java.io.FileInputStream;
 import java.io.InputStream;
 
@@ -8,6 +7,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.IOUtils;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -17,13 +17,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.zico.domain.Order;
 import org.zico.domain.OrderDetail;
+import org.zico.domain.TempOrder;
+import org.zico.domain.TempOrderDetail;
 import org.zico.dto.Criteria;
-import org.zico.service.OrderService;
+import org.zico.service.TempOrderService;
 import org.zico.util.MediaUtils;
 
 import lombok.extern.java.Log;
@@ -33,13 +36,13 @@ import lombok.extern.java.Log;
 @RequestMapping("/order/*")
 public class OrderController {
 	@Autowired
-	private OrderService orderService;	
+	private TempOrderService orderService;	
 	@GetMapping("/order/list") 
 	public void list(){
 		
 	}
 	
-	@GetMapping("/order/menulist") 
+	@GetMapping("/order/menulist")
 	public void menulist(){
 		
 	}
@@ -54,68 +57,83 @@ public class OrderController {
 	@PostMapping("/order/postpaytest")
 	public String postpaytest(String menuName,String menuPrice,String heeSubTotalPrice,String menuheeCount,int totalheekyung,int storeNo,String menuNo
 			,HttpSession session) {
-		Order order =new Order();
-		order.setStoreNo(storeNo);
-		order.setTotalPrice(totalheekyung);
-		order.setStatus("주문중");
-		order.setMemberId(session.getAttribute("id").toString());
+		log.info("StoreNo : " + storeNo);
+		TempOrder order = new TempOrder();
+		order.setOrderStoreNo(storeNo);
+		order.setOrderTotPrice(totalheekyung);
+		order.setOrderStatus("beforepay");
+		order.setOrderMemberId(session.getAttribute("id").toString());
 		String[] menuNameArr = menuName.split(",");
-		String[] menuPriceArr =menuPrice.split(","); 
+		String[] menuPriceArr = menuPrice.split(","); 
 		String[] heeSubTotalPriceArr =heeSubTotalPrice.split(",");
 		String[] menuheeCountArr=menuheeCount.split(",");
 		String[] menuNoArr = menuNo.split(",");
+		// comparisonCount랑 ordernoselect 합칠수 있는지 테스트 할 것
 		if(orderService.comparisonCount(order) == 0) {
 			log.info("혹시 요길로 오시나욥?");
-			int orderNo = orderService.insert(order);	
+			int orderNo = orderService.insert(order);
+			log.info("1");
 			for(int i=0;i<menuNameArr.length;i++) {
-				OrderDetail orderDetail = new OrderDetail();
-				orderDetail.setMenuName(menuNameArr[i]);
-				orderDetail.setPrice(Integer.parseInt(menuPriceArr[i]));
-				orderDetail.setSubTotal(Integer.parseInt(heeSubTotalPriceArr[i]));
-				orderDetail.setCount(Integer.parseInt(menuheeCountArr[i]));
-				orderDetail.setMenuNo(Integer.parseInt(menuNoArr[i]));
-				orderDetail.setOrderNo(orderNo);
-				orderDetail.setStoreNo(storeNo);
+//				OrderDetail orderDetail = new OrderDetail();
+				TempOrderDetail orderDetail = new TempOrderDetail();
+				orderDetail.setDetailMenuName(menuNameArr[i]);
+				orderDetail.setDetailPrice(Integer.parseInt(menuPriceArr[i]));
+				orderDetail.setDetailSubTotal(Integer.parseInt(heeSubTotalPriceArr[i]));
+				orderDetail.setDetailCount(Integer.parseInt(menuheeCountArr[i]));
+				orderDetail.setDetailMenuNo(Integer.parseInt(menuNoArr[i]));
+				orderDetail.setDetailOrderNo(orderNo);
+				orderDetail.setDetailStoreNo(storeNo);
+				log.info("2");
 				orderService.detailInsert(orderDetail);			
 			}
 		}else {
 				log.info("똑똑 ? 들어오십니까?");
 				int orderNo = orderService.orderNoSelect(order);
-				
-				orderService.detailDelete(orderNo);
+				log.info(""+orderNo);
+				log.info(""+order);
+				orderService.delete(orderNo);
+				log.info("3");
 				orderService.orderUpdate(order);
+				log.info("4");
 				for(int i=0;i<menuNameArr.length;i++) {
-					OrderDetail orderDetail = new OrderDetail();
-					orderDetail.setMenuName(menuNameArr[i]);
-					orderDetail.setPrice(Integer.parseInt(menuPriceArr[i]));
-					orderDetail.setSubTotal(Integer.parseInt(heeSubTotalPriceArr[i]));
-					orderDetail.setCount(Integer.parseInt(menuheeCountArr[i]));
-					orderDetail.setMenuNo(Integer.parseInt(menuNoArr[i]));
-					orderDetail.setOrderNo(orderNo);
-					orderDetail.setStoreNo(storeNo);
-					orderService.detailInsert(orderDetail);								
+					TempOrderDetail orderDetail = new TempOrderDetail();
+					orderDetail.setDetailMenuName(menuNameArr[i]);
+					orderDetail.setDetailPrice(Integer.parseInt(menuPriceArr[i]));
+					orderDetail.setDetailSubTotal(Integer.parseInt(heeSubTotalPriceArr[i]));
+					orderDetail.setDetailCount(Integer.parseInt(menuheeCountArr[i]));
+					orderDetail.setDetailMenuNo(Integer.parseInt(menuNoArr[i]));
+					orderDetail.setDetailOrderNo(orderNo);
+					orderDetail.setDetailStoreNo(storeNo);
+					orderService.detailInsert(orderDetail);						
 			}
 			}
+		log.info("해당 완료");
 		return "redirect:/order/paytest";
 	}
 	@GetMapping("/order/paytest") 
 	public void paytest(HttpSession session,Model model){
-		Order order=new Order();
-		OrderDetail orderDetail = new OrderDetail();
-		order.setStatus("주문중");
-		order.setMemberId(session.getAttribute("id").toString());
-		orderDetail.setStatus("주문중");
-		orderDetail.setMemberId(session.getAttribute("id").toString());	
+		TempOrder order=new TempOrder();
+		TempOrderDetail orderDetail = new TempOrderDetail();
+		order.setOrderStatus("beforepay");
+		order.setOrderMemberId(session.getAttribute("id").toString());
+		orderDetail.setDetailStatus("beforepay");
+		orderDetail.setDetailMemberId(session.getAttribute("id").toString());
 		model.addAttribute("order",orderService.orderList(order));
+		log.info("완료1");
 		model.addAttribute("detail",orderService.orderDetailList(orderDetail));
+		log.info("완료2");
 	}
 	@PostMapping("/order/postapy")
 	public void postpay(String menuName,HttpSession session) {
 		
 	}
 	@PostMapping("/order/menuDelete")
-	public String menuDelete(int menuNo) {
-		log.info("일단오나 확인");
+	public String menuDelete(@RequestBody String json) {
+		JSONObject removeItem = new JSONObject(json);
+		TempOrderDetail orderDetail = new TempOrderDetail();
+		orderDetail.setDetailMenuNo(removeItem.getInt("removeMenu"));
+		orderDetail.setDetailOrderNo(removeItem.getInt("removeOrder"));
+		orderService.detailDelete(orderDetail);
 		return "redirect:/order/paytest";
 	}
 	

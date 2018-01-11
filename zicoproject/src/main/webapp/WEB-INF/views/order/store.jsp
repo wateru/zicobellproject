@@ -11,36 +11,22 @@
 	<div class="inner">
 		<div class="box">
 			<div class="content">
-
 				<!-- Elements -->
 				<h2 id="elements">Elements</h2>
 				<div class="row 200%">
 					<div class="6u 12u$(medium)">
-					
 						<c:forEach items="${store}" var="store">
 						<span class="image fit heekyung"><img
 								src="displayFile?fileName=${store.simage}/" alt="" /></span>
 						<h3>
 						<a href="<c:out value='${store.sno}'/>" class="target">
 						<c:out value="${store.sname}" /></a></h3>
-						
-						
 						<hr>
 						</c:forEach>
 					</div>
-					
-					
-					
-					
-					
-					
 					<div class="6u 12u$(medium)">
-						
 						<div id="map"></div>
-							
-						
 					</div>
-
 				</div>
 			</div>
 		</div>

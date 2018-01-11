@@ -20,12 +20,10 @@ import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 import org.zico.domain.Connector;
-import org.zico.domain.Order;
-import org.zico.domain.OrderDetail;
 import org.zico.domain.TempOrder;
 import org.zico.domain.TempOrderDetail;
 import org.zico.service.ConnectorService;
-import org.zico.service.TempService;
+import org.zico.service.TempOrderService;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -41,7 +39,7 @@ private List<WebSocketSession> sessionList = new ArrayList<WebSocketSession>();
 	ConnectorService service;
 	
 	@Autowired
-	TempService temp;
+	TempOrderService orderService;
 	
 
 	// Connection 연결 성립되고 난 후 바로 이루어지는 작업
@@ -84,11 +82,11 @@ private List<WebSocketSession> sessionList = new ArrayList<WebSocketSession>();
 			connector.setCid(session.getId());
 			service.create(connector);
 		// 처음에게만 전달해줄 JSON데이터 생성
-			List<Order> order = temp.getOrder(Integer.parseInt(map.get("no").toString()));
+			List<TempOrder> order = orderService.getOrder(Integer.parseInt(map.get("no").toString()));
 			if(order.size() > 0) {
 				for(int i = 0; i < order.size(); i++) {
 						session.sendMessage(new TextMessage(
-								createMessage(order.get(i), temp.getOrderDetail(order.get(i).getOrderNo())).toString()));
+								createMessage(order.get(i), orderService.getOrderDetail(order.get(i).getOrderNo())).toString()));
 				}
 			}
 		}
@@ -122,7 +120,6 @@ private List<WebSocketSession> sessionList = new ArrayList<WebSocketSession>();
 		JSONObject socketInfo = new JSONObject();
 		if(no != null) {
 		socketArray = (JSONArray)socketObject.get(no);
-		socketArray = (JSONArray)socketObject.get(no);
 		logger.info("" + socketArray.length());
 		}
 		for(int i = 0; i < socketArray.length(); i++) {
@@ -140,26 +137,58 @@ private List<WebSocketSession> sessionList = new ArrayList<WebSocketSession>();
 	@PostMapping("/clientorder")
 	@ResponseBody
 	public String postClientOrder(@RequestBody String json, Model m) throws Exception { 
-		Order order = new Order();
-		OrderDetail orderDetail = new OrderDetail();
+		TempOrder order = new TempOrder();
+		TempOrderDetail orderDetail = new TempOrderDetail();
 		JSONObject receipt = new JSONObject(json);
 		receipt.put("message", "order");
-		receipt.put("token", "hi");
+		
+		// DB 수정 부분
+		order.setOrderNo(Integer.parseInt(receipt.get("orderno").toString()));
+		order.setOrderPay(receipt.get("pay").toString());
+		// people가 널이면 문제 발생
+		// 예약시간 넣어주어야 함
+		order.setOrderPeople(receipt.getInt("people")); 
+		order.setOrderStatus(receipt.getString("status"));
+		order.setOrderStoreNo(receipt.getInt("no"));
+		order.setOrderToken(receipt.getString("token"));
+		order.setOrderTotPrice(receipt.getInt("totalprice"));
+		order.setOrderMemberId(receipt.getString("id"));
+		logger.info("" + receipt.toString());
+		logger.info("" + order.toString());
+		orderService.modifyOrder(order);
+		
+		JSONArray tempArray = (JSONArray)receipt.get("menulist");
+		JSONObject tempObject;
+		orderDetail.setDetailOrderNo(Integer.parseInt(receipt.get("orderno").toString()));
+		for(int i = 0; i < tempArray.length(); i++) {
+			tempObject = (JSONObject)tempArray.get(i);
+			orderDetail.setDetailMenuName(tempObject.get("menu").toString());
+			orderDetail.setDetailCount(Integer.parseInt(tempObject.get("count").toString()));
+			orderDetail.setDetailSubTotal(tempObject.getInt("subtotal"));
+			orderService.modifyDetailOrder(orderDetail);
+			logger.info(orderDetail.toString());
+		}
+
 		logger.info(receipt.toString());
 		receipt.get("no");
 		
 		JSONArray socketArray = new JSONArray();
 		JSONObject socketInfo = new JSONObject();
 		logger.info("전송부 : " +socketObject.toString());
-		socketArray = (JSONArray)socketObject.get(receipt.get("no").toString());
-		for(int i = 0; i < socketArray.length(); i++) {
-			socketInfo = (JSONObject)socketArray.get(i);
-			sessionList.add((WebSocketSession)socketInfo.get("SessionInfo"));
+		try {
+			socketArray = (JSONArray)socketObject.get(receipt.get("no").toString());
+			for(int i = 0; i < socketArray.length(); i++) {
+				socketInfo = (JSONObject)socketArray.get(i);
+				sessionList.add((WebSocketSession)socketInfo.get("SessionInfo"));
+			}
+			for (WebSocketSession sess : sessionList) {
+				sess.sendMessage(new TextMessage(receipt.toString()));
+			}			
+		} catch (Exception e) {
+			
+		} finally {
+			sessionList = new ArrayList<WebSocketSession>();			
 		}
-		for (WebSocketSession sess : sessionList) {
-			sess.sendMessage(new TextMessage(receipt.toString()));
-		}
-		sessionList = new ArrayList<WebSocketSession>();
 		return "success";
 	}
 	
@@ -196,13 +225,15 @@ private List<WebSocketSession> sessionList = new ArrayList<WebSocketSession>();
 			if(speech.length == 2) {
 			for(int i = 0; i < progress.length; i++) {
 				if(speech[1].contains(progress[i])) {
-					status = "조리중";
+					logger.info("상태 : " + speech[1]);
+					
+					status = "cooking";
 					break progress;
 				} 
 			}
 			for(int j = 0; j < end.length; j++) {
 				if(speech[1].contains(end[j])) {
-					status = "조리완료";
+					status = "done";
 					break progress;
 				} 
 			}
@@ -216,7 +247,7 @@ private List<WebSocketSession> sessionList = new ArrayList<WebSocketSession>();
 		JSONObject statusJson = new JSONObject();
 		statusJson.put("message", "status");
 		statusJson.put("orderno", speech[0]);
-		statusJson.put("status", "조리완료");
+		statusJson.put("status", "done");
 		// json뽑아서 확인할 것
 		logger.info(statusJson.toString());
 		
@@ -234,29 +265,37 @@ private List<WebSocketSession> sessionList = new ArrayList<WebSocketSession>();
 	}
 	
 	//JSON 제작 Method
-	private JSONObject createMessage(Order order, List<OrderDetail> detail) {
+	private JSONObject createMessage(TempOrder order, List<TempOrderDetail> detail) {
 		JSONObject receipt = new JSONObject();
 		JSONArray receiptArray = new JSONArray();
-		OrderDetail tempOrderDetail = new OrderDetail();
+		TempOrderDetail tempOrderDetail = new TempOrderDetail();
 		
 		receipt.put("no", order.getOrderNo());
 		receipt.put("orderno", order.getOrderNo());
-		receipt.put("totalprice", order.getTotalPrice());
-		receipt.put("people", order.getPeople());
-		receipt.put("pay", order.getPay());
-		receipt.put("status", order.getStatus());
+		receipt.put("totalprice", order.getOrderTotPrice());
+		receipt.put("people", order.getOrderPeople());
+		receipt.put("id", order.getOrderMemberId());
+		receipt.put("pay", order.getOrderPay());
+		receipt.put("status", order.getOrderStatus());
+		receipt.put("token", order.getOrderToken());
 		receipt.put("message", "order");
 			
 		for(int i = 0; i < detail.size(); i++) {
 			JSONObject receiptDetail = new JSONObject();
 			tempOrderDetail = detail.get(i);
-			receiptDetail.put("menu", tempOrderDetail.getMenuNo());
-			receiptDetail.put("count", tempOrderDetail.getCount());
+			receiptDetail.put("menu", tempOrderDetail.getDetailMenuName());
+			receiptDetail.put("count", tempOrderDetail.getDetailCount());
 			receiptArray.put(i, receiptDetail);
 		}
 		receipt.put("menulist", receiptArray);
 	
 		return receipt;
+	}
+	private void changeStatus(int orderNo, String status) {
+		TempOrder order = new TempOrder();
+		order.setOrderNo(orderNo);
+		order.setOrderStatus(status);
+		orderService.modifyStatus(order);
 	}
 
 }

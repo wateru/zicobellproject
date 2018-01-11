@@ -4175,7 +4175,7 @@ opacity
 		overflow: visible;
 	}
 	.order {
-		width: 33%;
+		width: 32%;
 		height: 250px;
 		display: inline-block;
 	}
@@ -4192,7 +4192,7 @@ opacity
 		-webkit-overflow-scrolling: touch;
 	}
 	.order {
-		width: 49%;
+		width: 48%;
 		height: 250px;
 		display: inline-block;
 	}

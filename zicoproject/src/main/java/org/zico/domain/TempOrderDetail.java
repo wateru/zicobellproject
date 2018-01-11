@@ -6,5 +6,6 @@ import lombok.Data;
 public class TempOrderDetail {
 	private int detailOrderNo,detailMenuNo,detailStoreNo,detailCount,detailPrice,detailSubTotal;
 	/*private String token,menuName,status,memberId,menuImg;*/
-	private String detailMenuName;
+	/*토큰이없음*/
+	private String detailMenuName,detailMemberId,detailStatus,detailMenuImg;
 }

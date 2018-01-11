@@ -51,8 +51,8 @@
 									
 									</tbody>
 								</table>
-							<input value="수정"  class="button special" onclick="location.href='update?nno=${detail.nno}'" type="button">
-							<input value="삭제"  class="button special" onclick="location.href='delete?nno=${detail.nno}'" type="button">
+							<input value="수정"  class="button special admin-inlineblock" onclick="location.href='update?nno=${detail.nno}'" type="button">
+							<input value="삭제"  class="button special admin-inlineblock" onclick="location.href='delete?nno=${detail.nno}'" type="button">
 							<input value="목록" style="float:right;" class="button special" onclick="location.href='list'" type="button">
 							</div>
 						</div>

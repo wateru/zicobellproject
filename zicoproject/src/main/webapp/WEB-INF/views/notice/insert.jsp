@@ -40,8 +40,8 @@
 										<textarea name="ncontent" rows="12" placeholder="Contents"></textarea>
 									</div>
 									<ul class="actions align-center">
-										<li><input value="등록" class="button special" type="submit"></li>
-										<li><input value="취소" class="button special" type="submit"></li>
+										<li><input value="등록" class="button special admin-inlineblock" type="submit"></li>
+										<li><input value="취소" class="button special admin-inlineblock" type="submit"></li>
 									</ul>
 								</form>
 							</div>

@@ -108,7 +108,7 @@
 										  
 									</div>
 								</div>
-							<input value="등록" class="button special" onclick="location.href='/notice/insert'" type="button">
+							<input value="등록" class="button special admin-inlineblock" onclick="location.href='/notice/insert'" type="button">
 							</div>
 						</div>
 					</section>

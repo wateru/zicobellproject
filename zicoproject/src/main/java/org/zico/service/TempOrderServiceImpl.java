@@ -9,23 +9,28 @@ import org.zico.domain.Menu;
 import org.zico.domain.Order;
 import org.zico.domain.OrderDetail;
 import org.zico.domain.Store;
+import org.zico.domain.TempOrder;
+import org.zico.domain.TempOrderDetail;
 import org.zico.dto.Criteria;
 import org.zico.mappers.MenuMapper;
-import org.zico.mappers.OrderDetailMapper;
-import org.zico.mappers.OrderMapper;
 import org.zico.mappers.StoreMapper;
+import org.zico.mappers.TempOrderDetailMapper;
+import org.zico.mappers.TempOrderMapper;
+
+import lombok.extern.log4j.Log4j;
+import lombok.extern.log4j.Log4j2;
 
 @Service
-public class OrderServiceImpl implements OrderService {
+public class TempOrderServiceImpl implements TempOrderService {
 
 	@Autowired
-	private OrderMapper orderMapper;
+	private TempOrderMapper orderMapper;
 	@Autowired
 	private StoreMapper storeMapper;
 	@Autowired
 	private MenuMapper menuMapper;
 	@Autowired
-	private OrderDetailMapper orderDetailMapper;
+	private TempOrderDetailMapper orderDetailMapper;
 	
 	@Override
 	public List<Store> getList(Criteria cri) {
@@ -55,7 +60,7 @@ public class OrderServiceImpl implements OrderService {
 	//최초 주문시 인설트로 장바구니
 	@Transactional
 	@Override
-	public int insert(Order order) {
+	public int insert(TempOrder order) {
 		System.out.println("욜로 들어오기는함??");
 		orderMapper.create(order);
 		System.out.println(orderMapper.last());
@@ -63,26 +68,30 @@ public class OrderServiceImpl implements OrderService {
 	}
 	//중복이 있을경우 업데이트로 장바구니
 	@Override
-	public void orderUpdate(Order order) {
+	public void orderUpdate(TempOrder order) {
+		System.out.println("jaeik : " + order);
 		orderMapper.update(order);
 		
 		
 	}
 	//업데이할떄 번호를 알아야하기떄문에 검색
 	@Override
-	public int orderNoSelect(Order order) {
+	public int orderNoSelect(TempOrder order) {
 		return orderMapper.orderNoSelect(order);
 	}
 	//새로운 장바구니를 만들기위해 기존 디테일 삭제
 	@Override
-	public void detailDelete(int orderNo) {
+	public void detailDelete(TempOrderDetail orderDetail) {
+		orderDetailMapper.deleteDetail(orderDetail);
+	}
+	@Override
+	public void delete(int orderNo) {
 		orderDetailMapper.delete(orderNo);
-		
 	}
 
 	//장바구니로 가기위해 디테일 등록
 	@Override
-	public void detailInsert(OrderDetail detail) {
+	public void detailInsert(TempOrderDetail detail) {
 		
 		orderDetailMapper.create(detail);
 		
@@ -90,35 +99,52 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public Order orderList(Order order) {
+	public TempOrder orderList(TempOrder order) {
 		
 		return orderMapper.orderlist(order);
 	}
 
 	@Override
-	public List<OrderDetail> orderDetailList(OrderDetail detail) {
+	public List<TempOrderDetail> orderDetailList(TempOrderDetail detail) {
 
-		System.out.println("디테일 조회 id :["+detail.getMemberId()+"]");
-		System.out.println("디테일 조회 상태:["+detail.getStatus()+"]");
+		System.out.println("디테일 조회 id :["+detail.getDetailMemberId()+"]");
+		System.out.println("디테일 조회 상태:["+detail.getDetailStatus()+"]");
+		System.out.println(detail.toString());
+		System.out.println(orderDetailMapper.orderDetailList(detail));
 		return orderDetailMapper.orderDetailList(detail);
 	}
 
 	@Override
-	public int comparisonCount(Order order) {
+	public int comparisonCount(TempOrder order) {
 		return orderMapper.comparisonCount(order);
 	}
 
-	
+	@Override
+	public List<TempOrder> getOrder(Integer orderNo) {
+		
+		return orderMapper.selectOrder(orderNo);
+	}
 
+	@Override
+	public List<TempOrderDetail> getOrderDetail(Integer orderNo) {
+		
+		return orderDetailMapper.selectOrderDetail(orderNo);
+	}
 
+	@Override
+	public void modifyOrder(TempOrder order) {
+		orderMapper.updateOrder(order);
+	}
 
+	@Override
+	public void modifyDetailOrder(TempOrderDetail orderDetail) {
+		orderDetailMapper.updateDetail(orderDetail);
+	}
 
-
-	
-	
-
-
-
+	@Override
+	public void modifyStatus(TempOrder order) {
+		orderMapper.updateStatus(order);
+	}
 
 
 }

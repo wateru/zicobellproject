@@ -430,42 +430,43 @@ aside {
 						
 					<c:forEach items="${detail}" var="detail">
 							<div class="basket-product">
-								<input type="hidden" class="menuname" value="${detail.menuName}">
-								<input type="hidden" class="menucount" value="${detail.count}">
+								<input type="hidden" class="menuname" value="${detail.detailMenuName}">
 								<div class="item">
 									<div class="product-image">
-										<img src="displayFile?fileName=${detail.menuImg}/"
+										<img src="displayFile?fileName=${detail.detailMenuImg}/"
 											alt="Placholder Image 2" class="product-frame">
 									</div>
 									<div class="product-details">
 										<h1>
-											<strong><span class="item-quantity">${detail.count}</span> x</strong> ${detail.menuName}
+											<strong><span class="item-quantity">${detail.detailCount}</span> x</strong> ${detail.detailMenuName}
 										</h1>
 									</div>
 								</div>
-								<div class="price">${detail.price}</div>
+								<div class="price">${detail.detailPrice}</div>
 								<div class="quantity">
-									<input type="number" value="${detail.count}" min="1" class="quantity-field">
+									<input type="number" value="${detail.detailCount}" min="1" class="quantity-field">
 								</div>
-								<div class="subtotal">${detail.subTotal}</div>
-								<input type="hidden" name="menuNo" value="${detail.menuNo}">
+								<div class="subtotal">${detail.detailSubTotal}</div>
+								<input type="hidden" name="menuNo" value="${detail.detailMenuNo}">
 								<div class="remove">
-								<input type="hidden" name="menuNo" value="${detail.menuNo}">
-									<button>Remove</button>
+									<button>
+										<input type="hidden" class="detailMenuNo" name="detailMenuNo" value="${detail.detailMenuNo}">
+										<input type="hidden" class="detailOrderNo" name="detailOrderNo" value="${detail.detailOrderNo}">
+										Remove</button>
 								</div>
 							</div>
 							
 						</c:forEach>  
 							<label>인원수
-							<input type="text" value=""placeholder="인원수를 작성해주세요" />
+							<input type="text" class="people" value=""placeholder="인원수를 작성해주세요" />
 							</label>
 							<label>예약 시간
 							<span><input type="text" value="" placeholder="예약 시간을 작성해주세요" /></span>
 							</label>
 							<label>결제방법
 							<select name="demo-category" id="demo-category">
-											<option value="current">방문후 결재</option>
-											<option value="kakao">지금결재</option>
+								<option value="visit">방문후 결재</option>
+								<option value="kakao">지금결재</option>
 							</select>
 							</label>
 							
@@ -489,7 +490,7 @@ aside {
 								</div>
 								<div class="summary-subtotal">
 									<div class="subtotal-title">Subtotal</div>
-									<div class="subtotal-value final-value" id="basket-subtotal">${order.totalPrice}</div>
+									<div class="subtotal-value final-value" id="basket-subtotal">${order.orderTotPrice}</div>
 									<div class="summary-promo hide">
 										<div class="promo-title">Promotion</div>
 										<div class="promo-value final-value" id="basket-promo"></div>
@@ -497,7 +498,7 @@ aside {
 								</div>							
 								<div class="summary-total">
 									<div class="total-title">Total</div>
-									<div class="total-value final-value" id="basket-total">${order.totalPrice}</div>
+									<div class="total-value final-value" id="basket-total">${order.orderTotPrice}</div>
 								</div>
 								<div class="summary-checkout">
 									<button class="checkout-cta">Go to Secure Checkout</button>
@@ -514,224 +515,234 @@ aside {
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 <script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script>
-var promoCode;
-var promoPrice;
-var fadeTime = 300;
-
-/* Assign actions */
-$('.quantity input').change(function() {
-  updateQuantity(this);
-});
-
-$('.remove button').click(function() {
-  removeItem(this);
-});
-
-$(document).ready(function() {
-  updateSumItems();
-});
-
-$('.promo-code-cta').click(function() {
-
-  promoCode = $('#promo-code').val();
-
-  if (promoCode == '10off' || promoCode == '10OFF') {
-    //If promoPrice has no value, set it as 10 for the 10OFF promocode
-    if (!promoPrice) {
-      promoPrice = 10;
-    } else if (promoCode) {
-      promoPrice = promoPrice * 1;
-    }
-  } else if (promoCode != '') {
-    alert("Invalid Promo Code");
-    promoPrice = 0;
-  }
-  //If there is a promoPrice that has been set (it means there is a valid promoCode input) show promo
-  if (promoPrice) {
-    $('.summary-promo').removeClass('hide');
-    $('.promo-value').text(promoPrice.toFixed(0));
-    recalculateCart(true);
-  }
-});
-
-/* Recalculate cart */
-function recalculateCart(onlyTotal) {
-  var subtotal = 0;
-
-  /* Sum up row totals */
-  $('.basket-product').each(function() {
-    subtotal += parseFloat($(this).children('.subtotal').text());
-  });
-
-  /* Calculate totals */
-  var total = subtotal;
-
-  //If there is a valid promoCode, and subtotal < 10 subtract from total
-  var promoPrice = parseFloat($('.promo-value').text());
-  if (promoPrice) {
-    if (subtotal >= 10) {
-      total -= promoPrice;
-    } else {
-      alert('Order must be more than £10 for Promo code to apply.');
-      $('.summary-promo').addClass('hide');
-    }
-  }
-
-  /*If switch for update only total, update only total display*/
-  if (onlyTotal) {
-    /* Update total display */
-    $('.total-value').fadeOut(fadeTime, function() {
-      $('#basket-total').html(total.toFixed(0));
-      $('.total-value').fadeIn(fadeTime);
-    });
-  } else {
-    /* Update summary display. */
-    $('.final-value').fadeOut(fadeTime, function() {
-      $('#basket-subtotal').html(subtotal.toFixed(0));
-      $('#basket-total').html(total.toFixed(0));
-      if (total == 0) {
-        $('.checkout-cta').fadeOut(fadeTime);
-      } else {
-        $('.checkout-cta').fadeIn(fadeTime);
-      }
-      $('.final-value').fadeIn(fadeTime);
-    });
-  }
-}
-
-/* Update quantity */
-function updateQuantity(quantityInput) {
-  /* Calculate line price */
-  var productRow = $(quantityInput).parent().parent();
-  var price = parseFloat(productRow.children('.price').text());
-  var quantity = $(quantityInput).val();
-  var linePrice = price * quantity;
-
-  /* Update line price display and recalc cart totals */
-  productRow.children('.subtotal').each(function() {
-    $(this).fadeOut(fadeTime, function() {
-      $(this).text(linePrice.toFixed(0));
-      recalculateCart();
-      $(this).fadeIn(fadeTime);
-    });
-  });
-
-  productRow.find('.item-quantity').text(quantity);
-  updateSumItems();
-}
-
-function updateSumItems() {
-  var sumItems = 0;
-  $('.quantity input').each(function() {
-    sumItems += parseInt($(this).val());
-  });
-  $('.total-items').text(sumItems);
-}
-
-/* Remove item from cart */
-function removeItem(removeButton) {
-  /* Remove row from DOM and recalc cart total */
-  var productRow = $(removeButton).parent().parent();
-  
-
-  console.log($(this).children.input);
-  productRow.slideUp(fadeTime, function() {
-    productRow.remove();
-  
-    recalculateCart();
-    updateSumItems();
-  });
-  $.ajax({
-      url:'/order/menuDelet',
-      data:formData ,
-      dataType:"int",
-      processData: false,
-      contentType: false,
-      type: 'POST',
-      success: "데이터가 지워짐"
-   
-   });
-}
-
-var IMP = window.IMP;
-IMP.init('imp98404187');
-$(".checkout-cta").on("click",function(){
-if($("#demo-category").val() == "kakao"){
-	IMP.request_pay({
-	    pg : 'kakao', // version 1.1.0부터 지원.
-	    pay_method : 'card',
-	    merchant_uid : 'merchant_1234567890' + new Date().getTime(),
-	    name : '주문명:결제테스트',
-	    amount : 1000,
-	    buyer_email : 'iamport@siot.do',
-	    buyer_name : '구매자이름',
-	    buyer_tel : '',
-	    buyer_addr : '서울특별시 강남구 삼성동',
-	    buyer_postcode : '123-456',
-	    m_redirect_url : 'http://192.168.0.241:8000/order/paytest'
-	}, function(rsp) {
-	    if ( rsp.success ) {
-	        var msg = '결제가 완료되었습니다.';
-	        msg += '고유ID : ' + rsp.imp_uid;
-	        msg += '상점 거래ID : ' + rsp.merchant_uid;
-	        msg += '결제 금액 : ' + rsp.paid_amount;
-	        msg += '카드 승인번호 : ' + rsp.apply_num;
-	        postpay();
-
-	    } else {
-	        var msg = '결제에 실패하였습니다.';
-	        msg += '에러내용 : ' + rsp.error_msg;
-	        msg += '결제에 실패하셨습니다.'
+	var promoCode;
+	var promoPrice;
+	var fadeTime = 300;
+	
+	/* Assign actions */
+	$('.quantity input').change(function() {
+	  updateQuantity(this);
+	});
+	
+	$('.remove button').click(function() {
+	  removeItem(this);
+	});
+	
+	$(document).ready(function() {
+	  updateSumItems();
+	});
+	
+	$('.promo-code-cta').click(function() {
+	
+	  promoCode = $('#promo-code').val();
+	
+	  if (promoCode == '10off' || promoCode == '10OFF') {
+	    //If promoPrice has no value, set it as 10 for the 10OFF promocode
+	    if (!promoPrice) {
+	      promoPrice = 10;
+	    } else if (promoCode) {
+	      promoPrice = promoPrice * 1;
 	    }
-	    alert(msg);
+	  } else if (promoCode != '') {
+	    alert("Invalid Promo Code");
+	    promoPrice = 0;
+	  }
+	  //If there is a promoPrice that has been set (it means there is a valid promoCode input) show promo
+	  if (promoPrice) {
+	    $('.summary-promo').removeClass('hide');
+	    $('.promo-value').text(promoPrice.toFixed(0));
+	    recalculateCart(true);
+	  }
 	});
-} else {
-	postpay();
-			
-}
-});
-
-console.log($(".basket-product").children(".menuname").val())
-
-function postpay(){ 
-	var receiptArray = new Array();
-	for(var i = 0; i < $(".basket-product").length; i++){
-	var receiptDetail = {"menu":$( $(".basket-product")[i] ).children(".menuname").val(),
-						"count":$( $(".basket-product")[i] ).children(".menucount").val()}; 
-		receiptArray.push(receiptDetail);
+	
+	/* Recalculate cart */
+	function recalculateCart(onlyTotal) {
+	  var subtotal = 0;
+	
+	  /* Sum up row totals */
+	  $('.basket-product').each(function() {
+	    subtotal += parseFloat($(this).children('.subtotal').text());
+	  });
+	
+	  /* Calculate totals */
+	  var total = subtotal;
+	
+	  //If there is a valid promoCode, and subtotal < 10 subtract from total
+	  var promoPrice = parseFloat($('.promo-value').text());
+	  if (promoPrice) {
+	    if (subtotal >= 10) {
+	      total -= promoPrice;
+	    } else {
+	      alert('Order must be more than £10 for Promo code to apply.');
+	      $('.summary-promo').addClass('hide');
+	    }
+	  }
+	
+	  /*If switch for update only total, update only total display*/
+	  if (onlyTotal) {
+	    /* Update total display */
+	    $('.total-value').fadeOut(fadeTime, function() {
+	      $('#basket-total').html(total.toFixed(0));
+	      $('.total-value').fadeIn(fadeTime);
+	    });
+	  } else {
+	    /* Update summary display. */
+	    $('.final-value').fadeOut(fadeTime, function() {
+	      $('#basket-subtotal').html(subtotal.toFixed(0));
+	      $('#basket-total').html(total.toFixed(0));
+	      if (total == 0) {
+	        $('.checkout-cta').fadeOut(fadeTime);
+	      } else {
+	        $('.checkout-cta').fadeIn(fadeTime);
+	      }
+	      $('.final-value').fadeIn(fadeTime);
+	    });
+	  }
 	}
-	var receipt = {"no":"${order.storeNo}",
-				"orderno":"${order.orderNo}",
-				"totalprice":"${order.totalPrice}",
-				"people":$(".people").val(),
-				"id":'${order.memberId}',
-				"pay":$("#demo-category").val(),
-				"status":"결제완료",
-				"token":"hi",
-				"menulist":receiptArray};
-
-	$.ajax({
-	    type: 'POST', //post,get,등..전송방식
-	    url: '/clientorder',
-	    contentType : 'application/json; charset=UTF-8',
-// 	    dataType: 'text',//데이타 타입
-	    data: JSON.stringify(receipt),
-	    success: function(data){
-	    	console.log(data)
-	    	console.log("성공이다.");
-	        location.href="/home";
-	    },
-	    error:function(request,status,error){
-	        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-	       }
-	    /* error: function(e){
-	    	console.log(e);
-	    	console.log("실패다.");
-	    	
-	    } */
+	
+	/* Update quantity */
+	function updateQuantity(quantityInput) {
+	  /* Calculate line price */
+	  var productRow = $(quantityInput).parent().parent();
+	  var price = parseFloat(productRow.children('.price').text());
+	  var quantity = $(quantityInput).val();
+	  var linePrice = price * quantity;
+	
+	  /* Update line price display and recalc cart totals */
+	  productRow.children('.subtotal').each(function() {
+	    $(this).fadeOut(fadeTime, function() {
+	      $(this).text(linePrice.toFixed(0));
+	      recalculateCart();
+	      $(this).fadeIn(fadeTime);
+	    });
+	  });
+	
+	  productRow.find('.item-quantity').text(quantity);
+	  updateSumItems();
+	}
+	
+	function updateSumItems() {
+	  var sumItems = 0;
+	  $('.quantity input').each(function() {
+	    sumItems += parseInt($(this).val());
+	  });
+	  $('.total-items').text(sumItems);
+	}
+	
+	/* Remove item from cart */
+	function removeItem(removeButton) {
+	  /* Remove row from DOM and recalc cart total */
+	  var productRow = $(removeButton).parent().parent();
+	  
+	
+	  console.log($(this).children.input);
+	  productRow.slideUp(fadeTime, function() {
+	    productRow.remove();
+	  
+	    recalculateCart();
+	    updateSumItems();
+	  });
+	  
+	  console.log($(removeButton).children(".detailMenuNo").val())
+	  console.log($(removeButton).children(".detailOrderNo").val())
+	var removeItem = {"removeMenu":$(removeButton).children(".detailMenuNo").val(),
+		  				"removeOrder":$(removeButton).children(".detailOrderNo").val()}
+	  $.ajax({
+		    type: 'POST', //post,get,등..전송방식
+		    url: '/order/menuDelete',
+		    contentType : 'application/json; charset=UTF-8',
+		    data: JSON.stringify(removeItem),
+		    success: function(data){
+		    	
+		    } });
+	  
+	  
+	  $.ajax({
+	      url:'/order/menuDelete',
+	      data:formData ,
+	      dataType:"int",
+	      processData: false,
+	      contentType: false,
+	      type: 'POST',
+	      success: "데이터가 지워짐"
+	   
+	   });
+	}
+	
+	var IMP = window.IMP;
+	IMP.init('imp98404187');
+	$(".checkout-cta").on("click",function(){
+		console.log("상호야 살려줘");
+		if($("#demo-category").val() == "kakao"){
+				IMP.request_pay({
+				    pg : 'kakao', // version 1.1.0부터 지원.
+				    pay_method : 'card',
+				    merchant_uid : 'merchant_1234567890' + new Date().getTime(),
+				    name : '주문명:결제테스트',
+				    amount : 1000,
+				    buyer_email : 'iamport@siot.do',
+				    buyer_name : '구매자이름',
+				    buyer_tel : '',
+				    buyer_addr : '서울특별시 강남구 삼성동',
+				    buyer_postcode : '123-456',
+				    m_redirect_url : 'http://192.168.0.241:8000/order/paytest'
+					}, function(rsp) {
+					    if ( rsp.success ) {
+					        var msg = '결제가 완료되었습니다.';
+					        msg += '고유ID : ' + rsp.imp_uid;
+					        msg += '상점 거래ID : ' + rsp.merchant_uid;
+					        msg += '결제 금액 : ' + rsp.paid_amount;
+					        msg += '카드 승인번호 : ' + rsp.apply_num;
+					        postpay();
+				
+					    } else {
+					        var msg = '결제에 실패하였습니다.';
+					        msg += '에러내용 : ' + rsp.error_msg;
+					        msg += '결제에 실패하셨습니다.'
+				    	}
+				    alert(msg);
+				});
+		} else {
+			postpay();		
+		}
 	});
-}
+	
+	console.log($( $(".basket-product")[0] ).find(".quantity-field").val())
+	
+	function postpay(){ 
+		var receiptArray = new Array();
+		for(var i = 0; i < $(".basket-product").length; i++){
+		var receiptDetail = {"menu":$( $(".basket-product")[i] ).children(".menuname").val(),
+							"count":$( $(".basket-product")[i] ).find(".quantity-field").val(),
+							"subtotal":$( $(".basket-product")[i] ).find(".subtotal").text()}; 
+			receiptArray.push(receiptDetail);
+		}
+		var receipt = {"no":"${order.orderStoreNo}",
+					"orderno":"${order.orderNo}",
+					"totalprice":$("#basket-total").text(),
+					"people":$(".people").val(),
+					"id":'${order.orderMemberId}',
+					"pay":$("#demo-category").val(),
+					"status":"afterpay",
+					"token":"",
+					"menulist":receiptArray};
 
+		$.ajax({
+		    type: 'POST', //post,get,등..전송방식
+		    url: '/clientorder',
+		    contentType : 'application/json; charset=UTF-8',
+	// 	    dataType: 'text',//데이타 타입
+		    data: JSON.stringify(receipt),
+		    success: function(data){
+		    	console.log(data)
+		    	console.log("성공이다.");
+		        location.href="/home";
+		    },
+		    error:function(request,status,error){
+		        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		       }
+		});
+	}
 </script>
 <!-- Four -->
 

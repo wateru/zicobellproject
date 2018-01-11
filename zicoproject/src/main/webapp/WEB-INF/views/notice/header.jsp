@@ -166,7 +166,9 @@
 				$(".none-inlineblock").css("display","inline-block");
 				$(".user-inlineblock").css("display","none");
 				$(".manage-inlineblock").css("display","none");				
-				$(".manage-listitem").css("display","none")
+				$(".manage-listitem").css("display","none");
+				$(".admin-inlineblock").css("display","none")
+				$(".admin-block").css("display","none")
 			}else{
 				console.log("22")
 				$(".none-inlineblock").css("display","none");
@@ -174,6 +176,10 @@
 				if(sessiongrade <= 2){
 					$(".manage-inlineblock").css("display","inline-block");
 					$(".manage-listitem").css("display","list-item");
+				}
+				if(sessiongrade == 1){
+					$(".admin-inlineblock").css("display","inline-block")
+					$(".admin-block").css("display","block")
 				}
 			}
 	});
