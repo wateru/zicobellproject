@@ -61,7 +61,7 @@
 	</select>
 	
 	<select id="selectOrder" resultType="TempOrder" resultMap="TempOrderMap">
-		select * from zicobell.order where order_store_no = #{orderNo} and order_status = 'afterpay';
+		select * from zicobell.order where order_store_no = #{orderNo} and order_status = 'afterpay' or order_status = 'cooking';
 	</select>
 	
 	<update id="updateOrder">
@@ -75,6 +75,11 @@
 		set order_status = #{orderStatus}
 		where order_no = #{orderNo}
 	</update>
+	
+	<select id="selectStatus" resultType="String">
+		select order_status from zicobell.order 
+		where order_no = #{orderNo}  
+	</select>
 	
 </mapper>
   

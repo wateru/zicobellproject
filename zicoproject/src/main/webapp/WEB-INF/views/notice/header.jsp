@@ -160,9 +160,8 @@
 	$(document).ready(function() { 
 		var sessionid ="<%=(String)session.getAttribute("id")%>";
 		var sessiongrade = "<%=(Integer)session.getAttribute("grade")%>";
-		console.log(sessiongrade)
+		console.log("session 등급" + sessiongrade)
 			if(sessionid == "null"){
-				console.log("11")
 				$(".none-inlineblock").css("display","inline-block");
 				$(".user-inlineblock").css("display","none");
 				$(".manage-inlineblock").css("display","none");				
@@ -170,7 +169,6 @@
 				$(".admin-inlineblock").css("display","none")
 				$(".admin-block").css("display","none")
 			}else{
-				console.log("22")
 				$(".none-inlineblock").css("display","none");
 				$(".user-inlineblock").css("display","inline-block");
 				if(sessiongrade <= 2){
@@ -178,6 +176,7 @@
 					$(".manage-listitem").css("display","list-item");
 				}
 				if(sessiongrade == 1){
+					console.log(sessiongrade)
 					$(".admin-inlineblock").css("display","inline-block")
 					$(".admin-block").css("display","block")
 				}

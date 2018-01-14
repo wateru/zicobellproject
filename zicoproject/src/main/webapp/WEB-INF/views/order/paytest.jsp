@@ -13,12 +13,12 @@
 @import
 	url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,600);
 
-html, html a {
+/* html, html a {
 	-webkit-font-smoothing: antialiased;
 	text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);
 }
-
-body {
+ */
+.summary {
 	background-color: #fff;
 	color: #666;
 	font-family: 'Open Sans', sans-serif;
@@ -26,7 +26,7 @@ body {
 	margin: 0 auto;
 }
 
-a {
+/* a {
 	border: 0 none;
 	outline: 0;
 	text-decoration: none;
@@ -47,6 +47,7 @@ h1 {
 	padding: 0;
 }
 
+ */
 input, button {
 	border: 0 none;
 	outline: 0 none;
@@ -142,9 +143,9 @@ ul {
 
 li {
 	color: #111;
-	display: inline-block;
 	padding: 0.625rem 0;
 }
+ 
 
 li.price:before, li.subtotal:before {
 	content: '';
@@ -231,7 +232,7 @@ aside {
 	border: 1px solid #aaa;
 	padding: 1rem;
 	position: fixed;
-	width: 250px;
+	width: 330px;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
@@ -245,7 +246,7 @@ aside {
 
 .summary-subtotal, .summary-total {
 	border-top: 1px solid #ccc;
-	border-bottom: 1px solid #ccc;
+	/* border-bottom: 1px solid #ccc; */
 	clear: both;
 	margin: 1rem 0;
 	overflow: hidden;
@@ -364,7 +365,8 @@ aside {
 		padding: 0 1rem 0 0;
 	}
 	.summary {
-		width: 28%;
+		position: relative;
+		width: 100%;
 	}
 }
 
@@ -449,7 +451,7 @@ aside {
 								<div class="subtotal">${detail.detailSubTotal}</div>
 								<input type="hidden" name="menuNo" value="${detail.detailMenuNo}">
 								<div class="remove">
-									<button>
+									<button style="max-width:100%; width:100%;">
 										<input type="hidden" class="detailMenuNo" name="detailMenuNo" value="${detail.detailMenuNo}">
 										<input type="hidden" class="detailOrderNo" name="detailOrderNo" value="${detail.detailOrderNo}">
 										Remove</button>
@@ -471,13 +473,7 @@ aside {
 							</label>
 							
 						</div>
-							<div class="12u$">
-								<ul class="actions">
-									<li><input type="submit" value="주문 하기" /></li>
-								</ul>
-							</div>
-						
-						
+							<br>
 
 					</div>
 
@@ -500,8 +496,8 @@ aside {
 									<div class="total-title">Total</div>
 									<div class="total-value final-value" id="basket-total">${order.orderTotPrice}</div>
 								</div>
-								<div class="summary-checkout">
-									<button class="checkout-cta">Go to Secure Checkout</button>
+								<div class="summary-checkout" >
+									<button class="checkout-cta" style="max-width:100%; width:100%; padding:0;">Go to Secure Checkout</button>
 								</div>
 							</div>
 					</div>
@@ -672,38 +668,42 @@ aside {
 	var IMP = window.IMP;
 	IMP.init('imp98404187');
 	$(".checkout-cta").on("click",function(){
-		console.log("상호야 살려줘");
-		if($("#demo-category").val() == "kakao"){
-				IMP.request_pay({
-				    pg : 'kakao', // version 1.1.0부터 지원.
-				    pay_method : 'card',
-				    merchant_uid : 'merchant_1234567890' + new Date().getTime(),
-				    name : '주문명:결제테스트',
-				    amount : 1000,
-				    buyer_email : 'iamport@siot.do',
-				    buyer_name : '구매자이름',
-				    buyer_tel : '',
-				    buyer_addr : '서울특별시 강남구 삼성동',
-				    buyer_postcode : '123-456',
-				    m_redirect_url : 'http://192.168.0.241:8000/order/paytest'
-					}, function(rsp) {
-					    if ( rsp.success ) {
-					        var msg = '결제가 완료되었습니다.';
-					        msg += '고유ID : ' + rsp.imp_uid;
-					        msg += '상점 거래ID : ' + rsp.merchant_uid;
-					        msg += '결제 금액 : ' + rsp.paid_amount;
-					        msg += '카드 승인번호 : ' + rsp.apply_num;
-					        postpay();
-				
-					    } else {
-					        var msg = '결제에 실패하였습니다.';
-					        msg += '에러내용 : ' + rsp.error_msg;
-					        msg += '결제에 실패하셨습니다.'
-				    	}
-				    alert(msg);
-				});
+		
+		if($(".people").val() != ""){
+			if($("#demo-category").val() == "kakao"){
+					IMP.request_pay({
+					    pg : 'kakao', // version 1.1.0부터 지원.
+					    pay_method : 'card',
+					    merchant_uid : 'merchant_1234567890' + new Date().getTime(),
+					    name : '주문명:결제테스트',
+					    amount : 1000,
+					    buyer_email : 'iamport@siot.do',
+					    buyer_name : '구매자이름',
+					    buyer_tel : '',
+					    buyer_addr : '서울특별시 강남구 삼성동',
+					    buyer_postcode : '123-456',
+					    m_redirect_url : 'http://192.168.0.241:8000/order/paytest'
+						}, function(rsp) {
+						    if ( rsp.success ) {
+						        var msg = '결제가 완료되었습니다.';
+						        msg += '고유ID : ' + rsp.imp_uid;
+						        msg += '상점 거래ID : ' + rsp.merchant_uid;
+						        msg += '결제 금액 : ' + rsp.paid_amount;
+						        msg += '카드 승인번호 : ' + rsp.apply_num;
+						        postpay();
+					
+						    } else {
+						        var msg = '결제에 실패하였습니다.';
+						        msg += '에러내용 : ' + rsp.error_msg;
+						        msg += '결제에 실패하셨습니다.'
+					    	}
+					    alert(msg);
+					});
+			} else {
+				postpay();		
+			}
 		} else {
-			postpay();		
+			alert("인원수를 기입해 주세요");
 		}
 	});
 	

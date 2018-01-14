@@ -15,7 +15,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="stylesheet" href="/resources/assets/css/main.css" />
 		<!-- 아이콘 script -->
-		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css?version=1">
 		<link rel="stylesheet"  href="/resources/assets/css/login2.css" />
 		<link rel="stylesheet"  href="/resources/assets/css/login4.css" />
 		<style type="text/css">
@@ -65,7 +65,7 @@
 						<input type="text" placeholder="username" name="member_id"><br>
 						<input type="password" placeholder="password" name="member_password"><br>
 						<a href="/member/insert">회원가입 </a>&nbsp;&nbsp; <span class="line"><input name="remember" id="remember" style="opacity:1; float:none; -webkit-appearance: checkbox; display: -webkit-inline-box; " type="checkbox" />&emsp; &emsp;로그인</span><br>
-						<button >login</button>
+						<button style="padding:0px">login</button>
 					</div>
 				</form>
            		<!-- 모달 -->

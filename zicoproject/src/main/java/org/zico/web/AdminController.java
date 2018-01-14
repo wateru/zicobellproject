@@ -1,5 +1,8 @@
 package org.zico.web;
 
+import javax.servlet.http.HttpSession;
+
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,13 +13,14 @@ import org.zico.service.NoticeService;
 
 @Controller
 @RequestMapping("/admin/*")
-public class test {
+public class AdminController {
 	
 	@Autowired
 	NoticeService nservice;
 	
 	@GetMapping("/dashboard")
-	public void test(Model m) {
+	public void test(Model m, HttpSession session) {
+		System.out.println(session.getAttribute("storeno"));
 		Criteria cri = new Criteria();
 		m.addAttribute("list", nservice.getList(cri));
 	};

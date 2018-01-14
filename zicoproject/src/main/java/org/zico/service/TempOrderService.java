@@ -31,4 +31,5 @@ public interface TempOrderService {
 	public void modifyDetailOrder(TempOrderDetail orderDetail);
 	
 	public void modifyStatus(TempOrder order);
+	public String getStatus(Integer orderNo);
 }

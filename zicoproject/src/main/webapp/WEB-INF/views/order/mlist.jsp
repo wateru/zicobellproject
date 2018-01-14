@@ -58,45 +58,6 @@
 @import
 	url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,600);
 
-html, html a {
-	-webkit-font-smoothing: antialiased;
-	text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);
-}
-
-body {
-	background-color: #fff;
-	color: #666;
-	font-family: 'Open Sans', sans-serif;
-	font-size: 62.5%;
-	margin: 0 auto;
-}
-
-a {
-	border: 0 none;
-	outline: 0;
-	text-decoration: none;
-}
-
-strong {
-	font-weight: bold;
-}
-
-p {
-	margin: 0.75rem 0 0;
-}
-
-h1 {
-	font-size: 0.75rem;
-	font-weight: normal;
-	margin: 0;
-	padding: 0;
-}
-
-input, button {
-	border: 0 none;
-	outline: 0 none;
-}
-
 button {
 	background-color: #666;
 	color: #fff;
@@ -110,154 +71,10 @@ img, .basket-module, .basket-labels, .basket-product {
 	width: 100%;
 }
 
-input, button, .basket, .basket-module, .basket-labels, .item, .price,
+.summary input, button, .basket, .basket-module, .basket-labels, .item, .price,
 	.quantity, .subtotal, .basket-product, .product-image, .product-details
 	{
 	float: left;
-}
-
-.price:before, .subtotal:before, .total-value:before, .promo-value:before
-	{
-	
-}
-
-.hide {
-	display: none;
-}
-
-main {
-	clear: both;
-	font-size: 0.75rem;
-	margin: 0 auto;
-	overflow: hidden;
-	padding: 1rem 0;
-	width: 960px;
-}
-
-.basket, aside {
-	padding: 0 1rem;
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
-}
-
-.basket {
-	width: 70%;
-}
-
-.basket-module {
-	color: #111;
-}
-
-label {
-	display: block;
-	margin-bottom: 0.3125rem;
-}
-
-.promo-code-field {
-	border: 1px solid #ccc;
-	padding: 0.5rem;
-	text-transform: uppercase;
-	transition: all 0.2s linear;
-	width: 48%;
-	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
-	-moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
-	-o-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
-	box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
-}
-
-.promo-code-field:hover, .promo-code-field:focus {
-	border: 1px solid #999;
-}
-
-.promo-code-cta {
-	border-radius: 4px;
-	font-size: 0.625rem;
-	margin-left: 0.625rem;
-	padding: 0.6875rem 1.25rem 0.625rem;
-}
-
-.basket-labels {
-	border-top: 1px solid #ccc;
-	border-bottom: 1px solid #ccc;
-	margin-top: 1.625rem;
-}
-
-ul {
-	list-style: none;
-	margin: 0;
-	padding: 0;
-}
-
-li {
-	color: #111;
-	display: inline-block;
-	padding: 0.625rem 0;
-}
-
-li.price:before, li.subtotal:before {
-	content: '';
-}
-
-.item {
-	width: 55%;
-}
-
-.price, .quantity, .subtotal {
-	width: 15%;
-}
-
-.subtotal {
-	text-align: right;
-}
-
-.remove {
-	bottom: 1.125rem;
-	float: right;
-	position: absolute;
-	right: 0;
-	text-align: right;
-	width: 45%;
-}
-
-.remove button {
-	background-color: transparent;
-	color: #777;
-	float: none;
-	text-decoration: underline;
-	text-transform: uppercase;
-}
-
-.item-heading {
-	padding-left: 4.375rem;
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
-}
-
-.basket-product {
-	border-bottom: 1px solid #ccc;
-	padding: 1rem 0;
-	position: relative;
-}
-
-.product-image {
-	width: 35%;
-}
-
-.product-details {
-	width: 65%;
-}
-
-.product-frame {
-	border: 1px solid #aaa;
-}
-
-.product-details {
-	padding: 0 1.5rem;
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
 }
 
 .quantity-field {
@@ -280,10 +97,15 @@ aside {
 	border: 1px solid #aaa;
 	padding: 1rem;
 	position: fixed;
-	width: 250px;
+	width: 330px;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
+	
+	color: #666;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 80.5%;
+	margin: 0 auto;
 }
 
 .summary-total-items {
@@ -294,7 +116,7 @@ aside {
 
 .summary-subtotal, .summary-total {
 	border-top: 1px solid #ccc;
-	border-bottom: 1px solid #ccc;
+	/* border-bottom: 1px solid #ccc; */
 	clear: both;
 	margin: 1rem 0;
 	overflow: hidden;
@@ -308,36 +130,12 @@ aside {
 	width: 50%;
 }
 
-.summary-promo {
-	-webkit-transition: all .3s ease;
-	-moz-transition: all .3s ease;
-	-o-transition: all .3s ease;
-	transition: all .3s ease;
-}
-
-.promo-title {
-	float: left;
-	width: 70%;
-}
-
-.promo-value {
-	color: #8B0000;
-	float: left;
-	text-align: right;
-	width: 30%;
-}
-
 .summary-delivery {
 	padding-bottom: 3rem;
 }
 
 .subtotal-value, .total-value {
 	text-align: right;
-}
-
-.total-title {
-	font-weight: bold;
-	text-transform: uppercase;
 }
 
 .summary-checkout {
@@ -350,7 +148,8 @@ aside {
 	font-size: 0.75rem;
 	text-align: center;
 	text-transform: uppercase;
-	padding: 0.625rem 0;
+	/* padding: 0.625rem 0; */
+	max-width:100%;
 	width: 100%;
 }
 
@@ -393,14 +192,8 @@ aside {
 	.quantity-field {
 		float: none;
 	}
-	.remove {
-		bottom: 0;
-		text-align: left;
-		margin-top: 0.75rem;
-		position: relative;
-	}
-	.remove button {
-		padding: 0;
+	.hee {
+		float: right;
 	}
 	.summary {
 		margin-top: 1.25rem;
@@ -413,7 +206,8 @@ aside {
 		padding: 0 1rem 0 0;
 	}
 	.summary {
-		width: 28%;
+		position:relative;
+		width: 100%;
 	}
 }
 
@@ -433,9 +227,9 @@ aside {
 			<div class="content">
 
 				<!-- Elements -->
-				<h2 id="elements">Elements</h2>
 				<div class="row 200%">
 					<div class="8u 12u$(medium)">
+				<h2 id="elements">Elements</h2>
 
 						<c:forEach items="${menu}" var="menu">
 							<div class="container">
@@ -459,7 +253,7 @@ aside {
 
 
 					<div class="4u 12u$(medium)">
-						<form method="post" action="/order/postpaytest">
+						<form method="post" id="pay" action="/order/postpaytest">
 							<c:forEach items="${menu}" var="menu">
 								<input type="hidden" name="storeNo" value="${menu.storeNo}">
 							</c:forEach>
@@ -543,6 +337,23 @@ aside {
 		$("#basket-total").text(tot + " 원")
 		$("#totalheekyung").val(tot);
 	}
+	$(".checkout-cta").on("click",function(e){
+		e.preventDefault();
+		var id = "${id}";
+		if(id == "" || $(".hee").text() == ""){	
+			if(id == ""){
+				console.log("로그인에러")
+			alert("로그인 이후에 사용이 가능합니다.")
+			}
+			if($(".hee").text() == ""){
+				console.log("메뉴에러")
+				alert("메뉴를 추가해 주세요")
+			}
+		} else {
+			$("#pay").submit();
+		}
+		
+	})
 </script>
 
 <!-- Four -->

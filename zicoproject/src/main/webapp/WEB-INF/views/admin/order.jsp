@@ -99,9 +99,9 @@ function onMessage(evt) {
     if (speech["message"] == "status") {
     	console.log("음성 상태")
     	if(speech["status"] == "cooking") {
-    		$(".totorder " + "#" + speech["orderno"]).css("border","1px solid yellow");
-    		$(".totorder " + "#" + speech["orderno"] + " .orderno").css("color","yellow");
-    		$(".totorder " + "#" + speech["orderno"] + " .orderstatus").text("상태 : " + status(speech["status"]));
+    		$(".totorder " + "#" + speech["orderno"]).css("border","1px solid orange");
+    		$(".totorder " + "#" + speech["orderno"] + " .orderno").css("background","orange");
+    		$(".totorder " + "#" + speech["orderno"] + " .orderstatus").text("상태 : 조리중");
     		console.log($(".order"))
     		console.log($(".totorder #11"))
     	}
@@ -109,22 +109,24 @@ function onMessage(evt) {
     		console.log($(".totorder " + "#" + speech["orderno"]))
     		$(".totorder " + "#" + speech["orderno"]).css("border","1px solid red");
     		$(".totorder " + "#" + speech["orderno"] + " .orderno").css("background","red");
-    		$(".totorder " + "#" + speech["orderno"] + " .orderstatus").text("상태 : " + status(speech["status"]));
+    		$(".totorder " + "#" + speech["orderno"] + " .orderstatus").text("상태 : 조리완료");
     		setTimeout(function() {
     			$(".totorder " + "#" + speech["orderno"]).remove();
     		}, 5000)
     	}
     }
+    
     if (speech["message"] == "order") {
     	console.log("주문 받음")
     	
     	str=''
-    	str += '<div class="order" id="'+ speech["orderno"] +'" style="border:1px solid green;">';
     	if(speech["status"] == "afterpay"){
+	    	str += '<div class="order" id="'+ speech["orderno"] +'" style="border:1px solid green;">';
 			str += '<div class="orderno" style="background:green">주문번호 : '+ speech["orderno"] +'</div>';
     	}
     	if(speech["status"] == "cooking"){
-    		str += '<div class="orderno" style="background:yellow">주문번호 : '+ speech["orderno"] +'</div>';
+	    	str += '<div class="order" id="'+ speech["orderno"] +'" style="border:1px solid orange;">';
+    		str += '<div class="orderno" style="background:orange">주문번호 : '+ speech["orderno"] +'</div>';
     	}
 		str += '<ul>'
 		for (var i = 0; i < speech["menulist"].length; i++){
@@ -136,7 +138,7 @@ function onMessage(evt) {
 		str += '<div>총 가격 : '+speech["totalprice"]+'</div>'
 		str += '</div>'
 		$(".totorder").append(str);
-    } 
+    }
     // status 로 오면 status 처리
 	if (speech["exit"] > 0) {
 		$("#data").html("");
@@ -145,12 +147,15 @@ function onMessage(evt) {
 }
 function status(status) {
 	if(status == "afterpay"){
+		console.log("aa")
 		return "결제완료";
 	}
-	if(status == "afterpay"){
+	if(status == "cooking"){
+		console.log("bb")
 		return "조리중";
 	}
-	if(status == "afterpay"){
+	if(status == "done"){
+		console.log("cc")
 		return "조리완료";
 	}
 }

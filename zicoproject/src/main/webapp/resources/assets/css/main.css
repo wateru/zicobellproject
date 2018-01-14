@@ -3378,7 +3378,7 @@
 		}
 		.login input[type=text]{
 		  	max-width: 244px;
-		  	min-width: 150px;
+		  	min-width: 180px;
 		  	width: 100%;
 			height: 18%;
 			background: transparent;
@@ -3392,7 +3392,7 @@
 		}
 		.login input[type=password]{
 			max-width: 244px;
-		  	min-width: 150px;
+		  	min-width: 180px;
 		  	width: 100%;
 			height: 18%;
 			background: transparent;
@@ -3409,7 +3409,7 @@
 	  	    padding: 2PX 25px 2PX 20px;
 		    font-size: 17px;
 		    max-width: 350px;
-		    min-width: 150px;
+		    min-width: 180px;
 		    width: 100%;
 		    height: 12%;
 		    background: transparent;
@@ -3425,7 +3425,7 @@
 			padding: 2PX 22px 2PX 18px;
 			font-size: 17px;
 			max-width: 350px;
-		  	min-width: 150px;
+		  	min-width: 180px;
 		  	width: 100%;
 			height: 12%;
 			background: transparent;
@@ -3505,7 +3505,7 @@
 				display:none;
 			}
 			.modal-content {
-			height: 100%;
+			height: 48%;
 			}
 			.login a{
 				display:block;

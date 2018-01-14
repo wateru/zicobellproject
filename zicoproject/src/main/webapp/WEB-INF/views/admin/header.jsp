@@ -215,10 +215,14 @@
                               </ul>
                         </li>
                         <li>
-                            <a href="/admin/order" class="dropdown-toggle" data-toggle="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="ti-headphone"></i>
-								<p>음성주문</p>
+								<p>주문</p>
                             </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/admin/order">음성 주문</a></li>
+                                <li><a href="/admin/order">디스플레이 주문</a></li>
+                              </ul>
                         </li>
 						<li>
 							<c:choose>

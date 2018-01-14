@@ -220,8 +220,28 @@ private List<WebSocketSession> sessionList = new ArrayList<WebSocketSession>();
 		String[] progress = {"주문","쥬문","시작","start"};
 		String[] end = {"완료","완뇨","끝","끗","클리어","빨간맛","clear","end"};
 		String status = "";
-		progress:
-		while(status.isEmpty()) { 
+		
+		JSONObject statusJson = new JSONObject();
+		try {
+			String current = orderService.getStatus(Integer.parseInt(speech[0]));
+			if(current.equals("afterpay")) {
+				logger.info("afterpay" + current);
+				status = "cooking";
+				changeStatus(Integer.parseInt(speech[0]), status);
+				statusJson.put("status", status);
+			}
+			if(current.equals("cooking")) {
+				logger.info(current);
+				status = "done";
+				changeStatus(Integer.parseInt(speech[0]), status);
+				statusJson.put("status", status);
+			}
+		} catch (Exception e) {
+			
+		}
+				
+		/*progress:
+		while(status.isEmpty()) {
 			if(speech.length == 2) {
 			for(int i = 0; i < progress.length; i++) {
 				if(speech[1].contains(progress[i])) {
@@ -240,14 +260,14 @@ private List<WebSocketSession> sessionList = new ArrayList<WebSocketSession>();
 			}
 			status = "none";
 			break progress;
-		}
+		}*/
 		// ORDER에 주문번호로 상태 DB를 수정하는 부분 작성
 		
 		// 상태결과 json 으로 만들어주는 부분
-		JSONObject statusJson = new JSONObject();
+		
 		statusJson.put("message", "status");
 		statusJson.put("orderno", speech[0]);
-		statusJson.put("status", "done");
+		
 		// json뽑아서 확인할 것
 		logger.info(statusJson.toString());
 		
