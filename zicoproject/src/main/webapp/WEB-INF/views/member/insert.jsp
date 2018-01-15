@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ include file="/WEB-INF/views/notice/header.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <html style="width:40%;margin: 0 auto;"><head>
@@ -21,7 +22,6 @@
 <body>
 <div class="content" style="
     align: center;">
-								<h2 class="align-center">Get in Touch</h2>
 								<hr>
 								<form action="/member/insert" method="post">
 									<div class="field half first">
@@ -35,6 +35,10 @@
 									<div class="field">
 										<label for="name">Password</label>
 										<input id="handwrite" name="mpassword" type="password" placeholder="Password">
+									</div>
+									<div class="field">
+										<label for="name">Password check</label>
+										<input id="handwrite" name="mpassword" type="password" placeholder="다시 한번 입력하세요">
 									</div>
 									<div class="field">
 										<label for="dept">Password Qustion</label>
@@ -67,10 +71,11 @@
 										</div>
 									</div>
 									<ul class="actions align-center">
-										<li><input value="Send personal information" class="button special" type="submit"></li>
+										<li><input value="등록" class="button special" type="submit"></li>
 									</ul>
 								</form>
 							</div>
 
 </body>
 </html>
+<%@ include file="/WEB-INF/views/notice/footer.jsp" %>
