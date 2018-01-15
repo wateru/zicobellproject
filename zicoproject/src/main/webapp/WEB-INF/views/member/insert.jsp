@@ -8,29 +8,38 @@
 
 <link rel="stylesheet" href="/resources/assets/css/main.css">
 <link rel="stylesheet" href="/resources/assets/css/font-awesome.min.css">
+
+<style>
+	#handwrite{
+		color:black;
+		}
+
+
+</style>
+
 </head>
 <body>
 <div class="content" style="
     align: center;">
 								<h2 class="align-center">Get in Touch</h2>
 								<hr>
-								<form action="/login/insertmember" method="post">
+								<form action="/member/insert" method="post">
 									<div class="field half first">
 										<label for="name">Name</label>
-										<input name="mname"  type="text" placeholder="Name">
+										<input id="handwrite" name="mname"  type="text" placeholder="Name">
 									</div>
 									<div class="field half">
 										<label for="email">ID</label>
-										<input name="mid"  type="text" placeholder="Id">
+										<input id="handwrite" name="mid"  type="text" placeholder="Id">
 									</div>
 									<div class="field">
 										<label for="name">Password</label>
-										<input name="mpassword" type="password" placeholder="Password">
+										<input id="handwrite" name="mpassword" type="password" placeholder="Password">
 									</div>
 									<div class="field">
 										<label for="dept">Password Qustion</label>
 										<div class="select-wrapper">
-											<select name="manswer" >
+											<select id="handwrite" name="mquestion" >
 												<option value="1">너의 가장 소중한 보물</option>
 												<option value="2">어머니의 고향</option>
 												<option value="3">졸업한 고등학교</option>
@@ -41,17 +50,17 @@
 									</div>
 									<div class="field">
 										<label for="name">Qustion Password</label>
-										<input name="mqpassword"  type="text" placeholder="Qustion Password">
+										<input id="handwrite" name="mqpassword"  type="text" placeholder="Qustion Password">
 									</div>
 									
 									<div class="field">
 										<label for="name">Phone Number</label>
-										<input name="mphone"  type="text" placeholder="Phone Number">
+										<input id="handwrite" name="mphone"  type="text" placeholder="Phone Number">
 									</div>
 									<div class="field">
 										<label for="dept">Class</label>
 										<div class="select-wrapper" >
-											<select name="mgrade" >
+											<select id="handwrite" name="mgrade" >
 												<option value="2">매니저</option>
 												<option value="3">손님</option>
 											</select>

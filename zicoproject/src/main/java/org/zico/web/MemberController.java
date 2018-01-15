@@ -39,6 +39,11 @@ public class MemberController {
 	
 	@PostMapping("/insert")
 	public String insert(Member member) {
+		System.out.println(member.getMname());
+		System.out.println(member.getMid());
+		System.out.println(member.getMquestion());
+		System.out.println(member.getMqpassword());
+		
 		memberservice.memberinsert(member);
 		
 		return "/home";
@@ -75,19 +80,7 @@ public class MemberController {
 	
 	}
 
-	
-	@GetMapping("/loginurl")
-	public String loginurl(String url,Model model) {
-		
-		
-		model.addAttribute("url", url);
-		
-		System.out.println("url "+url);
-		
-		return "/member/checktest";
-	}
-	
-	
+
 	@PostMapping("/login")
 	public String login(Check vo ,Model model) {
 		System.out.println("아이디체크오나");

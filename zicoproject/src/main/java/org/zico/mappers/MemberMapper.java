@@ -6,7 +6,7 @@ import org.zico.domain.Member;
 
 public interface MemberMapper {
 	@Insert("insert into member(member_name, member_id, member_password, member_pwd_hint, member_pwd_anwser, member_phone, member_grade )"
-			+ " values (#{mname},#{mid},#{mpassword},#{manswer},#{mqpassword},#{mphone},#{mgrade})")
+			+ " values (#{mname},#{mid},#{mpassword},#{mquestion},#{mqpassword},#{mphone},#{mgrade})")
 	public void insertmember(Member member);
 	
 	public Member mypage(String id);

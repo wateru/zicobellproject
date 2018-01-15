@@ -1,33 +1,75 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-	<table>
-		<tr>
-			<th>이름</th>
-			<th>아이디</th>
-			<th>패스워드</th>
-			<th>2차비밀번호답</th>
-			<th>2차비밀번호</th>
-			<th>핸드폰번호</th>
-			<th>등급</th>
-		</tr>
-		<tr>
-			<td>${member.mname}</td>
-			<td>${member.mid}</td>
-			<td>${member.mpassword}</td>
-			<td>${member.mquestion}</td>
-			<td>${member.mqpassword}</td>
-			<td>${member.mphone}</td>
-			<td>${member.mgrade}</td>
-			
-		</tr>
+<%@ include file="/WEB-INF/views/notice/header.jsp" %>
+<style>
+
+	.total_body{
+	border: 1px solid;
+    padding: 10px;
+    max-width: 1930px;
+    max-height: 870px;
+    text-align: left;
+    background: #71eca2;
+    margin-left: 30%;
+    margin-right: 30%;
+	}
 	
-	</table>
-</body>
-</html>
+	.line{
+		background:yellow;
+	
+	}
+	@media(max-width: 2000px){
+	 .dataline{
+		 display: inline;
+    	 font-size: 1.5rem;
+    		  }
+	}
+	
+	@media(max-width: 1000px){
+	 .dataline{
+		 display: inline;
+    	 font-size: 1rem;
+    		  }
+	}
+	
+/* 	.dataline{
+	 display: inline;
+     font-size: 1.5rem;
+	} */
+	.name{
+	
+	}
+	
+	
+</style>
+		
+		<div class="total_body">
+			<div class="nameup">
+			<div class="dataline" style=""><img class="name" style="width:6%; " src="/resources/assets/img/user-name.png"> </div><div style="width:50%;" class="dataline">${member.mname}</div><br>			
+			</div>
+			<br>
+			<div class="nameup">
+			<div class="dataline" style=""><img class="name" style="width:6%;" src="/resources/assets/img/id.png"> </div><div style="width:50%;" class="dataline">${member.mid}</div><br>			
+			</div><div class="nameup">
+			<br>
+			<div class="dataline" style=""><img class="name" style="width:6%;" src="/resources/assets/img/phone.png"> </div><div style="width:50%;" class="dataline">${member.mphone}</div><br>			
+			</div><div class="nameup">
+			<br>
+			<div class="dataline" style=""><img class="name" style="width:6%;" src="/resources/assets/img/grade.png"> </div><div style="width:50%;" class="dataline">${member.mgrade}</div><br>			
+			</div>
+			
+			
+			<a>수정</a>
+		
+			
+			
+			<div style="width:32%;"></div>
+		
+		
+		
+		
+		
+		</div>
+	
+
+<%@ include file="/WEB-INF/views/notice/footer.jsp" %>

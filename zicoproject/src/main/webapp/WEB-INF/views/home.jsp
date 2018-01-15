@@ -197,6 +197,19 @@
 				</div>
 				<div class="slide sli-right" style="z-index: 3; margin-left: 30px;">&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-angle-right fa-4x" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;</div>
 			</section>
+			
+		<script>
+			// url 가져오고 바꿔주는 스크립트부분
+			/* var url = document.location.href */
+			var url = location.href
+			$("#url").attr("value", url);
+			
+			$("#logoutvalue").attr("value", url);
+		</script>
+		
+			
+			
+			
 			<!-- 슬라이드 스크립트 -->
 			<!-- 슬라이드 스크립트 -->
 			<script>
