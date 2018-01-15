@@ -197,7 +197,6 @@
 				</div>
 				<div class="slide sli-right" style="z-index: 3; margin-left: 30px;">&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-angle-right fa-4x" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;</div>
 			</section>
-			
 		<script>
 			// url 가져오고 바꿔주는 스크립트부분
 			/* var url = document.location.href */
@@ -273,9 +272,9 @@
 		        }
 		        slideArray[curSlideNo].style.left = newCurX + "px";
 		        slideArray[next].style.left = newNextX + "px";
-		        setTimeout(function () {
+		         setTimeout(function () {
 		            prevSliding();
-		        }, 7);
+		        }, 7); 
 		    }
 		    function nextSliding() {
 		        var curX = parseInt(slideArray[curSlideNo].style.left, 10);
@@ -292,11 +291,11 @@
 		        }
 		        slideArray[curSlideNo].style.left = newCurX + "px";
 		        slideArray[next].style.left = newNextX + "px";
-		        setTimeout(function () {
+		         setTimeout(function () {
 		            nextSliding();
-		        }, 7);
+		        }, 7); 
 		    }
-		    setInterval(nextSlide,100000);
+		    /* setInterval(nextSlide,100000); */
 		    $(".sli-right").on("click",function(){
 		        nextSlide();
 		    });

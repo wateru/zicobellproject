@@ -3996,10 +3996,11 @@
 			}
 
 		@media screen and (max-width: 736px) {
-
+		/* 마이노의 덫 	 */
 			#banner {
 				min-height: 0;
-				height: auto !important;
+				/* height: auto !important; */
+				height: 120%;
 				padding: 6rem 2rem 4rem 2rem;
 			}
 
