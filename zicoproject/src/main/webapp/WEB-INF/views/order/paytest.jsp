@@ -463,7 +463,7 @@ aside {
 							<input type="text" class="people" value=""placeholder="인원수를 작성해주세요" />
 							</label>
 							<label>예약 시간
-							<span><input type="text" value="" placeholder="예약 시간을 작성해주세요" /></span>
+							<span><input type="text" class="timepicker" value="" placeholder="예약 시간을 작성해주세요" /></span>
 							</label>
 							<label>결제방법
 							<select name="demo-category" id="demo-category">
@@ -510,10 +510,14 @@ aside {
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 <script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<script src="/resources/assets/js/timepicki.js"></script>
+
 <script>
 	var promoCode;
 	var promoPrice;
 	var fadeTime = 300;
+	
+	$(".timepicker").timepicki();
 	
 	/* Assign actions */
 	$('.quantity input').change(function() {

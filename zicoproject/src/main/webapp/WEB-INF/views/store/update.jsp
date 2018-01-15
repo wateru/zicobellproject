@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="../admin/header.jsp" %>
-<link rel="stylesheet" type="text/css" href="../../../resources/assets/css/timepicki.css" />
+<link rel="stylesheet" type="text/css" href="/resources/assets/css/timepicki.css" />
 
 <div class="content">
 	<div class="container-fluid">
@@ -99,7 +99,7 @@
   src="https://code.jquery.com/jquery-3.2.1.min.js"
   integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
   crossorigin="anonymous"></script>
-<script src="../../../resources/assets/js/timepicki.js"></script>
+<script src="/resources/assets/js/timepicki.js"></script>
 
 <script>
 	
