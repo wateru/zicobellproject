@@ -181,7 +181,7 @@
 								<h1><b></b>예약</h1>
 								<p>원하는 매장을 미리 예약하고 주문하세요
 								<br>당신의 시간이 절약됩니다</p>
-								<a href="http://localhost:8000/order/store" class="button special scrolly">예약하기</a>
+								<a href="/order/store" class="button special scrolly">예약하기</a>
 						</li>
 						<li>
 								<h1><b></b>매장관리</h1>
@@ -189,7 +189,7 @@
 								<br>
 								효율적으로 매장을 관리할수 있도록 도와드립니다.
 								</p>
-								<a href="http://localhost:8000/admin/dashboard" class="button special scrolly">매장관리</a>
+								<a href="/admin/dashboard" class="button special scrolly">매장관리</a>
 						</li>
 						
 					</ul>
