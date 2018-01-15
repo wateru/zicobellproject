@@ -28,6 +28,16 @@
     <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
     <link href="/resources/assets/css/themify-icons.css" rel="stylesheet">
     
+    <!-- 구글 차트 -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <!-- c3 차트 사용 -->
+    <!-- Load c3.css -->
+	<!-- <link href="/path/to/c3.css" rel="stylesheet">
+	
+	Load d3.js and c3.js
+	<script src="/path/to/d3.v3.min.js" charset="utf-8"></script>
+	<script src="/path/to/c3.min.js"></script> -->
+    
     <style>
     	<!-- Slide for 공지사항 -->
     	#slidebox {
@@ -200,11 +210,11 @@
 								<p>매장</p>
                             </a>
                               <ul class="dropdown-menu">
-                               	<li class="newstore"><a href="/store/insert">매장등록</a></li>
-                               	<li class="storeinfo"><a href="/store/detail">매장정보</a></li>
+                               	<li class="newstore" style="display:none"><a href="/store/insert">매장등록</a></li>
+                               	<li class="storeinfo" style="display:none"><a href="/store/detail">매장정보</a></li>
                               </ul>
                         </li>
-                        <li class="dropdown storeinfo">
+                        <li class="dropdown storeinfo"  style="display:none">
                               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     <i class="ti-receipt"></i>
 									<p>메뉴</p>
@@ -214,12 +224,12 @@
                                 <li><a href="/menu/insert">메뉴등록</a></li>
                               </ul>
                         </li>
-                        <li>
+                        <li class="dropdown storeinfo" style="display:none">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="ti-headphone"></i>
 								<p>주문</p>
                             </a>
-                            <ul class="dropdown-menu">
+                            <ul class="dropdown-menu" >
                                 <li><a href="/admin/order">음성 주문</a></li>
                                 <li><a href="/admin/order">디스플레이 주문</a></li>
                               </ul>

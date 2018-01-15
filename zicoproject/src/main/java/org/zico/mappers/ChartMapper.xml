@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="org.zico.mappers.ChartMapper">
+
+<resultMap type="SearchChart" id="TempOrderMap">
+ 	<result property="status" column="order_status" />
+ 	<result property="storeNo" column="order_store_no" />
+</resultMap>
+
+<resultMap type="ChartOrder" id="ChartOrderMap">
+ 	<result property="people" column="people" />
+ 	<result property="totalPrice" column="totalprice" />
+ 	<result property="orderCount" column="orderCount" />
+</resultMap>
+<resultMap type="ChartOrderDetail" id="ChartOrderDetailMap">
+ 	<result property="subPrice" column="subPrice" />
+ 	<result property="menu" column="menu" />
+ 	<result property="detailCount" column="detailCount" />
+</resultMap>
+
+	<select id="selectOrder" resultType="ChartOrder" resultMap="ChartOrderMap">
+	select ifnull(sum(o.order_people),0) people, ifnull(sum(o.order_totalprice),0) totalprice, count(order_no) orderCount
+	from zicobell.order o 
+	where timestamp(order_time) between #{startTime} and #{closeTime} and order_store_no = #{storeNo} and order_status= #{status}
+	</select>
+	
+	<select id="selectOrderDetail" resultType="ChartOrderDetail" resultMap="ChartOrderDetailMap">
+	select sum(od.detail_count) detailCount, od.detail_menuname menu, sum(od.detail_subtotal) subPrice
+	from zicobell.order o 
+	inner join orderdetail od
+    on o.order_no = od.detail_order_no
+   	where timestamp(order_time) between #{startTime} and #{closeTime} and order_store_no = #{storeNo} and order_status= #{status}
+    group by od.detail_menu_no;
+	</select>
+	
+</mapper>
+  
