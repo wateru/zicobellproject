@@ -221,7 +221,6 @@
                               </a>
                               <ul class="dropdown-menu">
                                 <li><a href="/menu/menulist">메뉴리스트</a></li>
-                                <li><a href="/menu/insert">메뉴등록</a></li>
                               </ul>
                         </li>
                         <li class="dropdown storeinfo" style="display:none">
