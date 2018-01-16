@@ -440,8 +440,8 @@ aside {
 							</label>
 							<label>결제방법
 							<select name="demo-category" id="demo-category">
-								<option value="visit">방문후 결재</option>
-								<option value="kakao">지금결재</option>
+								<option value="visit">방문 후 결제</option>
+								<option value="kakao">카카오페이</option>
 							</select>
 							<span id="alarm"></span>
 							<input type="hidden" id="fcmtoken">
