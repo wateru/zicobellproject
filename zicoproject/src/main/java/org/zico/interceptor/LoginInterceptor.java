@@ -24,6 +24,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		Object obj2 = modelAndView.getModel().get("password");
 		Object obj3 = modelAndView.getModel().get("storeno");
 		Object obj4 = modelAndView.getModel().get("grade");
+		Object obj5 = modelAndView.getModel().get("storename");
 		if(obj == null) {
 			response.sendRedirect("/home?status=fail");
 			return;
@@ -34,6 +35,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		session.setAttribute("grade", obj4);
 		if(obj3 != null) {
 			session.setAttribute("storeno", obj3);
+			session.setAttribute("storename", obj5);
 		}
 	try { // tryCatch 안해주면 remember없이 로그인시 500에러뜸
 		Boolean remember = (Boolean) modelAndView.getModel().get("remember");

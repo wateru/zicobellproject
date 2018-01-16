@@ -78,7 +78,11 @@
 	
 	<select id="selectStatus" resultType="String">
 		select order_status from zicobell.order 
-		where order_no = #{orderNo}  
+		where order_no = #{orderNo}
+	</select>
+	<select id="getToken" resultType="String">
+		select order_token from zicobell.order
+		where order_no = #{orderNo}
 	</select>
 	
 </mapper>

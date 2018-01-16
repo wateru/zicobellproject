@@ -1,5 +1,6 @@
 package org.zico.service;
 
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.zico.domain.Member;
@@ -19,6 +20,11 @@ public class MembertServiceImpl implements MemberService{
 		
 		return membermapper.mypage(id);
 		
+	}
+	@Test
+	@Override
+	public Integer getId(String id) {
+		return membermapper.selectId(id);
 	};
 	
 

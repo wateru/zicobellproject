@@ -38,20 +38,19 @@
 //message 기본틀 작성
 // 1) 세션 ID정보 가져옴
 <%	String no;
-    no = session.getAttribute("storeno").toString(); %>
-
+    no = session.getAttribute("storeno").toString(); 
+    String storename;
+    storename = session.getAttribute("storename").toString();%>
 // 2) JSON 객체 생성 
 	var obj = new Object();
 // 3) ID json에 저장
 	obj.no = "<%=no%>";
+	var storename = "<%=storename%>"
 console.log(obj);
 // message 기본틀 작성 종료
-
 var sock;
-
 //웸소켓을 지정한 url로 연결한다.
 sock = new SockJS("<c:url value="/echo"/>");
-
 //자바스크립트 안에 function을 집어넣을 수 있음.
 //데이터가 나한테 전달되읐을 때 자동으로 실행되는 function
 sock.onmessage = onMessage;
@@ -102,6 +101,7 @@ function onMessage(evt) {
     		$(".totorder " + "#" + speech["orderno"]).css("border","1px solid orange");
     		$(".totorder " + "#" + speech["orderno"] + " .orderno").css("background","orange");
     		$(".totorder " + "#" + speech["orderno"] + " .orderstatus").text("상태 : 조리중");
+    		fcmmessage(speech["token"],storename,"조리중");
     		console.log($(".order"))
     		console.log($(".totorder #11"))
     	}
@@ -110,6 +110,7 @@ function onMessage(evt) {
     		$(".totorder " + "#" + speech["orderno"]).css("border","1px solid red");
     		$(".totorder " + "#" + speech["orderno"] + " .orderno").css("background","red");
     		$(".totorder " + "#" + speech["orderno"] + " .orderstatus").text("상태 : 조리완료");
+    		fcmmessage(speech["token"],storename,"조리완료");
     		setTimeout(function() {
     			$(".totorder " + "#" + speech["orderno"]).remove();
     		}, 5000)
@@ -123,6 +124,7 @@ function onMessage(evt) {
     	if(speech["status"] == "afterpay"){
 	    	str += '<div class="order" id="'+ speech["orderno"] +'" style="border:1px solid green;">';
 			str += '<div class="orderno" style="background:green">주문번호 : '+ speech["orderno"] +'</div>';
+
     	}
     	if(speech["status"] == "cooking"){
 	    	str += '<div class="order" id="'+ speech["orderno"] +'" style="border:1px solid orange;">';
@@ -143,7 +145,6 @@ function onMessage(evt) {
 	if (speech["exit"] > 0) {
 		$("#data").html("");
 	}
-	
 }
 function status(status) {
 	if(status == "afterpay"){
@@ -182,6 +183,32 @@ $(document).ready(function() {
     console.log(json);
 
 });
+
+function fcmmessage(token,store,status) {
+    var key = "AAAALPU97BY:APA91bH_7GDP62fw8aoN9l9shyc8dfywoWLFyviKVhihx07arUhROm0cq4CtuHB0kGYhzN8WY48C538Jr8g_v9yc2VXW5Z_y3qdi1tViFTscvhRy8ytUa1ZfkluDBPvAnIK4SaRQAS0e";
+    var notification = {
+        'title': store,
+        'body': status,
+        'icon': "https://namu.wiki/w/%ED%8C%8C%EC%9D%BC:%ED%8A%B8%EC%99%80%EC%9D%B4%EC%8A%A4.png",
+        
+        'click_action': 'https://192.168.0.241:8001/home'};
+    var registrationToken = token;
+    fetch('https://fcm.googleapis.com/fcm/send', {
+        'method': 'POST',
+        'headers': {
+            'Authorization': 'key=' + key,
+            'Content-Type': 'application/json'
+        },
+        'body': JSON.stringify({
+            'notification': notification,
+            'to': registrationToken
+        })
+    }).then(function (response) {
+        console.log(response);
+    }).catch(function (error) {
+        console.error(error);
+    })
+}
 </script>
 
 <%@ include file="footer.jsp" %>

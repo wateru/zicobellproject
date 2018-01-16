@@ -17,8 +17,10 @@
 
 <select id="mypage" resultMap="MemberMap">
 	select * from member where member_id=#{id}
-
 </select>
 
+<select id="selectId" resultType="Integer">
+	select count(*) from member where member_id = #{id}
+</select>
 
 </mapper>

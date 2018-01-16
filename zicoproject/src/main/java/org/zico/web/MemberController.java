@@ -13,11 +13,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.util.WebUtils;
 import org.zico.domain.Check;
 import org.zico.domain.Member;
 import org.zico.service.LoginService;
 import org.zico.service.MemberService;
+import org.zico.service.StoreService;
 
 @Controller
 @RequestMapping("/member/*")
@@ -27,7 +30,8 @@ public class MemberController {
 	@Autowired
 	LoginService loginmapper;
 	
-	
+	@Autowired
+	StoreService storeservice;
 	
 	@Autowired
 	MemberService memberservice;
@@ -87,7 +91,7 @@ public class MemberController {
 		Check check = loginmapper.idcheck(vo);
 		Integer checkStoreNo = loginmapper.getStoreNo(vo.getMember_id());
 		Integer checkGrade = loginmapper.getGrade(vo.getMember_id());
-
+		
 		
 		if(check !=null) {
 		model.addAttribute("id",vo.getMember_id());
@@ -97,6 +101,7 @@ public class MemberController {
 			if(check != null) {
 				model.addAttribute("storeno",checkStoreNo);
 				model.addAttribute("grade",checkGrade);
+				model.addAttribute("storename",storeservice.detail(checkStoreNo).getSname());
 			}
 			
 		 return "/home";
@@ -111,5 +116,9 @@ public class MemberController {
 		m.addAttribute("member",member);
 	}
 	
-	
+	@GetMapping("/duplicatecheck")
+	@ResponseBody
+	public Integer duplicatecheck(@RequestParam(value="id") String id) {
+		return memberservice.getId(id);
+	}
 }

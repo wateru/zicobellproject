@@ -71,7 +71,7 @@ public class AdminController {
 			SearchChart search = new SearchChart();
 			search.setStartTime(chartFormat.format(openTime));
 			search.setCloseTime(chartFormat.format(closeTime));
-			search.setStatus("afterpay");
+			search.setStatus("done");
 			search.setStoreNo(Integer.parseInt(session.getAttribute("storeno").toString()));
 			
 			chartOrderDetailList = chartService.getChartOrderDetail(search);

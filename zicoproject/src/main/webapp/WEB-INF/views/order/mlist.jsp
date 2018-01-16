@@ -3,6 +3,7 @@
 
 
 <%@ include file="header.jsp"%>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
 .fix {
 	position: fixed;
@@ -251,7 +252,7 @@ aside {
 
 					</div>
 
-
+					<div id="fcmwindow"></div>
 					<div class="4u 12u$(medium)">
 						<form method="post" id="pay" action="/order/postpaytest">
 							<c:forEach items="${menu}" var="menu">
@@ -271,6 +272,7 @@ aside {
 								</div>
 								<div class="summary-checkout">
 									<button class="checkout-cta">주문하기</button>
+									<a class="button alt icon fa-check" style="width:100%" id="fcm">실시간 알림</a>
 								</div>
 							</div>
 						</form>
@@ -279,7 +281,6 @@ aside {
 			</div>
 		</div>
 	</div>
-
 </section>
 <script>
 	$(".container")
@@ -350,9 +351,27 @@ aside {
 				alert("메뉴를 추가해 주세요")
 			}
 		} else {
+			if($("#fcm").text() === "알림 허용"){
+				$("#pay").append("<input type='hidden' name='stat' value='ok'>");
+			}else{
+				$("#pay").append("<input type='hidden' name='stat' value='no'>");
+			}
 			$("#pay").submit();
 		}
 		
+	})
+	function zico(token) {
+		if(token != ""){
+			$("#fcm").text("알림 허용");			
+		}
+		
+	}
+	function newwindow(){
+ 		window.open("https://zicobell-654d2.firebaseapp.com/token.html","pop","width=500,height=500,top=100,left=100"); 
+	}
+	$("#fcm").on("click",function(){
+		$("#fcm").html('<i class="fa fa-spinner fa-spin"></i>')
+		$("#fcmwindow").html('<iframe src="https://zicobell-654d2.firebaseapp.com/token.html" hidden></iframe>')
 	})
 </script>
 

@@ -17,9 +17,7 @@
 <insert id="create" >
 		insert into menu (menu_Name, menu_img, menu_price,menu_store_no,menu_category)
 		values (#{menuName}, #{imgName}, #{menuPrice},#{storeNo},#{menuCategory})
-	</insert>
-
-
+</insert>
 
 <select id="count" resultType="int">
 	select count(menu_no) from menu

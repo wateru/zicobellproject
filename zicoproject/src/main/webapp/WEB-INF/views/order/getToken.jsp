@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<input class="token" type="text" value="${token}">
+	<input class="token" type="text" value="${token}" >
 	<script
   src="https://code.jquery.com/jquery-3.2.1.min.js"
   integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
@@ -15,7 +15,17 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	//console.log($(".token").val());
-	parent.parent.zico($(".token").val())
+	console.log("---------------------")
+	var token = "${token}";
+		console.log("왜**")
+	if(token == ""){
+		parent.parent.newwindow()
+		console.log("왜???")
+	} else{
+		console.log("왜!!!")
+		parent.parent.zico($(".token").val())		
+	}
+	
 })
 </script>
 </body>

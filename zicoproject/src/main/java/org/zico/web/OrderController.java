@@ -54,10 +54,15 @@ public class OrderController {
 	public void pay(){
 		
 	}
+	@GetMapping("/getToken")
+	public void gettoken(String token,Model m) {
+		m.addAttribute("token",token);
+	}
 	@PostMapping("/order/postpaytest")
 	public String postpaytest(String menuName,String menuPrice,String heeSubTotalPrice,String menuheeCount,int totalheekyung,int storeNo,String menuNo
-			,HttpSession session) {
+			,String stat, HttpSession session) {
 		log.info("StoreNo : " + storeNo);
+		log.info("Stat 파라미터값 : " + stat);
 		TempOrder order = new TempOrder();
 		order.setOrderStoreNo(storeNo);
 		order.setOrderTotPrice(totalheekyung);
@@ -108,10 +113,10 @@ public class OrderController {
 			}
 			}
 		log.info("해당 완료");
-		return "redirect:/order/paytest";
+		return "redirect:/order/paytest?stat="+stat;
 	}
 	@GetMapping("/order/paytest") 
-	public void paytest(HttpSession session,Model model){
+	public void paytest(HttpSession session,Model model,String stat){
 		TempOrder order=new TempOrder();
 		TempOrderDetail orderDetail = new TempOrderDetail();
 		order.setOrderStatus("beforepay");
@@ -121,6 +126,7 @@ public class OrderController {
 		model.addAttribute("order",orderService.orderList(order));
 		log.info("완료1");
 		model.addAttribute("detail",orderService.orderDetailList(orderDetail));
+		model.addAttribute("stat",stat);
 		log.info("완료2");
 	}
 	@PostMapping("/order/postapy")

@@ -142,8 +142,9 @@ public class TempOrderServiceImpl implements TempOrderService {
 	}
 
 	@Override
-	public void modifyStatus(TempOrder order) {
+	public String modifyStatus(TempOrder order) {
 		orderMapper.updateStatus(order);
+		return orderMapper.getToken(order);
 	}
 	
 	@Override

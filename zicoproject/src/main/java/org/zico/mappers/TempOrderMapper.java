@@ -12,5 +12,5 @@ public interface TempOrderMapper extends CRUDMapper<TempOrder, Integer> {
 	public void updateOrder(TempOrder order);
 	public void updateStatus(TempOrder order);
 	public String selectStatus(Integer orderNo);
-	
+	public String getToken(TempOrder order);
 }

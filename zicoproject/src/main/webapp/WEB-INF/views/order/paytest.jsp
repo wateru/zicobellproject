@@ -402,35 +402,7 @@ aside {
 									<li class="subtotal">Subtotal</li>
 								</ul>
 							</div>
-							<!-- <div class="basket-product">
-								<div class="item">
-									<div class="product-image">
-										<img src="/resources/images/garbage.jpg"
-											alt="Placholder Image 2" class="product-frame">
-									</div>
-									<div class="product-details">
-										<h1>
-											<strong><span class="item-quantity">주문수량</span> x Eliza
-												J</strong> 메뉴이름
-										</h1>
-										<p>
-											<strong>Navy, Size 18</strong>
-										</p>
-										<p>Product Code - 232321939</p>
-									</div>
-								</div>
-								<div class="price">26.00</div>
-								<div class="quantity">
-									<input type="number" value="4" min="1" class="quantity-field">
-								</div>
-								<div class="subtotal">104.00</div>
-								<div class="remove">
-									<button>Remove</button>
-								</div>
-							</div> -->
-						
-					
-						
+	
 					<c:forEach items="${detail}" var="detail">
 							<div class="basket-product">
 								<input type="hidden" class="menuname" value="${detail.detailMenuName}">
@@ -468,11 +440,13 @@ aside {
 							</label>
 							<label>결제방법
 							<select name="demo-category" id="demo-category">
-								<option value="visit">방문 후 결제</option>
-								<option value="kakao">지금 결제</option>
+								<option value="visit">방문후 결재</option>
+								<option value="kakao">지금결재</option>
 							</select>
+							<span id="alarm"></span>
+							<input type="hidden" id="fcmtoken">
+							<span id="fcmalarm"></span>
 							</label>
-							
 						</div>
 							<br>
 
@@ -517,6 +491,19 @@ aside {
 	var promoCode;
 	var promoPrice;
 	var fadeTime = 300;
+	
+	$(document).ready(function(){
+		fcmstatus = "${stat}";
+		console.log(fcmstatus)
+		if (fcmstatus == "ok"){
+			$("#alarm").text("알람을 설정중입니다..")
+			$("#alarm").css("color","black")
+			$("#fcmalarm").html('<iframe src="https://zicobell-654d2.firebaseapp.com/token.html" hidden></iframe>')
+		} else {
+			$("#alarm").text("알람을 선택하지 않으셨습니다.")
+			$("#alarm").css("color","black")
+		}
+	})
 	
 	$(".timepicker").timepicki();
 	
@@ -729,9 +716,8 @@ aside {
 					"id":'${order.orderMemberId}',
 					"pay":$("#demo-category").val(),
 					"status":"afterpay",
-					"token":"",
+					"token":$("#fcmtoken").val(),
 					"menulist":receiptArray};
-
 		$.ajax({
 		    type: 'POST', //post,get,등..전송방식
 		    url: '/clientorder',
@@ -744,10 +730,18 @@ aside {
 		        location.href="/home";
 		    },
 		    error:function(request,status,error){
-		        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		        /* alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error); */
+		        alert("정상적으로 주문처리가 되지 않았습니다.");
 		       }
 		});
 	}
+	
+	function zico(token) {
+			$("#fcmtoken").val(token);
+			$("#alarm").text("알람을 허용하셨습니다.")
+			$("#alarm").css("color","blue")
+	}
+	
 </script>
 <!-- Four -->
 
