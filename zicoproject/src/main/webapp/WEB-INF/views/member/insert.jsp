@@ -34,7 +34,7 @@ body {
 				<label for="name">Password</label> <input class="handwrite" id="password" name="mpassword" type="password" placeholder="Password" >
 			</div>
 			<div class="field">
-				<label for="name">Password check</label> <input class="handwrite" id="passwordcheck" name="mpassword" type="password" placeholder="다시 한번 입력하세요">
+				<label for="name">Password check</label> <input class="handwrite" id="passwordcheck" type="password" placeholder="다시 한번 입력하세요">
 				<span style="font-size:14px" id="checkpassword"></span>
 				<input id="chkpassword" type="hidden" value="false">
 			</div>

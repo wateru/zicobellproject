@@ -13,5 +13,4 @@
 			<script src="/resources/assets/js/skel.min.js"></script>
 			<script src="/resources/assets/js/util.js"></script>
 			<script src="/resources/assets/js/main.js"></script>
-
-	</body>s
+	</body>

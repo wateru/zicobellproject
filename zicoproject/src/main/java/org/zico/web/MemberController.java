@@ -97,10 +97,10 @@ public class MemberController {
 		model.addAttribute("id",vo.getMember_id());
 		model.addAttribute("password",vo.getMember_password());
 		model.addAttribute("remember",vo.getRemember());
+		model.addAttribute("grade",checkGrade);
 		//storeno 확인
-			if(check != null) {
+			if(checkStoreNo != null) {
 				model.addAttribute("storeno",checkStoreNo);
-				model.addAttribute("grade",checkGrade);
 				model.addAttribute("storename",storeservice.detail(checkStoreNo).getSname());
 			}
 			

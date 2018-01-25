@@ -35,8 +35,8 @@
 	<header id="header" class="alt" style="overflow:unset;">
 		<div class="logo"><a href="/home">B E L L<span>&nbsp;by Zico</span></a></div>
 			<a class="none-inlineblock" id="login" style="display:none">Login</a>
-			<a class="none-inlineblock"  style="display:none">Signin</a>
-			<a class="user-inlineblock" style="display:none">Mypage</a>
+			<a class="none-inlineblock" href="/member/insert" style="display:none">Signin</a>
+			<a class="user-inlineblock" id="myid" style="display:none"></a>
 			<a class="user-inlineblock" id="aftersignin" style="display:none">Logout</a>
 			<a class="manage-inlineblock" href="/admin/dashboard" style="display:none">manage</a>
 		</div>
@@ -124,7 +124,7 @@
 	    	// 2) JSON 객체 생성 
 	    		var obj = new Object();
 	    	// 3) ID json에 저장
-	    		obj.id = "<%=id%>";
+	    		id = "<%=id%>";
 	    	/* console.log(obj); */
 		});     
 	</script>
@@ -140,10 +140,12 @@
 				$(".user-inlineblock").css("display","none");
 				$(".manage-inlineblock").css("display","none");				
 				$(".manage-listitem").css("display","none")
+				$("#myid").text("");
 			}else{
 				console.log("22")
 				$(".none-inlineblock").css("display","none");
 				$(".user-inlineblock").css("display","inline-block");
+				$("#myid").text(id+"님 ");
 				if(sessiongrade <= 2){
 					$(".manage-inlineblock").css("display","inline-block");
 					$(".manage-listitem").css("display","list-item");
@@ -184,14 +186,13 @@
 								<a href="/order/store" class="button special scrolly">예약하기</a>
 						</li>
 						<li>
-								<h1><b></b>매장관리</h1>
-								<p>당신의 매장을 관리하세요
+								<h1><b></b>회원가입</h1>
+								<p>로그인을 하여 손쉽게 주문하세요
 								<br>
-								효율적으로 매장을 관리할수 있도록 도와드립니다.
+								깨끗하고 신선한 음식을 보장해드립니다.
 								</p>
-								<a href="/admin/dashboard" class="button special scrolly">매장관리</a>
+								<a href="/member/insert" class="button special scrolly">매장관리</a>
 						</li>
-						
 					</ul>
 					</div>
 				</div>

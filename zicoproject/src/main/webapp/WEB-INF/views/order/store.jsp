@@ -3,16 +3,39 @@
 
 <%@ include file="header.jsp"%>
 <style>
-	#map { width: 100%; height: 550px; }
-	.store {
-		padding-top:10px;
-	}
-	hr {
-		margin:0;
-	}
-	.store:hover{
-		background:rgba(90,166,237,0.3);
-	}
+#map {
+	width: 100%;
+	height: 550px;
+}
+
+.store {
+	padding-top: 10px;
+}
+
+hr {
+	margin: 0;
+}
+
+.store:hover {
+	background: rgba(90, 166, 237, 0.3);
+}
+
+.pagination a {
+	color: black;
+	float: left;
+	padding: 8px 16px;
+	text-decoration: none;
+	transition: background-color .3s;
+}
+
+.pagination a.active {
+	background-color: #5AA6ED;
+	color: white;
+}
+
+.pagination a:hover:not (.active ) {
+	background-color: #ddd;
+}
 </style>
 
 <!-- One -->
@@ -26,8 +49,7 @@
 					<div class="6u 12u$(medium) mapStage">
 						<c:forEach items="${store}" var="store">
 							<div class="store">
-								<span class="image fit heekyung"><img
-										src="displayFile?fileName=${store.simage}/" alt="" /></span>
+								<span class="image fit heekyung"></span>
 								<input class="mapAddr" type="hidden" value='${store.saddr}'>
 								<h3>
 								<a href="<c:out value='${store.sno}'/>" class="target">
@@ -40,6 +62,8 @@
 						<div id="map"></div>
 					</div>
 				</div>
+		<div class="pagination">
+		</div>
 			</div>
 		</div>
 	</div>
@@ -49,7 +73,7 @@
 </section>
 <script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c7f42c5fca86621564f323cf9ba41c4e&libraries=services"></script>
-
+<script src="/resources/assets/js/pagination.js"></script>
 <script>
 var mapContainer = document.getElementById('map');
 var mapOption = { center: new daum.maps.LatLng(37.498146, 127.027578), level: 3};
@@ -100,6 +124,21 @@ $(".mapStage").on("click","h3,span",function(){
 		}
 	});	
 })
+
+$(document).ready(function() {
+	str='';
+	var pageResult = makePage({ page:${criteria.page}, size:5, total:${total} });
+	if(pageResult.prev){
+		str += "<a href=/order/store?page="+ (pageResult.first - 1) +">&laquo;</a>";
+	}
+	for(var i = pageResult.first; i <= pageResult.last; i++){	
+		str += "<a " + (pageResult.page == i ? "class='active'":"") + "href=/order/store?page="+i+">"+i+"</a>";
+	}
+	if(pageResult.next){
+		str += "<a href=/order/store?page="+ (pageResult.last + 1) +">&raquo;</a>";
+	}
+		$(".pagination").html(str);
+	});
 </script>
 <!-- Four -->
 

@@ -272,8 +272,8 @@
       }
       
       $("#totprice").text("￦ " + totprice.toLocaleString())
-      $("#totpeople").text(totpeople + " 개")
-      $("#totcount").text(totcount + " 명")
+      $("#totpeople").text(totpeople + " 명")
+      $("#totcount").text(totcount + " 개")
       $("#menuname").text(tempArray[0])
       if($("#menuname").text() == ""){
     	  $("#menuname").text("No Data")

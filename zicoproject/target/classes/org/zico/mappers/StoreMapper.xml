@@ -33,7 +33,7 @@
 	<select id="list" resultType="Store" resultMap="StoreMap">
 		select *
 		  from store
-		 order by store_no desc limit #{skip}, #{size}
+		 order by store_no limit #{skip}, #{size}
 	</select>
 
 	<!-- 매장 상세 조회 -->

@@ -59,20 +59,4 @@
 	<!-- Paper Dashboard DEMO methods, don't include it in your project! -->
 	<script src="/resources/assets/js/demo.js"></script>
 
-	<script type="text/javascript">
-    	$(document).ready(function(){
-			demo.initChartist();
-
-        	$.notify({
-            	icon: 'ti-gift',
-            	message: "<b>ZI-CO</b>에 오신것을 환영합니다. <br>당신의 매장을 확인헤 보세요 ."
-
-            },{
-                type: 'success',
-                timer: 4000
-            });
-
-    	});
-	</script>
-
 </html>

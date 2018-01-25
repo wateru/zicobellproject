@@ -151,6 +151,7 @@ public class OrderController {
 	
 	@GetMapping("/order/store") 
 	public void store(Criteria cri, Model model){
+		cri.setSize(5);
 		model.addAttribute("store", orderService.getList(cri));
 		model.addAttribute("total", orderService.getListCount());
 	}

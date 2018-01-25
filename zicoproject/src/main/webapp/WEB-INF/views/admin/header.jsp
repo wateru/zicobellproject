@@ -230,7 +230,6 @@
                             </a>
                             <ul class="dropdown-menu" >
                                 <li><a href="/admin/order">음성 주문</a></li>
-                                <li><a href="/admin/order">디스플레이 주문</a></li>
                               </ul>
                         </li>
 						<li>
@@ -244,7 +243,7 @@
 	                            <c:otherwise>
 		                            <a href="#">
 										<i class="ti-power-off"></i>
-										<p>Logout</p>
+										<p id="aftersignin">Logout</p>
 		                            </a>
 	                            </c:otherwise>
                             </c:choose>
@@ -254,8 +253,15 @@
                 </div>
             </div>
         </nav>
+        <form id="logout" action="/member/logout" method="post" style="display:none"></form>
+
 <script> 
 	$(document).ready(function() {
+		
+		$("#aftersignin").on("click",function(){
+			$("#logout").submit();
+		})
+		
     	//slide
     	var x = 50;
         var slider = document.getElementById("slider");

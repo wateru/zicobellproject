@@ -195,6 +195,7 @@ private List<WebSocketSession> sessionList = new ArrayList<WebSocketSession>();
 	@PostMapping("/bell")
 	public void postBell(String storeno, Model m) throws Exception {
 		logger.info(storeno);
+		logger.info("페달 누름");
 		JSONArray socketArray = new JSONArray();
 		JSONObject socketInfo = new JSONObject();
 		logger.info("전송부 : " +socketObject.toString());

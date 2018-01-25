@@ -20,7 +20,14 @@
 				width: 20%;
 			}
 		</style>
-
+		<script>
+		$(document).ready(function(){
+			id = "${id}";
+			$("#nid").val(id);	
+			console.log(id);
+		})
+			
+		</script>
 		<!-- Footer -->
 			<footer id="footer" class="wrapper">
 				<div class="inner">
@@ -33,6 +40,7 @@
 									<div class="field">
 										<label for="email">Title</label>
 										<input name="ntitle" type="text" placeholder="Title">
+										<input id="nid" name="nid" type="hidden">
 									</div>
 									
 									<div class="field">
